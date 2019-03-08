@@ -62,5 +62,8 @@ def form_unit(T,root):
     children = get_children(T,root)
     if len(children)!=0:
         children_summary = list(map(lambda x: form_unit(T,x),children))
+    else:
+        #dealing with base case
+        return 0
     return 0
     
