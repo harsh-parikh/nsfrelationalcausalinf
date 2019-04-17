@@ -1,0 +1,14 @@
+[[package]]
+category = "dev"
+description = "Generate random names"
+name = "names"
+optional = false
+python-versions = "*"
+version = "0.3.0"
+
+[metadata]
+content-hash = "5cd6d85c55e79d339e9b2b92463c42011044f971f07ae40b19cdb24fecae56cf"
+python-versions = "^3.6"
+
+[metadata.hashes]
+names = ["726e46254f2ed03f1ffb5d941dae3bc67c35123941c29becd02d48d0caa2a671"]
