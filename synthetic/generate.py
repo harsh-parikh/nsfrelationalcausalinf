@@ -10,7 +10,8 @@ import pprint
 import names
 
 # local modules
-import util
+import synthetic.util as util
+from synthetic.structural_eqs import tutoring
 
 parser = argparse.ArgumentParser(description='Generate schema as specified ' +
                                  'in section 7 of ...',
@@ -86,18 +87,30 @@ def generate_attributes(entities, intelligence, ability, difficulty):
             'teaching_skills': teaching_skills,
             'difficulty': difficulty}
 
-   
+
+def generate_endogenous(schema):
+    t = set()
+    for c in schema['entities']['courses']:
+        t.add((c, tutoring.instantiate(c, schema)))
+
+    return {"tutoring": t}
+
+
 def main():
     args = parser.parse_args()
     entities = generate_entities(args.professors, args.students, args.courses)
     relations = generate_relations(entities, args.friendliness,
                                      args.commitment, args.teaching_interest)
-    attributes = generate_attributes(entities, args.intelligence,
+    attributes_exogenous = generate_attributes(entities, args.intelligence,
                                      args.teaching_ability, args.difficulty)
-    
+
     schema = {"entities": entities,
               "relations": relations,
-              "attributes": attributes}
+              "attributes": attributes_exogenous}
+
+    attributes_endogenous = generate_endogenous(schema)
+    schema["attributes"] = {**attributes_exogenous, **attributes_endogenous}
+
     if (args.save_json):
         with open(args.save_json, 'w') as f:
             json.dump(schema, f, ensure_ascii=False,
