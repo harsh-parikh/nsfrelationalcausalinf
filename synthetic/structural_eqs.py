@@ -2,7 +2,7 @@ from numpy.random import binomial
 from numpy import mean
 from scipy.special import expit as logistic
 
-from synthetic.endogenous import Summarization, EndogenousVar
+from .endogenous import Summarization, EndogenousVar
 
 students_intelligence = Summarization(
     target="students",
@@ -26,9 +26,10 @@ course_diff = Summarization(
 )
 
 tutoring = EndogenousVar(
-    reducer=lambda xs: binomial(1, logistic(sum(xs))),
-    variables={
+    reducer=lambda xs: "yes" if binomial(1, logistic(sum(xs))) else "no",
+    summarizations={
         students_intelligence,
         professors_skill,
         course_diff
-})
+    }
+)

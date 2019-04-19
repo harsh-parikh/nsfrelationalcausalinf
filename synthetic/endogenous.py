@@ -20,24 +20,19 @@ class Summarization:
 
 
 class EndogenousVar:
-    def __init__(self, reducer, variables : {Summarization}):
+    def __init__(self, reducer, summarizations : {Summarization}):
         """
             Define a new partially endogenous variable.
 
             name = reducer(vars[0] + ... + vars[n])
         """
         self.reducer = reducer
-        self.variables = variables
+        self.summarizations = summarizations
 
     def instantiate(self, parent, schema):
         """
             Return a concrete instance of this endogenous variable.
         """
-        concrete_vars = [v.measure(parent, schema) for v in self.variables]
+        concrete_vars = [v.measure(parent, schema) for v in self.summarizations]
         return self.reducer(concrete_vars)
-
-
-
-
-
 
