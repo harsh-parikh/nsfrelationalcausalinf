@@ -52,7 +52,7 @@ parser.add_argument('-d', '--difficulty', default=0.5, type=float,
 def generate_entities(professors, students, courses):
     p = ["Dr. " + names.get_first_name() for _ in range(professors)]
     s = [names.get_first_name() for _ in range(students)]
-    c = [f'CSE {random.randint(10, 59) * 10}' for _ in range(courses)]
+    c = [f'CSE {random.randint(1000, 5999)}' for _ in range(courses)]
     return {'professors': p, 'students': s, 'courses': c}
 
 
