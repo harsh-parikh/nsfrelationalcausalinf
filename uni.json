@@ -1,0 +1,5632 @@
+{
+    "entities": {
+        "professors": [
+            "Dr. Lucille",
+            "Dr. Rodger",
+            "Dr. William",
+            "Dr. Betty",
+            "Dr. Millie",
+            "Dr. Paul",
+            "Dr. Kelly",
+            "Dr. George",
+            "Dr. Andrea",
+            "Dr. John",
+            "Dr. Ramiro",
+            "Dr. Nan",
+            "Dr. Betty",
+            "Dr. Pauline",
+            "Dr. Angela",
+            "Dr. Sheryl",
+            "Dr. Heath",
+            "Dr. Francis",
+            "Dr. Paul",
+            "Dr. Thomas"
+        ],
+        "students": [
+            "Jeremy",
+            "Ira",
+            "Leonard",
+            "Ryan",
+            "Bobbie",
+            "John",
+            "Margaret",
+            "Ouida",
+            "Betty",
+            "Ronald",
+            "Blake",
+            "Donald",
+            "Catherine",
+            "Douglas",
+            "Josefina",
+            "Tim",
+            "David",
+            "Daniel",
+            "Alejandra",
+            "Matthew"
+        ],
+        "courses": [
+            "CSE 5103",
+            "CSE 3168",
+            "CSE 4203",
+            "CSE 1967",
+            "CSE 4295",
+            "CSE 4258",
+            "CSE 5635",
+            "CSE 5644",
+            "CSE 3737",
+            "CSE 1685",
+            "CSE 3795",
+            "CSE 3992",
+            "CSE 3747",
+            "CSE 4037",
+            "CSE 5658",
+            "CSE 3479",
+            "CSE 3352",
+            "CSE 2461",
+            "CSE 4241",
+            "CSE 2433",
+            "CSE 3516",
+            "CSE 1977",
+            "CSE 3013",
+            "CSE 1825",
+            "CSE 4601",
+            "CSE 1495",
+            "CSE 2168",
+            "CSE 2086",
+            "CSE 2103",
+            "CSE 4419",
+            "CSE 2983",
+            "CSE 4525",
+            "CSE 3290",
+            "CSE 2518",
+            "CSE 5743",
+            "CSE 1468",
+            "CSE 2454",
+            "CSE 5809",
+            "CSE 5515",
+            "CSE 3544",
+            "CSE 2149",
+            "CSE 4429",
+            "CSE 4245",
+            "CSE 1967",
+            "CSE 1508",
+            "CSE 3465",
+            "CSE 3542",
+            "CSE 1410",
+            "CSE 2086",
+            "CSE 3544",
+            "CSE 3335",
+            "CSE 1126",
+            "CSE 2380",
+            "CSE 1865",
+            "CSE 1987",
+            "CSE 4267",
+            "CSE 3174",
+            "CSE 5062",
+            "CSE 1942",
+            "CSE 4513",
+            "CSE 3699",
+            "CSE 2795",
+            "CSE 1215",
+            "CSE 4986",
+            "CSE 1342",
+            "CSE 4138",
+            "CSE 4366",
+            "CSE 5364",
+            "CSE 1093",
+            "CSE 2375",
+            "CSE 4522",
+            "CSE 4778",
+            "CSE 5844",
+            "CSE 2785",
+            "CSE 5752",
+            "CSE 3204",
+            "CSE 1977",
+            "CSE 2700",
+            "CSE 3722",
+            "CSE 1737",
+            "CSE 3814",
+            "CSE 4537",
+            "CSE 4787",
+            "CSE 3001",
+            "CSE 4722",
+            "CSE 2675",
+            "CSE 1434",
+            "CSE 4943",
+            "CSE 1577",
+            "CSE 2401",
+            "CSE 3361",
+            "CSE 3762",
+            "CSE 1714",
+            "CSE 3893",
+            "CSE 3089",
+            "CSE 4086",
+            "CSE 5141",
+            "CSE 2043",
+            "CSE 1199",
+            "CSE 2646",
+            "CSE 2700",
+            "CSE 1550",
+            "CSE 1844",
+            "CSE 2313",
+            "CSE 3936",
+            "CSE 4355",
+            "CSE 5164",
+            "CSE 2845",
+            "CSE 4929",
+            "CSE 2576",
+            "CSE 4408",
+            "CSE 3120",
+            "CSE 4026",
+            "CSE 3953",
+            "CSE 4450",
+            "CSE 3338",
+            "CSE 3034",
+            "CSE 2373",
+            "CSE 5875",
+            "CSE 5681",
+            "CSE 2910",
+            "CSE 1938",
+            "CSE 3328",
+            "CSE 2035",
+            "CSE 4498",
+            "CSE 4197",
+            "CSE 1629",
+            "CSE 3880",
+            "CSE 1188",
+            "CSE 5065",
+            "CSE 3214",
+            "CSE 5118",
+            "CSE 3610",
+            "CSE 5736",
+            "CSE 5352",
+            "CSE 1884",
+            "CSE 3177",
+            "CSE 5644",
+            "CSE 2625",
+            "CSE 1614",
+            "CSE 4004",
+            "CSE 3630",
+            "CSE 4469",
+            "CSE 5743",
+            "CSE 5779",
+            "CSE 2398",
+            "CSE 2045",
+            "CSE 3583",
+            "CSE 5562",
+            "CSE 3425",
+            "CSE 2710",
+            "CSE 3357",
+            "CSE 3044",
+            "CSE 4727",
+            "CSE 2349",
+            "CSE 5641",
+            "CSE 3753",
+            "CSE 1564",
+            "CSE 1048",
+            "CSE 2161",
+            "CSE 5140",
+            "CSE 4071",
+            "CSE 3496",
+            "CSE 4761",
+            "CSE 1981",
+            "CSE 5200",
+            "CSE 1916",
+            "CSE 3953",
+            "CSE 4289",
+            "CSE 4908",
+            "CSE 5302",
+            "CSE 3394",
+            "CSE 2505",
+            "CSE 3920",
+            "CSE 1329",
+            "CSE 5443",
+            "CSE 2180",
+            "CSE 3207",
+            "CSE 3163",
+            "CSE 3188",
+            "CSE 5758",
+            "CSE 2414",
+            "CSE 1924",
+            "CSE 1121",
+            "CSE 3454",
+            "CSE 3859",
+            "CSE 5647",
+            "CSE 3647",
+            "CSE 4543",
+            "CSE 2620",
+            "CSE 2435",
+            "CSE 2027",
+            "CSE 4696",
+            "CSE 2135",
+            "CSE 4577",
+            "CSE 1250",
+            "CSE 4697",
+            "CSE 3548",
+            "CSE 2170",
+            "CSE 1451",
+            "CSE 3045",
+            "CSE 2158",
+            "CSE 1820",
+            "CSE 1129",
+            "CSE 2116",
+            "CSE 3321",
+            "CSE 5111",
+            "CSE 1498",
+            "CSE 3571",
+            "CSE 3386",
+            "CSE 1167",
+            "CSE 2236",
+            "CSE 4747",
+            "CSE 3831",
+            "CSE 1793",
+            "CSE 5805",
+            "CSE 3496",
+            "CSE 4125",
+            "CSE 1240",
+            "CSE 3227",
+            "CSE 2910",
+            "CSE 5027",
+            "CSE 3625",
+            "CSE 2990",
+            "CSE 3139",
+            "CSE 2031",
+            "CSE 4853",
+            "CSE 4156",
+            "CSE 3433",
+            "CSE 3609",
+            "CSE 3328",
+            "CSE 4341",
+            "CSE 2626",
+            "CSE 4341",
+            "CSE 4882",
+            "CSE 1492",
+            "CSE 5985",
+            "CSE 3255",
+            "CSE 3661",
+            "CSE 4044",
+            "CSE 1335",
+            "CSE 5683",
+            "CSE 3806",
+            "CSE 5094",
+            "CSE 1096",
+            "CSE 1672",
+            "CSE 5341",
+            "CSE 5473",
+            "CSE 4613",
+            "CSE 4962",
+            "CSE 1474",
+            "CSE 3237",
+            "CSE 5824",
+            "CSE 1459",
+            "CSE 4941",
+            "CSE 4043",
+            "CSE 3798",
+            "CSE 1380",
+            "CSE 1728",
+            "CSE 5523",
+            "CSE 3678",
+            "CSE 2805",
+            "CSE 1143",
+            "CSE 1053",
+            "CSE 1959",
+            "CSE 4280",
+            "CSE 5286",
+            "CSE 2239",
+            "CSE 3079",
+            "CSE 3739",
+            "CSE 3660",
+            "CSE 2670",
+            "CSE 2985",
+            "CSE 1260",
+            "CSE 2664",
+            "CSE 1411",
+            "CSE 1229",
+            "CSE 3044",
+            "CSE 2980",
+            "CSE 5007",
+            "CSE 3453",
+            "CSE 2998",
+            "CSE 1901",
+            "CSE 3687",
+            "CSE 3192",
+            "CSE 3388",
+            "CSE 2790",
+            "CSE 5584",
+            "CSE 3088",
+            "CSE 4877",
+            "CSE 4908",
+            "CSE 1194",
+            "CSE 3468",
+            "CSE 4613",
+            "CSE 3636",
+            "CSE 4732",
+            "CSE 1960",
+            "CSE 1014",
+            "CSE 4939",
+            "CSE 2105",
+            "CSE 2915",
+            "CSE 5495",
+            "CSE 3364",
+            "CSE 3658",
+            "CSE 5038",
+            "CSE 5808",
+            "CSE 3430",
+            "CSE 2619",
+            "CSE 3634",
+            "CSE 4162",
+            "CSE 4357",
+            "CSE 3169",
+            "CSE 2727",
+            "CSE 2188",
+            "CSE 4713",
+            "CSE 1514",
+            "CSE 5457",
+            "CSE 3608",
+            "CSE 2829",
+            "CSE 2093",
+            "CSE 4450",
+            "CSE 1618",
+            "CSE 5487",
+            "CSE 3627",
+            "CSE 1197",
+            "CSE 5674",
+            "CSE 4399",
+            "CSE 1293",
+            "CSE 1156",
+            "CSE 1260",
+            "CSE 5795",
+            "CSE 3711",
+            "CSE 1507",
+            "CSE 4845",
+            "CSE 2511",
+            "CSE 4088",
+            "CSE 2301",
+            "CSE 1442",
+            "CSE 2885",
+            "CSE 4239",
+            "CSE 5434",
+            "CSE 4409",
+            "CSE 2242",
+            "CSE 3918",
+            "CSE 1640",
+            "CSE 5949",
+            "CSE 1450",
+            "CSE 3297",
+            "CSE 5971",
+            "CSE 2195",
+            "CSE 2391",
+            "CSE 3489",
+            "CSE 4101",
+            "CSE 2882",
+            "CSE 1121",
+            "CSE 2114",
+            "CSE 4065",
+            "CSE 2884",
+            "CSE 1750",
+            "CSE 4423",
+            "CSE 2906",
+            "CSE 2175",
+            "CSE 2740",
+            "CSE 1109",
+            "CSE 3359",
+            "CSE 4749",
+            "CSE 4364",
+            "CSE 2053",
+            "CSE 4697",
+            "CSE 4620",
+            "CSE 3648",
+            "CSE 3866",
+            "CSE 2798",
+            "CSE 5325",
+            "CSE 5577",
+            "CSE 4923",
+            "CSE 4836",
+            "CSE 5728",
+            "CSE 1561",
+            "CSE 4541",
+            "CSE 4842",
+            "CSE 5382",
+            "CSE 2964",
+            "CSE 5576",
+            "CSE 2942",
+            "CSE 2845",
+            "CSE 2826",
+            "CSE 5811",
+            "CSE 1665",
+            "CSE 5301",
+            "CSE 2667",
+            "CSE 5357",
+            "CSE 5568",
+            "CSE 4478",
+            "CSE 5323",
+            "CSE 4597",
+            "CSE 1339",
+            "CSE 4296",
+            "CSE 5990",
+            "CSE 5063",
+            "CSE 1793",
+            "CSE 1646",
+            "CSE 5097",
+            "CSE 3454",
+            "CSE 1622",
+            "CSE 2778",
+            "CSE 5586",
+            "CSE 4207",
+            "CSE 5050",
+            "CSE 2415",
+            "CSE 5435",
+            "CSE 1264",
+            "CSE 3633",
+            "CSE 4452",
+            "CSE 1581",
+            "CSE 2900",
+            "CSE 2848",
+            "CSE 3739",
+            "CSE 1817",
+            "CSE 2677",
+            "CSE 1683",
+            "CSE 4725",
+            "CSE 1482",
+            "CSE 1710",
+            "CSE 5211",
+            "CSE 3330",
+            "CSE 2742",
+            "CSE 2992",
+            "CSE 3005",
+            "CSE 3418",
+            "CSE 4444",
+            "CSE 2461",
+            "CSE 1926",
+            "CSE 1865",
+            "CSE 3509",
+            "CSE 2480",
+            "CSE 4450",
+            "CSE 3721",
+            "CSE 3088",
+            "CSE 5348",
+            "CSE 3634",
+            "CSE 4084",
+            "CSE 2332",
+            "CSE 1128",
+            "CSE 2764",
+            "CSE 5630",
+            "CSE 4114",
+            "CSE 3496",
+            "CSE 4554",
+            "CSE 4794",
+            "CSE 4147",
+            "CSE 5110",
+            "CSE 3510",
+            "CSE 2708",
+            "CSE 5624",
+            "CSE 5850",
+            "CSE 1363",
+            "CSE 5730",
+            "CSE 2990",
+            "CSE 4119",
+            "CSE 3579",
+            "CSE 5127",
+            "CSE 2429",
+            "CSE 3475",
+            "CSE 2811",
+            "CSE 2837",
+            "CSE 5865",
+            "CSE 3106",
+            "CSE 4668",
+            "CSE 3525",
+            "CSE 2703",
+            "CSE 3790",
+            "CSE 5998",
+            "CSE 4403",
+            "CSE 3428",
+            "CSE 2677",
+            "CSE 1869",
+            "CSE 1954",
+            "CSE 2009",
+            "CSE 2531",
+            "CSE 3600",
+            "CSE 1726",
+            "CSE 5573",
+            "CSE 4383",
+            "CSE 3974",
+            "CSE 4760",
+            "CSE 3770",
+            "CSE 1704",
+            "CSE 1371",
+            "CSE 2161",
+            "CSE 1145",
+            "CSE 2174",
+            "CSE 2237",
+            "CSE 1589",
+            "CSE 5656",
+            "CSE 2820",
+            "CSE 3649",
+            "CSE 3376",
+            "CSE 1623",
+            "CSE 5664"
+        ]
+    },
+    "relations": {
+        "friendship": [
+            [
+                "Matthew",
+                "Tim"
+            ],
+            [
+                "Blake",
+                "Donald"
+            ],
+            [
+                "Josefina",
+                "John"
+            ],
+            [
+                "Ronald",
+                "Jeremy"
+            ],
+            [
+                "Tim",
+                "Ira"
+            ],
+            [
+                "Matthew",
+                "Ira"
+            ],
+            [
+                "Douglas",
+                "Margaret"
+            ],
+            [
+                "Betty",
+                "Bobbie"
+            ],
+            [
+                "Catherine",
+                "John"
+            ],
+            [
+                "Catherine",
+                "Ronald"
+            ],
+            [
+                "Douglas",
+                "John"
+            ],
+            [
+                "Matthew",
+                "Leonard"
+            ],
+            [
+                "John",
+                "Douglas"
+            ],
+            [
+                "Jeremy",
+                "Alejandra"
+            ],
+            [
+                "Ira",
+                "Margaret"
+            ],
+            [
+                "Ryan",
+                "Betty"
+            ],
+            [
+                "John",
+                "Josefina"
+            ],
+            [
+                "Blake",
+                "Ira"
+            ],
+            [
+                "Ryan",
+                "Donald"
+            ],
+            [
+                "David",
+                "Josefina"
+            ],
+            [
+                "Daniel",
+                "Jeremy"
+            ],
+            [
+                "Douglas",
+                "Catherine"
+            ],
+            [
+                "Catherine",
+                "Alejandra"
+            ],
+            [
+                "Tim",
+                "Margaret"
+            ],
+            [
+                "Leonard",
+                "Ira"
+            ],
+            [
+                "Douglas",
+                "Ouida"
+            ],
+            [
+                "Daniel",
+                "Josefina"
+            ],
+            [
+                "Donald",
+                "Betty"
+            ],
+            [
+                "Ouida",
+                "Catherine"
+            ],
+            [
+                "Daniel",
+                "Matthew"
+            ],
+            [
+                "Ira",
+                "David"
+            ],
+            [
+                "Tim",
+                "Leonard"
+            ],
+            [
+                "Ira",
+                "Tim"
+            ],
+            [
+                "Daniel",
+                "Ira"
+            ],
+            [
+                "Donald",
+                "Blake"
+            ],
+            [
+                "Betty",
+                "Margaret"
+            ],
+            [
+                "Tim",
+                "John"
+            ],
+            [
+                "Margaret",
+                "Donald"
+            ],
+            [
+                "Ronald",
+                "Bobbie"
+            ],
+            [
+                "Donald",
+                "Daniel"
+            ],
+            [
+                "Alejandra",
+                "Ronald"
+            ],
+            [
+                "Daniel",
+                "Margaret"
+            ],
+            [
+                "Jeremy",
+                "Josefina"
+            ],
+            [
+                "Ronald",
+                "David"
+            ],
+            [
+                "Alejandra",
+                "John"
+            ],
+            [
+                "Ouida",
+                "Matthew"
+            ],
+            [
+                "Margaret",
+                "Daniel"
+            ],
+            [
+                "Catherine",
+                "Tim"
+            ],
+            [
+                "Betty",
+                "John"
+            ],
+            [
+                "Bobbie",
+                "Tim"
+            ],
+            [
+                "Josefina",
+                "Leonard"
+            ],
+            [
+                "Leonard",
+                "Tim"
+            ],
+            [
+                "Alejandra",
+                "Blake"
+            ],
+            [
+                "Betty",
+                "Blake"
+            ],
+            [
+                "Ouida",
+                "Margaret"
+            ],
+            [
+                "Ouida",
+                "Daniel"
+            ],
+            [
+                "Ryan",
+                "Tim"
+            ],
+            [
+                "Ryan",
+                "Jeremy"
+            ],
+            [
+                "Matthew",
+                "Daniel"
+            ],
+            [
+                "Ronald",
+                "Donald"
+            ],
+            [
+                "Josefina",
+                "Ronald"
+            ],
+            [
+                "Ronald",
+                "Ira"
+            ],
+            [
+                "Catherine",
+                "Donald"
+            ],
+            [
+                "Leonard",
+                "Blake"
+            ],
+            [
+                "Jeremy",
+                "Bobbie"
+            ],
+            [
+                "Douglas",
+                "David"
+            ],
+            [
+                "Matthew",
+                "Margaret"
+            ],
+            [
+                "Alejandra",
+                "Tim"
+            ],
+            [
+                "Ronald",
+                "Daniel"
+            ],
+            [
+                "Leonard",
+                "Daniel"
+            ],
+            [
+                "Donald",
+                "Matthew"
+            ],
+            [
+                "Leonard",
+                "John"
+            ],
+            [
+                "Blake",
+                "Catherine"
+            ],
+            [
+                "Daniel",
+                "Bobbie"
+            ],
+            [
+                "Daniel",
+                "Blake"
+            ],
+            [
+                "Margaret",
+                "Bobbie"
+            ],
+            [
+                "Ronald",
+                "Matthew"
+            ],
+            [
+                "Blake",
+                "Betty"
+            ],
+            [
+                "Tim",
+                "Ryan"
+            ],
+            [
+                "Jeremy",
+                "Donald"
+            ],
+            [
+                "Ira",
+                "Catherine"
+            ],
+            [
+                "David",
+                "Bobbie"
+            ],
+            [
+                "Daniel",
+                "Tim"
+            ],
+            [
+                "John",
+                "Bobbie"
+            ],
+            [
+                "Jeremy",
+                "Ryan"
+            ],
+            [
+                "Leonard",
+                "Ouida"
+            ]
+        ],
+        "registered": [
+            [
+                "Blake",
+                "CSE 1564"
+            ],
+            [
+                "Ryan",
+                "CSE 5118"
+            ],
+            [
+                "Donald",
+                "CSE 1434"
+            ],
+            [
+                "Ouida",
+                "CSE 3335"
+            ],
+            [
+                "Ronald",
+                "CSE 3394"
+            ],
+            [
+                "Margaret",
+                "CSE 2829"
+            ],
+            [
+                "Betty",
+                "CSE 2910"
+            ],
+            [
+                "John",
+                "CSE 5824"
+            ],
+            [
+                "Jeremy",
+                "CSE 2985"
+            ],
+            [
+                "Ryan",
+                "CSE 1194"
+            ],
+            [
+                "Jeremy",
+                "CSE 5382"
+            ],
+            [
+                "Blake",
+                "CSE 5341"
+            ],
+            [
+                "Josefina",
+                "CSE 1865"
+            ],
+            [
+                "Ryan",
+                "CSE 3831"
+            ],
+            [
+                "Catherine",
+                "CSE 3634"
+            ],
+            [
+                "Catherine",
+                "CSE 4696"
+            ],
+            [
+                "Margaret",
+                "CSE 1121"
+            ],
+            [
+                "Tim",
+                "CSE 5824"
+            ],
+            [
+                "Jeremy",
+                "CSE 4162"
+            ],
+            [
+                "Margaret",
+                "CSE 5523"
+            ],
+            [
+                "Alejandra",
+                "CSE 3516"
+            ],
+            [
+                "Donald",
+                "CSE 4408"
+            ],
+            [
+                "John",
+                "CSE 3013"
+            ],
+            [
+                "Tim",
+                "CSE 1981"
+            ],
+            [
+                "David",
+                "CSE 4114"
+            ],
+            [
+                "David",
+                "CSE 3633"
+            ],
+            [
+                "Tim",
+                "CSE 3936"
+            ],
+            [
+                "Ira",
+                "CSE 5443"
+            ],
+            [
+                "Ryan",
+                "CSE 2820"
+            ],
+            [
+                "John",
+                "CSE 1197"
+            ],
+            [
+                "Ronald",
+                "CSE 2998"
+            ],
+            [
+                "Betty",
+                "CSE 5348"
+            ],
+            [
+                "Jeremy",
+                "CSE 3739"
+            ],
+            [
+                "Catherine",
+                "CSE 3489"
+            ],
+            [
+                "Josefina",
+                "CSE 2646"
+            ],
+            [
+                "Jeremy",
+                "CSE 1129"
+            ],
+            [
+                "John",
+                "CSE 3737"
+            ],
+            [
+                "Jeremy",
+                "CSE 1825"
+            ],
+            [
+                "Ira",
+                "CSE 3139"
+            ],
+            [
+                "Donald",
+                "CSE 1714"
+            ],
+            [
+                "Josefina",
+                "CSE 4613"
+            ],
+            [
+                "Bobbie",
+                "CSE 2045"
+            ],
+            [
+                "Ryan",
+                "CSE 5795"
+            ],
+            [
+                "David",
+                "CSE 1977"
+            ],
+            [
+                "Ryan",
+                "CSE 2429"
+            ],
+            [
+                "Donald",
+                "CSE 5050"
+            ],
+            [
+                "Leonard",
+                "CSE 4258"
+            ],
+            [
+                "Ouida",
+                "CSE 4794"
+            ],
+            [
+                "Ronald",
+                "CSE 5949"
+            ],
+            [
+                "Leonard",
+                "CSE 1197"
+            ],
+            [
+                "Tim",
+                "CSE 2461"
+            ],
+            [
+                "Catherine",
+                "CSE 3936"
+            ],
+            [
+                "Blake",
+                "CSE 3660"
+            ],
+            [
+                "John",
+                "CSE 3089"
+            ],
+            [
+                "Catherine",
+                "CSE 2667"
+            ],
+            [
+                "Ronald",
+                "CSE 1710"
+            ],
+            [
+                "Tim",
+                "CSE 1924"
+            ],
+            [
+                "Matthew",
+                "CSE 3658"
+            ],
+            [
+                "Jeremy",
+                "CSE 5348"
+            ],
+            [
+                "Alejandra",
+                "CSE 2625"
+            ],
+            [
+                "Leonard",
+                "CSE 1293"
+            ],
+            [
+                "Josefina",
+                "CSE 5743"
+            ],
+            [
+                "Josefina",
+                "CSE 5568"
+            ],
+            [
+                "Ryan",
+                "CSE 4239"
+            ],
+            [
+                "David",
+                "CSE 1264"
+            ],
+            [
+                "John",
+                "CSE 5473"
+            ],
+            [
+                "Ronald",
+                "CSE 4403"
+            ],
+            [
+                "Catherine",
+                "CSE 2620"
+            ],
+            [
+                "Ronald",
+                "CSE 5364"
+            ],
+            [
+                "Ryan",
+                "CSE 3739"
+            ],
+            [
+                "Jeremy",
+                "CSE 5844"
+            ],
+            [
+                "Daniel",
+                "CSE 1468"
+            ],
+            [
+                "Betty",
+                "CSE 1623"
+            ],
+            [
+                "Leonard",
+                "CSE 1581"
+            ],
+            [
+                "John",
+                "CSE 3831"
+            ],
+            [
+                "Ryan",
+                "CSE 4613"
+            ],
+            [
+                "David",
+                "CSE 2480"
+            ],
+            [
+                "Margaret",
+                "CSE 1434"
+            ],
+            [
+                "Matthew",
+                "CSE 2174"
+            ],
+            [
+                "Matthew",
+                "CSE 1865"
+            ],
+            [
+                "Bobbie",
+                "CSE 5118"
+            ],
+            [
+                "Margaret",
+                "CSE 1264"
+            ],
+            [
+                "Bobbie",
+                "CSE 1128"
+            ],
+            [
+                "Josefina",
+                "CSE 1434"
+            ],
+            [
+                "John",
+                "CSE 1335"
+            ],
+            [
+                "Douglas",
+                "CSE 4541"
+            ],
+            [
+                "Leonard",
+                "CSE 1967"
+            ],
+            [
+                "Josefina",
+                "CSE 2086"
+            ],
+            [
+                "Alejandra",
+                "CSE 3139"
+            ],
+            [
+                "Blake",
+                "CSE 3806"
+            ],
+            [
+                "Margaret",
+                "CSE 3357"
+            ],
+            [
+                "Alejandra",
+                "CSE 2149"
+            ]
+        ],
+        "teaches": [
+            [
+                "Dr. Lucille",
+                "CSE 3388"
+            ],
+            [
+                "Dr. Francis",
+                "CSE 1942"
+            ],
+            [
+                "Dr. Paul",
+                "CSE 4341"
+            ],
+            [
+                "Dr. Betty",
+                "CSE 2161"
+            ],
+            [
+                "Dr. William",
+                "CSE 4620"
+            ],
+            [
+                "Dr. Betty",
+                "CSE 5050"
+            ],
+            [
+                "Dr. Nan",
+                "CSE 3290"
+            ],
+            [
+                "Dr. Pauline",
+                "CSE 2105"
+            ],
+            [
+                "Dr. Betty",
+                "CSE 4450"
+            ],
+            [
+                "Dr. Andrea",
+                "CSE 3418"
+            ],
+            [
+                "Dr. Paul",
+                "CSE 1495"
+            ],
+            [
+                "Dr. Andrea",
+                "CSE 5382"
+            ],
+            [
+                "Dr. Sheryl",
+                "CSE 3711"
+            ],
+            [
+                "Dr. William",
+                "CSE 5065"
+            ],
+            [
+                "Dr. Rodger",
+                "CSE 4722"
+            ],
+            [
+                "Dr. Thomas",
+                "CSE 5063"
+            ],
+            [
+                "Dr. Betty",
+                "CSE 5435"
+            ],
+            [
+                "Dr. Millie",
+                "CSE 2764"
+            ],
+            [
+                "Dr. Nan",
+                "CSE 3542"
+            ],
+            [
+                "Dr. Lucille",
+                "CSE 4778"
+            ],
+            [
+                "Dr. Heath",
+                "CSE 1197"
+            ],
+            [
+                "Dr. Ramiro",
+                "CSE 1128"
+            ],
+            [
+                "Dr. Paul",
+                "CSE 5065"
+            ],
+            [
+                "Dr. Sheryl",
+                "CSE 4065"
+            ],
+            [
+                "Dr. Pauline",
+                "CSE 1685"
+            ],
+            [
+                "Dr. Rodger",
+                "CSE 3454"
+            ],
+            [
+                "Dr. Thomas",
+                "CSE 1844"
+            ],
+            [
+                "Dr. Ramiro",
+                "CSE 1371"
+            ],
+            [
+                "Dr. Angela",
+                "CSE 4620"
+            ],
+            [
+                "Dr. Francis",
+                "CSE 2708"
+            ],
+            [
+                "Dr. Thomas",
+                "CSE 2415"
+            ],
+            [
+                "Dr. Rodger",
+                "CSE 1339"
+            ],
+            [
+                "Dr. Paul",
+                "CSE 2435"
+            ],
+            [
+                "Dr. Rodger",
+                "CSE 3475"
+            ],
+            [
+                "Dr. John",
+                "CSE 5805"
+            ],
+            [
+                "Dr. Sheryl",
+                "CSE 1640"
+            ],
+            [
+                "Dr. Nan",
+                "CSE 3893"
+            ],
+            [
+                "Dr. Thomas",
+                "CSE 4295"
+            ],
+            [
+                "Dr. Thomas",
+                "CSE 3465"
+            ],
+            [
+                "Dr. William",
+                "CSE 1685"
+            ],
+            [
+                "Dr. Betty",
+                "CSE 4877"
+            ],
+            [
+                "Dr. Heath",
+                "CSE 5118"
+            ],
+            [
+                "Dr. William",
+                "CSE 5656"
+            ],
+            [
+                "Dr. Pauline",
+                "CSE 5286"
+            ],
+            [
+                "Dr. Thomas",
+                "CSE 2135"
+            ],
+            [
+                "Dr. Angela",
+                "CSE 3880"
+            ],
+            [
+                "Dr. George",
+                "CSE 3089"
+            ],
+            [
+                "Dr. Angela",
+                "CSE 1561"
+            ],
+            [
+                "Dr. Rodger",
+                "CSE 2116"
+            ],
+            [
+                "Dr. William",
+                "CSE 1121"
+            ],
+            [
+                "Dr. Rodger",
+                "CSE 3648"
+            ],
+            [
+                "Dr. Thomas",
+                "CSE 5435"
+            ],
+            [
+                "Dr. Paul",
+                "CSE 2740"
+            ],
+            [
+                "Dr. Pauline",
+                "CSE 3188"
+            ],
+            [
+                "Dr. Thomas",
+                "CSE 4383"
+            ],
+            [
+                "Dr. Paul",
+                "CSE 4357"
+            ],
+            [
+                "Dr. Angela",
+                "CSE 4929"
+            ],
+            [
+                "Dr. Thomas",
+                "CSE 5038"
+            ],
+            [
+                "Dr. Betty",
+                "CSE 1229"
+            ],
+            [
+                "Dr. Lucille",
+                "CSE 5523"
+            ],
+            [
+                "Dr. John",
+                "CSE 1096"
+            ],
+            [
+                "Dr. Paul",
+                "CSE 1737"
+            ],
+            [
+                "Dr. George",
+                "CSE 4713"
+            ],
+            [
+                "Dr. Paul",
+                "CSE 4450"
+            ],
+            [
+                "Dr. Heath",
+                "CSE 4601"
+            ],
+            [
+                "Dr. Thomas",
+                "CSE 2301"
+            ],
+            [
+                "Dr. Thomas",
+                "CSE 3762"
+            ],
+            [
+                "Dr. Lucille",
+                "CSE 1938"
+            ],
+            [
+                "Dr. Betty",
+                "CSE 2795"
+            ],
+            [
+                "Dr. George",
+                "CSE 2964"
+            ],
+            [
+                "Dr. Nan",
+                "CSE 5736"
+            ],
+            [
+                "Dr. Ramiro",
+                "CSE 5752"
+            ],
+            [
+                "Dr. Ramiro",
+                "CSE 4794"
+            ],
+            [
+                "Dr. Nan",
+                "CSE 2906"
+            ],
+            [
+                "Dr. Ramiro",
+                "CSE 1492"
+            ],
+            [
+                "Dr. Francis",
+                "CSE 1967"
+            ],
+            [
+                "Dr. John",
+                "CSE 4513"
+            ],
+            [
+                "Dr. Nan",
+                "CSE 1371"
+            ],
+            [
+                "Dr. Pauline",
+                "CSE 3699"
+            ],
+            [
+                "Dr. Millie",
+                "CSE 2677"
+            ],
+            [
+                "Dr. John",
+                "CSE 4341"
+            ],
+            [
+                "Dr. Millie",
+                "CSE 1329"
+            ],
+            [
+                "Dr. Rodger",
+                "CSE 2461"
+            ],
+            [
+                "Dr. Paul",
+                "CSE 5523"
+            ],
+            [
+                "Dr. Paul",
+                "CSE 1938"
+            ]
+        ]
+    },
+    "attributes": {
+        "intelligence": [
+            [
+                "Donald",
+                "low"
+            ],
+            [
+                "Catherine",
+                "low"
+            ],
+            [
+                "Ryan",
+                "low"
+            ],
+            [
+                "Ouida",
+                "low"
+            ],
+            [
+                "Betty",
+                "high"
+            ],
+            [
+                "Blake",
+                "high"
+            ],
+            [
+                "Daniel",
+                "low"
+            ],
+            [
+                "Matthew",
+                "low"
+            ],
+            [
+                "Alejandra",
+                "high"
+            ],
+            [
+                "Bobbie",
+                "high"
+            ],
+            [
+                "Ira",
+                "high"
+            ],
+            [
+                "Tim",
+                "high"
+            ],
+            [
+                "Ronald",
+                "high"
+            ],
+            [
+                "Douglas",
+                "high"
+            ],
+            [
+                "Josefina",
+                "high"
+            ],
+            [
+                "Leonard",
+                "high"
+            ],
+            [
+                "David",
+                "high"
+            ],
+            [
+                "Margaret",
+                "high"
+            ],
+            [
+                "John",
+                "high"
+            ],
+            [
+                "Jeremy",
+                "low"
+            ]
+        ],
+        "teaching_skills": [
+            [
+                "Dr. Pauline",
+                "low"
+            ],
+            [
+                "Dr. Millie",
+                "high"
+            ],
+            [
+                "Dr. Angela",
+                "high"
+            ],
+            [
+                "Dr. John",
+                "low"
+            ],
+            [
+                "Dr. Rodger",
+                "low"
+            ],
+            [
+                "Dr. Lucille",
+                "high"
+            ],
+            [
+                "Dr. William",
+                "low"
+            ],
+            [
+                "Dr. George",
+                "high"
+            ],
+            [
+                "Dr. Betty",
+                "low"
+            ],
+            [
+                "Dr. Thomas",
+                "low"
+            ],
+            [
+                "Dr. Sheryl",
+                "high"
+            ],
+            [
+                "Dr. Heath",
+                "high"
+            ],
+            [
+                "Dr. Andrea",
+                "low"
+            ],
+            [
+                "Dr. Kelly",
+                "high"
+            ],
+            [
+                "Dr. Nan",
+                "high"
+            ],
+            [
+                "Dr. Paul",
+                "high"
+            ],
+            [
+                "Dr. Francis",
+                "high"
+            ],
+            [
+                "Dr. Ramiro",
+                "low"
+            ]
+        ],
+        "difficulty": [
+            [
+                "CSE 3388",
+                "low"
+            ],
+            [
+                "CSE 2998",
+                "low"
+            ],
+            [
+                "CSE 3418",
+                "low"
+            ],
+            [
+                "CSE 2375",
+                "low"
+            ],
+            [
+                "CSE 2149",
+                "low"
+            ],
+            [
+                "CSE 5865",
+                "high"
+            ],
+            [
+                "CSE 2798",
+                "low"
+            ],
+            [
+                "CSE 2620",
+                "low"
+            ],
+            [
+                "CSE 4450",
+                "high"
+            ],
+            [
+                "CSE 3394",
+                "low"
+            ],
+            [
+                "CSE 2301",
+                "high"
+            ],
+            [
+                "CSE 1924",
+                "high"
+            ],
+            [
+                "CSE 1260",
+                "high"
+            ],
+            [
+                "CSE 3425",
+                "high"
+            ],
+            [
+                "CSE 5743",
+                "low"
+            ],
+            [
+                "CSE 1793",
+                "high"
+            ],
+            [
+                "CSE 4355",
+                "high"
+            ],
+            [
+                "CSE 4668",
+                "low"
+            ],
+            [
+                "CSE 5949",
+                "high"
+            ],
+            [
+                "CSE 3866",
+                "high"
+            ],
+            [
+                "CSE 4498",
+                "high"
+            ],
+            [
+                "CSE 5779",
+                "high"
+            ],
+            [
+                "CSE 2708",
+                "high"
+            ],
+            [
+                "CSE 5141",
+                "high"
+            ],
+            [
+                "CSE 3290",
+                "low"
+            ],
+            [
+                "CSE 2009",
+                "low"
+            ],
+            [
+                "CSE 4882",
+                "low"
+            ],
+            [
+                "CSE 3321",
+                "high"
+            ],
+            [
+                "CSE 3608",
+                "low"
+            ],
+            [
+                "CSE 4469",
+                "low"
+            ],
+            [
+                "CSE 3920",
+                "low"
+            ],
+            [
+                "CSE 3699",
+                "low"
+            ],
+            [
+                "CSE 2848",
+                "low"
+            ],
+            [
+                "CSE 3079",
+                "low"
+            ],
+            [
+                "CSE 1726",
+                "high"
+            ],
+            [
+                "CSE 1121",
+                "low"
+            ],
+            [
+                "CSE 2778",
+                "high"
+            ],
+            [
+                "CSE 2829",
+                "high"
+            ],
+            [
+                "CSE 3088",
+                "low"
+            ],
+            [
+                "CSE 1128",
+                "high"
+            ],
+            [
+                "CSE 1093",
+                "low"
+            ],
+            [
+                "CSE 2236",
+                "high"
+            ],
+            [
+                "CSE 2531",
+                "low"
+            ],
+            [
+                "CSE 3636",
+                "low"
+            ],
+            [
+                "CSE 5523",
+                "low"
+            ],
+            [
+                "CSE 2626",
+                "high"
+            ],
+            [
+                "CSE 2349",
+                "high"
+            ],
+            [
+                "CSE 1665",
+                "high"
+            ],
+            [
+                "CSE 4778",
+                "high"
+            ],
+            [
+                "CSE 1250",
+                "low"
+            ],
+            [
+                "CSE 4577",
+                "low"
+            ],
+            [
+                "CSE 3357",
+                "low"
+            ],
+            [
+                "CSE 3297",
+                "high"
+            ],
+            [
+                "CSE 1371",
+                "low"
+            ],
+            [
+                "CSE 3661",
+                "high"
+            ],
+            [
+                "CSE 1967",
+                "high"
+            ],
+            [
+                "CSE 2237",
+                "high"
+            ],
+            [
+                "CSE 5164",
+                "low"
+            ],
+            [
+                "CSE 3139",
+                "low"
+            ],
+            [
+                "CSE 4923",
+                "high"
+            ],
+            [
+                "CSE 1581",
+                "high"
+            ],
+            [
+                "CSE 2990",
+                "low"
+            ],
+            [
+                "CSE 3711",
+                "high"
+            ],
+            [
+                "CSE 1683",
+                "high"
+            ],
+            [
+                "CSE 2985",
+                "high"
+            ],
+            [
+                "CSE 5515",
+                "low"
+            ],
+            [
+                "CSE 5038",
+                "low"
+            ],
+            [
+                "CSE 3795",
+                "high"
+            ],
+            [
+                "CSE 4366",
+                "low"
+            ],
+            [
+                "CSE 5357",
+                "high"
+            ],
+            [
+                "CSE 3516",
+                "high"
+            ],
+            [
+                "CSE 2043",
+                "high"
+            ],
+            [
+                "CSE 3936",
+                "low"
+            ],
+            [
+                "CSE 4986",
+                "low"
+            ],
+            [
+                "CSE 2619",
+                "high"
+            ],
+            [
+                "CSE 1514",
+                "high"
+            ],
+            [
+                "CSE 3468",
+                "low"
+            ],
+            [
+                "CSE 4044",
+                "low"
+            ],
+            [
+                "CSE 4543",
+                "low"
+            ],
+            [
+                "CSE 4419",
+                "high"
+            ],
+            [
+                "CSE 1482",
+                "high"
+            ],
+            [
+                "CSE 1750",
+                "high"
+            ],
+            [
+                "CSE 3214",
+                "low"
+            ],
+            [
+                "CSE 3634",
+                "low"
+            ],
+            [
+                "CSE 4119",
+                "low"
+            ],
+            [
+                "CSE 4697",
+                "low"
+            ],
+            [
+                "CSE 5027",
+                "high"
+            ],
+            [
+                "CSE 3479",
+                "high"
+            ],
+            [
+                "CSE 3633",
+                "high"
+            ],
+            [
+                "CSE 4280",
+                "high"
+            ],
+            [
+                "CSE 1507",
+                "high"
+            ],
+            [
+                "CSE 1240",
+                "high"
+            ],
+            [
+                "CSE 4197",
+                "high"
+            ],
+            [
+                "CSE 1410",
+                "high"
+            ],
+            [
+                "CSE 5844",
+                "high"
+            ],
+            [
+                "CSE 1901",
+                "low"
+            ],
+            [
+                "CSE 4613",
+                "low"
+            ],
+            [
+                "CSE 1869",
+                "low"
+            ],
+            [
+                "CSE 2785",
+                "low"
+            ],
+            [
+                "CSE 1498",
+                "high"
+            ],
+            [
+                "CSE 5647",
+                "high"
+            ],
+            [
+                "CSE 5111",
+                "low"
+            ],
+            [
+                "CSE 3542",
+                "high"
+            ],
+            [
+                "CSE 2161",
+                "low"
+            ],
+            [
+                "CSE 5473",
+                "low"
+            ],
+            [
+                "CSE 1737",
+                "high"
+            ],
+            [
+                "CSE 5364",
+                "low"
+            ],
+            [
+                "CSE 1646",
+                "low"
+            ],
+            [
+                "CSE 4403",
+                "high"
+            ],
+            [
+                "CSE 4241",
+                "high"
+            ],
+            [
+                "CSE 3177",
+                "low"
+            ],
+            [
+                "CSE 3044",
+                "low"
+            ],
+            [
+                "CSE 5644",
+                "high"
+            ],
+            [
+                "CSE 3204",
+                "high"
+            ],
+            [
+                "CSE 2811",
+                "low"
+            ],
+            [
+                "CSE 2093",
+                "low"
+            ],
+            [
+                "CSE 3489",
+                "high"
+            ],
+            [
+                "CSE 3338",
+                "low"
+            ],
+            [
+                "CSE 4962",
+                "high"
+            ],
+            [
+                "CSE 4943",
+                "high"
+            ],
+            [
+                "CSE 3525",
+                "high"
+            ],
+            [
+                "CSE 3893",
+                "low"
+            ],
+            [
+                "CSE 1293",
+                "low"
+            ],
+            [
+                "CSE 5809",
+                "high"
+            ],
+            [
+                "CSE 2885",
+                "high"
+            ],
+            [
+                "CSE 5382",
+                "high"
+            ],
+            [
+                "CSE 5211",
+                "low"
+            ],
+            [
+                "CSE 2646",
+                "high"
+            ],
+            [
+                "CSE 3496",
+                "low"
+            ],
+            [
+                "CSE 3918",
+                "low"
+            ],
+            [
+                "CSE 5728",
+                "low"
+            ],
+            [
+                "CSE 1825",
+                "high"
+            ],
+            [
+                "CSE 3953",
+                "high"
+            ],
+            [
+                "CSE 4156",
+                "low"
+            ],
+            [
+                "CSE 5658",
+                "high"
+            ],
+            [
+                "CSE 4004",
+                "low"
+            ],
+            [
+                "CSE 2105",
+                "high"
+            ],
+            [
+                "CSE 3880",
+                "high"
+            ],
+            [
+                "CSE 3192",
+                "low"
+            ],
+            [
+                "CSE 3609",
+                "high"
+            ],
+            [
+                "CSE 1987",
+                "high"
+            ],
+            [
+                "CSE 5050",
+                "high"
+            ],
+            [
+                "CSE 5577",
+                "low"
+            ],
+            [
+                "CSE 1167",
+                "low"
+            ],
+            [
+                "CSE 4357",
+                "high"
+            ],
+            [
+                "CSE 1109",
+                "high"
+            ],
+            [
+                "CSE 1508",
+                "low"
+            ],
+            [
+                "CSE 5062",
+                "high"
+            ],
+            [
+                "CSE 5576",
+                "low"
+            ],
+            [
+                "CSE 3475",
+                "low"
+            ],
+            [
+                "CSE 3687",
+                "low"
+            ],
+            [
+                "CSE 5586",
+                "high"
+            ],
+            [
+                "CSE 4071",
+                "low"
+            ],
+            [
+                "CSE 1143",
+                "low"
+            ],
+            [
+                "CSE 4749",
+                "high"
+            ],
+            [
+                "CSE 2915",
+                "low"
+            ],
+            [
+                "CSE 3454",
+                "low"
+            ],
+            [
+                "CSE 1728",
+                "low"
+            ],
+            [
+                "CSE 1215",
+                "high"
+            ],
+            [
+                "CSE 3376",
+                "high"
+            ],
+            [
+                "CSE 1411",
+                "low"
+            ],
+            [
+                "CSE 1495",
+                "high"
+            ],
+            [
+                "CSE 1335",
+                "low"
+            ],
+            [
+                "CSE 4787",
+                "high"
+            ],
+            [
+                "CSE 2795",
+                "high"
+            ],
+            [
+                "CSE 3571",
+                "low"
+            ],
+            [
+                "CSE 1589",
+                "high"
+            ],
+            [
+                "CSE 3831",
+                "low"
+            ],
+            [
+                "CSE 5094",
+                "high"
+            ],
+            [
+                "CSE 4258",
+                "high"
+            ],
+            [
+                "CSE 4088",
+                "low"
+            ],
+            [
+                "CSE 4341",
+                "high"
+            ],
+            [
+                "CSE 3509",
+                "high"
+            ],
+            [
+                "CSE 1260",
+                "low"
+            ],
+            [
+                "CSE 1704",
+                "high"
+            ],
+            [
+                "CSE 4597",
+                "low"
+            ],
+            [
+                "CSE 1450",
+                "high"
+            ],
+            [
+                "CSE 2703",
+                "low"
+            ],
+            [
+                "CSE 3658",
+                "high"
+            ],
+            [
+                "CSE 2461",
+                "high"
+            ],
+            [
+                "CSE 2990",
+                "high"
+            ],
+            [
+                "CSE 1714",
+                "high"
+            ],
+            [
+                "CSE 3328",
+                "low"
+            ],
+            [
+                "CSE 3430",
+                "low"
+            ],
+            [
+                "CSE 1451",
+                "high"
+            ],
+            [
+                "CSE 3649",
+                "low"
+            ],
+            [
+                "CSE 3583",
+                "high"
+            ],
+            [
+                "CSE 2505",
+                "high"
+            ],
+            [
+                "CSE 4383",
+                "high"
+            ],
+            [
+                "CSE 2845",
+                "high"
+            ],
+            [
+                "CSE 3790",
+                "low"
+            ],
+            [
+                "CSE 2910",
+                "low"
+            ],
+            [
+                "CSE 5443",
+                "low"
+            ],
+            [
+                "CSE 3188",
+                "low"
+            ],
+            [
+                "CSE 5743",
+                "high"
+            ],
+            [
+                "CSE 1442",
+                "high"
+            ],
+            [
+                "CSE 2805",
+                "low"
+            ],
+            [
+                "CSE 2429",
+                "low"
+            ],
+            [
+                "CSE 4452",
+                "low"
+            ],
+            [
+                "CSE 1629",
+                "high"
+            ],
+            [
+                "CSE 2727",
+                "high"
+            ],
+            [
+                "CSE 2433",
+                "low"
+            ],
+            [
+                "CSE 4537",
+                "high"
+            ],
+            [
+                "CSE 3428",
+                "low"
+            ],
+            [
+                "CSE 4037",
+                "low"
+            ],
+            [
+                "CSE 3806",
+                "low"
+            ],
+            [
+                "CSE 4713",
+                "low"
+            ],
+            [
+                "CSE 5736",
+                "high"
+            ],
+            [
+                "CSE 1710",
+                "high"
+            ],
+            [
+                "CSE 3255",
+                "high"
+            ],
+            [
+                "CSE 3753",
+                "low"
+            ],
+            [
+                "CSE 5630",
+                "high"
+            ],
+            [
+                "CSE 3169",
+                "low"
+            ],
+            [
+                "CSE 2415",
+                "high"
+            ],
+            [
+                "CSE 1977",
+                "low"
+            ],
+            [
+                "CSE 5824",
+                "high"
+            ],
+            [
+                "CSE 3106",
+                "high"
+            ],
+            [
+                "CSE 3330",
+                "high"
+            ],
+            [
+                "CSE 2195",
+                "high"
+            ],
+            [
+                "CSE 1561",
+                "high"
+            ],
+            [
+                "CSE 5758",
+                "low"
+            ],
+            [
+                "CSE 4541",
+                "high"
+            ],
+            [
+                "CSE 4725",
+                "high"
+            ],
+            [
+                "CSE 3678",
+                "high"
+            ],
+            [
+                "CSE 1197",
+                "low"
+            ],
+            [
+                "CSE 5568",
+                "low"
+            ],
+            [
+                "CSE 2158",
+                "high"
+            ],
+            [
+                "CSE 5302",
+                "high"
+            ],
+            [
+                "CSE 1685",
+                "low"
+            ],
+            [
+                "CSE 2700",
+                "low"
+            ],
+            [
+                "CSE 2414",
+                "high"
+            ],
+            [
+                "CSE 3168",
+                "low"
+            ],
+            [
+                "CSE 4747",
+                "low"
+            ],
+            [
+                "CSE 1188",
+                "high"
+            ],
+            [
+                "CSE 5140",
+                "high"
+            ],
+            [
+                "CSE 4239",
+                "low"
+            ],
+            [
+                "CSE 1434",
+                "low"
+            ],
+            [
+                "CSE 4289",
+                "high"
+            ],
+            [
+                "CSE 3610",
+                "low"
+            ],
+            [
+                "CSE 1145",
+                "low"
+            ],
+            [
+                "CSE 3335",
+                "low"
+            ],
+            [
+                "CSE 5110",
+                "high"
+            ],
+            [
+                "CSE 3814",
+                "low"
+            ],
+            [
+                "CSE 1342",
+                "high"
+            ],
+            [
+                "CSE 5850",
+                "high"
+            ],
+            [
+                "CSE 1954",
+                "low"
+            ],
+            [
+                "CSE 4877",
+                "low"
+            ],
+            [
+                "CSE 3647",
+                "high"
+            ],
+            [
+                "CSE 5805",
+                "high"
+            ],
+            [
+                "CSE 3034",
+                "low"
+            ],
+            [
+                "CSE 4908",
+                "low"
+            ],
+            [
+                "CSE 4296",
+                "low"
+            ],
+            [
+                "CSE 5341",
+                "high"
+            ],
+            [
+                "CSE 4842",
+                "high"
+            ],
+            [
+                "CSE 1865",
+                "low"
+            ],
+            [
+                "CSE 4341",
+                "low"
+            ],
+            [
+                "CSE 2086",
+                "low"
+            ],
+            [
+                "CSE 1550",
+                "high"
+            ],
+            [
+                "CSE 1623",
+                "low"
+            ],
+            [
+                "CSE 4203",
+                "low"
+            ],
+            [
+                "CSE 2239",
+                "low"
+            ],
+            [
+                "CSE 3359",
+                "low"
+            ],
+            [
+                "CSE 4613",
+                "high"
+            ],
+            [
+                "CSE 2670",
+                "low"
+            ],
+            [
+                "CSE 1916",
+                "low"
+            ],
+            [
+                "CSE 4101",
+                "high"
+            ],
+            [
+                "CSE 2027",
+                "low"
+            ],
+            [
+                "CSE 5624",
+                "high"
+            ],
+            [
+                "CSE 2161",
+                "high"
+            ],
+            [
+                "CSE 1981",
+                "low"
+            ],
+            [
+                "CSE 2882",
+                "low"
+            ],
+            [
+                "CSE 4043",
+                "low"
+            ],
+            [
+                "CSE 2031",
+                "high"
+            ],
+            [
+                "CSE 4513",
+                "high"
+            ],
+            [
+                "CSE 2710",
+                "high"
+            ],
+            [
+                "CSE 5990",
+                "high"
+            ],
+            [
+                "CSE 3364",
+                "high"
+            ],
+            [
+                "CSE 4207",
+                "high"
+            ],
+            [
+                "CSE 3625",
+                "low"
+            ],
+            [
+                "CSE 5127",
+                "high"
+            ],
+            [
+                "CSE 5103",
+                "high"
+            ],
+            [
+                "CSE 4086",
+                "high"
+            ],
+            [
+                "CSE 5635",
+                "low"
+            ],
+            [
+                "CSE 1926",
+                "low"
+            ],
+            [
+                "CSE 2625",
+                "high"
+            ],
+            [
+                "CSE 2116",
+                "low"
+            ],
+            [
+                "CSE 1329",
+                "low"
+            ],
+            [
+                "CSE 3579",
+                "low"
+            ],
+            [
+                "CSE 3465",
+                "high"
+            ],
+            [
+                "CSE 2454",
+                "low"
+            ],
+            [
+                "CSE 5457",
+                "low"
+            ],
+            [
+                "CSE 2391",
+                "low"
+            ],
+            [
+                "CSE 3227",
+                "high"
+            ],
+            [
+                "CSE 2174",
+                "low"
+            ],
+            [
+                "CSE 5118",
+                "high"
+            ],
+            [
+                "CSE 2135",
+                "low"
+            ],
+            [
+                "CSE 4478",
+                "high"
+            ],
+            [
+                "CSE 4138",
+                "low"
+            ],
+            [
+                "CSE 1048",
+                "high"
+            ],
+            [
+                "CSE 5435",
+                "high"
+            ],
+            [
+                "CSE 5348",
+                "low"
+            ],
+            [
+                "CSE 1096",
+                "high"
+            ],
+            [
+                "CSE 3328",
+                "high"
+            ],
+            [
+                "CSE 3762",
+                "low"
+            ],
+            [
+                "CSE 4423",
+                "low"
+            ],
+            [
+                "CSE 3627",
+                "high"
+            ],
+            [
+                "CSE 4941",
+                "high"
+            ],
+            [
+                "CSE 4444",
+                "low"
+            ],
+            [
+                "CSE 2910",
+                "high"
+            ],
+            [
+                "CSE 4147",
+                "high"
+            ],
+            [
+                "CSE 4065",
+                "high"
+            ],
+            [
+                "CSE 4084",
+                "low"
+            ],
+            [
+                "CSE 2175",
+                "high"
+            ],
+            [
+                "CSE 2884",
+                "high"
+            ],
+            [
+                "CSE 1938",
+                "high"
+            ],
+            [
+                "CSE 1942",
+                "high"
+            ],
+            [
+                "CSE 2906",
+                "low"
+            ],
+            [
+                "CSE 2740",
+                "low"
+            ],
+            [
+                "CSE 2700",
+                "high"
+            ],
+            [
+                "CSE 1199",
+                "high"
+            ],
+            [
+                "CSE 3174",
+                "low"
+            ],
+            [
+                "CSE 3600",
+                "low"
+            ],
+            [
+                "CSE 2188",
+                "low"
+            ],
+            [
+                "CSE 1865",
+                "high"
+            ],
+            [
+                "CSE 3747",
+                "low"
+            ],
+            [
+                "CSE 5656",
+                "low"
+            ],
+            [
+                "CSE 4853",
+                "low"
+            ],
+            [
+                "CSE 3859",
+                "low"
+            ],
+            [
+                "CSE 2820",
+                "low"
+            ],
+            [
+                "CSE 2103",
+                "low"
+            ],
+            [
+                "CSE 3648",
+                "high"
+            ],
+            [
+                "CSE 5971",
+                "high"
+            ],
+            [
+                "CSE 1977",
+                "high"
+            ],
+            [
+                "CSE 5808",
+                "low"
+            ],
+            [
+                "CSE 5007",
+                "high"
+            ],
+            [
+                "CSE 4908",
+                "high"
+            ],
+            [
+                "CSE 3453",
+                "low"
+            ],
+            [
+                "CSE 2435",
+                "low"
+            ],
+            [
+                "CSE 2045",
+                "low"
+            ],
+            [
+                "CSE 4761",
+                "low"
+            ],
+            [
+                "CSE 2675",
+                "low"
+            ],
+            [
+                "CSE 4429",
+                "high"
+            ],
+            [
+                "CSE 3361",
+                "low"
+            ],
+            [
+                "CSE 2983",
+                "low"
+            ],
+            [
+                "CSE 3974",
+                "high"
+            ],
+            [
+                "CSE 5573",
+                "low"
+            ],
+            [
+                "CSE 3496",
+                "high"
+            ],
+            [
+                "CSE 3005",
+                "high"
+            ],
+            [
+                "CSE 4620",
+                "high"
+            ],
+            [
+                "CSE 3163",
+                "low"
+            ],
+            [
+                "CSE 4295",
+                "high"
+            ],
+            [
+                "CSE 3045",
+                "high"
+            ],
+            [
+                "CSE 5795",
+                "high"
+            ],
+            [
+                "CSE 2942",
+                "low"
+            ],
+            [
+                "CSE 2242",
+                "high"
+            ],
+            [
+                "CSE 1380",
+                "high"
+            ],
+            [
+                "CSE 1194",
+                "low"
+            ],
+            [
+                "CSE 3120",
+                "low"
+            ],
+            [
+                "CSE 1459",
+                "high"
+            ],
+            [
+                "CSE 4727",
+                "high"
+            ],
+            [
+                "CSE 4696",
+                "low"
+            ],
+            [
+                "CSE 2518",
+                "low"
+            ],
+            [
+                "CSE 1672",
+                "low"
+            ],
+            [
+                "CSE 2900",
+                "high"
+            ],
+            [
+                "CSE 4114",
+                "high"
+            ],
+            [
+                "CSE 1468",
+                "high"
+            ],
+            [
+                "CSE 3001",
+                "low"
+            ],
+            [
+                "CSE 2790",
+                "high"
+            ],
+            [
+                "CSE 5434",
+                "low"
+            ],
+            [
+                "CSE 3739",
+                "high"
+            ],
+            [
+                "CSE 4929",
+                "low"
+            ],
+            [
+                "CSE 5495",
+                "high"
+            ],
+            [
+                "CSE 3544",
+                "low"
+            ],
+            [
+                "CSE 1564",
+                "low"
+            ],
+            [
+                "CSE 5641",
+                "high"
+            ],
+            [
+                "CSE 4267",
+                "high"
+            ],
+            [
+                "CSE 1014",
+                "low"
+            ],
+            [
+                "CSE 4601",
+                "low"
+            ],
+            [
+                "CSE 3660",
+                "low"
+            ],
+            [
+                "CSE 5985",
+                "low"
+            ],
+            [
+                "CSE 4522",
+                "low"
+            ],
+            [
+                "CSE 2114",
+                "high"
+            ],
+            [
+                "CSE 3722",
+                "low"
+            ],
+            [
+                "CSE 3548",
+                "low"
+            ],
+            [
+                "CSE 4026",
+                "high"
+            ],
+            [
+                "CSE 5664",
+                "high"
+            ],
+            [
+                "CSE 4125",
+                "high"
+            ],
+            [
+                "CSE 2664",
+                "high"
+            ],
+            [
+                "CSE 3737",
+                "low"
+            ],
+            [
+                "CSE 5301",
+                "low"
+            ],
+            [
+                "CSE 3739",
+                "low"
+            ],
+            [
+                "CSE 5875",
+                "low"
+            ],
+            [
+                "CSE 1053",
+                "high"
+            ],
+            [
+                "CSE 5752",
+                "high"
+            ],
+            [
+                "CSE 1474",
+                "low"
+            ],
+            [
+                "CSE 2576",
+                "high"
+            ],
+            [
+                "CSE 3634",
+                "high"
+            ],
+            [
+                "CSE 5674",
+                "high"
+            ],
+            [
+                "CSE 3798",
+                "low"
+            ],
+            [
+                "CSE 3088",
+                "high"
+            ],
+            [
+                "CSE 5683",
+                "high"
+            ],
+            [
+                "CSE 4245",
+                "low"
+            ],
+            [
+                "CSE 3630",
+                "high"
+            ],
+            [
+                "CSE 2170",
+                "high"
+            ],
+            [
+                "CSE 5998",
+                "high"
+            ],
+            [
+                "CSE 5681",
+                "high"
+            ],
+            [
+                "CSE 4409",
+                "low"
+            ],
+            [
+                "CSE 4939",
+                "low"
+            ],
+            [
+                "CSE 2398",
+                "high"
+            ],
+            [
+                "CSE 1129",
+                "low"
+            ],
+            [
+                "CSE 3433",
+                "high"
+            ],
+            [
+                "CSE 2053",
+                "high"
+            ],
+            [
+                "CSE 4697",
+                "high"
+            ],
+            [
+                "CSE 2980",
+                "high"
+            ],
+            [
+                "CSE 3386",
+                "low"
+            ],
+            [
+                "CSE 1126",
+                "high"
+            ],
+            [
+                "CSE 2380",
+                "high"
+            ],
+            [
+                "CSE 1820",
+                "high"
+            ],
+            [
+                "CSE 2826",
+                "low"
+            ],
+            [
+                "CSE 2313",
+                "low"
+            ],
+            [
+                "CSE 2742",
+                "low"
+            ],
+            [
+                "CSE 4760",
+                "low"
+            ],
+            [
+                "CSE 5811",
+                "high"
+            ],
+            [
+                "CSE 1577",
+                "low"
+            ],
+            [
+                "CSE 1817",
+                "high"
+            ],
+            [
+                "CSE 1229",
+                "high"
+            ],
+            [
+                "CSE 2511",
+                "high"
+            ],
+            [
+                "CSE 2332",
+                "low"
+            ],
+            [
+                "CSE 3770",
+                "high"
+            ],
+            [
+                "CSE 2667",
+                "low"
+            ],
+            [
+                "CSE 3237",
+                "low"
+            ],
+            [
+                "CSE 5323",
+                "high"
+            ],
+            [
+                "CSE 1884",
+                "high"
+            ],
+            [
+                "CSE 1618",
+                "low"
+            ],
+            [
+                "CSE 1614",
+                "high"
+            ],
+            [
+                "CSE 4722",
+                "high"
+            ],
+            [
+                "CSE 4836",
+                "low"
+            ],
+            [
+                "CSE 3013",
+                "high"
+            ],
+            [
+                "CSE 3510",
+                "high"
+            ],
+            [
+                "CSE 1492",
+                "low"
+            ],
+            [
+                "CSE 4364",
+                "low"
+            ],
+            [
+                "CSE 2461",
+                "low"
+            ],
+            [
+                "CSE 5200",
+                "high"
+            ],
+            [
+                "CSE 1640",
+                "high"
+            ],
+            [
+                "CSE 1339",
+                "high"
+            ],
+            [
+                "CSE 3352",
+                "low"
+            ],
+            [
+                "CSE 2837",
+                "high"
+            ],
+            [
+                "CSE 5065",
+                "low"
+            ],
+            [
+                "CSE 1959",
+                "high"
+            ],
+            [
+                "CSE 1622",
+                "low"
+            ],
+            [
+                "CSE 4399",
+                "low"
+            ],
+            [
+                "CSE 4845",
+                "high"
+            ],
+            [
+                "CSE 3721",
+                "high"
+            ],
+            [
+                "CSE 4525",
+                "low"
+            ],
+            [
+                "CSE 3207",
+                "high"
+            ],
+            [
+                "CSE 5562",
+                "low"
+            ],
+            [
+                "CSE 4162",
+                "low"
+            ],
+            [
+                "CSE 2964",
+                "high"
+            ],
+            [
+                "CSE 4732",
+                "low"
+            ],
+            [
+                "CSE 2480",
+                "high"
+            ],
+            [
+                "CSE 5286",
+                "high"
+            ],
+            [
+                "CSE 3992",
+                "low"
+            ],
+            [
+                "CSE 2168",
+                "low"
+            ],
+            [
+                "CSE 5487",
+                "high"
+            ],
+            [
+                "CSE 5352",
+                "low"
+            ],
+            [
+                "CSE 1844",
+                "low"
+            ],
+            [
+                "CSE 1363",
+                "high"
+            ],
+            [
+                "CSE 2373",
+                "low"
+            ],
+            [
+                "CSE 5325",
+                "low"
+            ],
+            [
+                "CSE 2180",
+                "low"
+            ],
+            [
+                "CSE 4408",
+                "high"
+            ],
+            [
+                "CSE 2992",
+                "high"
+            ],
+            [
+                "CSE 2764",
+                "low"
+            ],
+            [
+                "CSE 5063",
+                "low"
+            ],
+            [
+                "CSE 4794",
+                "high"
+            ],
+            [
+                "CSE 5730",
+                "high"
+            ],
+            [
+                "CSE 2401",
+                "low"
+            ],
+            [
+                "CSE 1156",
+                "low"
+            ],
+            [
+                "CSE 1960",
+                "low"
+            ],
+            [
+                "CSE 2677",
+                "low"
+            ],
+            [
+                "CSE 5097",
+                "high"
+            ],
+            [
+                "CSE 1264",
+                "high"
+            ],
+            [
+                "CSE 5584",
+                "high"
+            ],
+            [
+                "CSE 4554",
+                "high"
+            ],
+            [
+                "CSE 3089",
+                "high"
+            ],
+            [
+                "CSE 2035",
+                "high"
+            ]
+        ],
+        "tutoring": [
+            [
+                "CSE 4429",
+                "yes"
+            ],
+            [
+                "CSE 1665",
+                "no"
+            ],
+            [
+                "CSE 3866",
+                "no"
+            ],
+            [
+                "CSE 4882",
+                "no"
+            ],
+            [
+                "CSE 4877",
+                "yes"
+            ],
+            [
+                "CSE 2454",
+                "no"
+            ],
+            [
+                "CSE 4778",
+                "yes"
+            ],
+            [
+                "CSE 5118",
+                "yes"
+            ],
+            [
+                "CSE 2778",
+                "yes"
+            ],
+            [
+                "CSE 1411",
+                "yes"
+            ],
+            [
+                "CSE 5573",
+                "yes"
+            ],
+            [
+                "CSE 1335",
+                "yes"
+            ],
+            [
+                "CSE 5971",
+                "yes"
+            ],
+            [
+                "CSE 3634",
+                "yes"
+            ],
+            [
+                "CSE 3831",
+                "yes"
+            ],
+            [
+                "CSE 2175",
+                "no"
+            ],
+            [
+                "CSE 4939",
+                "yes"
+            ],
+            [
+                "CSE 1750",
+                "yes"
+            ],
+            [
+                "CSE 3388",
+                "yes"
+            ],
+            [
+                "CSE 5779",
+                "yes"
+            ],
+            [
+                "CSE 3479",
+                "yes"
+            ],
+            [
+                "CSE 3633",
+                "yes"
+            ],
+            [
+                "CSE 3088",
+                "yes"
+            ],
+            [
+                "CSE 3013",
+                "yes"
+            ],
+            [
+                "CSE 4597",
+                "yes"
+            ],
+            [
+                "CSE 1199",
+                "yes"
+            ],
+            [
+                "CSE 5050",
+                "no"
+            ],
+            [
+                "CSE 3335",
+                "no"
+            ],
+            [
+                "CSE 5681",
+                "no"
+            ],
+            [
+                "CSE 5062",
+                "yes"
+            ],
+            [
+                "CSE 2161",
+                "yes"
+            ],
+            [
+                "CSE 2505",
+                "yes"
+            ],
+            [
+                "CSE 4004",
+                "yes"
+            ],
+            [
+                "CSE 5641",
+                "yes"
+            ],
+            [
+                "CSE 1614",
+                "yes"
+            ],
+            [
+                "CSE 2700",
+                "no"
+            ],
+            [
+                "CSE 2237",
+                "yes"
+            ],
+            [
+                "CSE 5364",
+                "no"
+            ],
+            [
+                "CSE 1014",
+                "no"
+            ],
+            [
+                "CSE 3297",
+                "yes"
+            ],
+            [
+                "CSE 3880",
+                "yes"
+            ],
+            [
+                "CSE 5728",
+                "no"
+            ],
+            [
+                "CSE 3089",
+                "yes"
+            ],
+            [
+                "CSE 3468",
+                "no"
+            ],
+            [
+                "CSE 3737",
+                "yes"
+            ],
+            [
+                "CSE 1459",
+                "yes"
+            ],
+            [
+                "CSE 4749",
+                "no"
+            ],
+            [
+                "CSE 4258",
+                "yes"
+            ],
+            [
+                "CSE 1977",
+                "no"
+            ],
+            [
+                "CSE 2518",
+                "no"
+            ],
+            [
+                "CSE 5435",
+                "no"
+            ],
+            [
+                "CSE 2992",
+                "yes"
+            ],
+            [
+                "CSE 2116",
+                "no"
+            ],
+            [
+                "CSE 3227",
+                "yes"
+            ],
+            [
+                "CSE 4697",
+                "no"
+            ],
+            [
+                "CSE 5097",
+                "yes"
+            ],
+            [
+                "CSE 4444",
+                "yes"
+            ],
+            [
+                "CSE 3753",
+                "no"
+            ],
+            [
+                "CSE 1128",
+                "no"
+            ],
+            [
+                "CSE 2480",
+                "yes"
+            ],
+            [
+                "CSE 2398",
+                "no"
+            ],
+            [
+                "CSE 3079",
+                "no"
+            ],
+            [
+                "CSE 5844",
+                "yes"
+            ],
+            [
+                "CSE 3361",
+                "no"
+            ],
+            [
+                "CSE 2135",
+                "yes"
+            ],
+            [
+                "CSE 1363",
+                "yes"
+            ],
+            [
+                "CSE 1410",
+                "no"
+            ],
+            [
+                "CSE 4088",
+                "yes"
+            ],
+            [
+                "CSE 5658",
+                "no"
+            ],
+            [
+                "CSE 2433",
+                "no"
+            ],
+            [
+                "CSE 3974",
+                "yes"
+            ],
+            [
+                "CSE 1371",
+                "yes"
+            ],
+            [
+                "CSE 2188",
+                "yes"
+            ],
+            [
+                "CSE 3376",
+                "yes"
+            ],
+            [
+                "CSE 1844",
+                "yes"
+            ],
+            [
+                "CSE 4357",
+                "yes"
+            ],
+            [
+                "CSE 1507",
+                "no"
+            ],
+            [
+                "CSE 5630",
+                "no"
+            ],
+            [
+                "CSE 5141",
+                "no"
+            ],
+            [
+                "CSE 3394",
+                "yes"
+            ],
+            [
+                "CSE 1685",
+                "yes"
+            ],
+            [
+                "CSE 4355",
+                "yes"
+            ],
+            [
+                "CSE 2910",
+                "no"
+            ],
+            [
+                "CSE 2349",
+                "no"
+            ],
+            [
+                "CSE 1916",
+                "no"
+            ],
+            [
+                "CSE 3721",
+                "yes"
+            ],
+            [
+                "CSE 5664",
+                "no"
+            ],
+            [
+                "CSE 3214",
+                "yes"
+            ],
+            [
+                "CSE 3352",
+                "no"
+            ],
+            [
+                "CSE 4044",
+                "no"
+            ],
+            [
+                "CSE 1145",
+                "yes"
+            ],
+            [
+                "CSE 5736",
+                "yes"
+            ],
+            [
+                "CSE 5656",
+                "no"
+            ],
+            [
+                "CSE 3953",
+                "yes"
+            ],
+            [
+                "CSE 1492",
+                "no"
+            ],
+            [
+                "CSE 4296",
+                "no"
+            ],
+            [
+                "CSE 5809",
+                "yes"
+            ],
+            [
+                "CSE 2301",
+                "yes"
+            ],
+            [
+                "CSE 3711",
+                "no"
+            ],
+            [
+                "CSE 1901",
+                "yes"
+            ],
+            [
+                "CSE 1514",
+                "yes"
+            ],
+            [
+                "CSE 4267",
+                "yes"
+            ],
+            [
+                "CSE 2667",
+                "no"
+            ],
+            [
+                "CSE 4722",
+                "yes"
+            ],
+            [
+                "CSE 3418",
+                "no"
+            ],
+            [
+                "CSE 5865",
+                "no"
+            ],
+            [
+                "CSE 4929",
+                "yes"
+            ],
+            [
+                "CSE 5584",
+                "yes"
+            ],
+            [
+                "CSE 1451",
+                "yes"
+            ],
+            [
+                "CSE 4727",
+                "yes"
+            ],
+            [
+                "CSE 3920",
+                "yes"
+            ],
+            [
+                "CSE 1926",
+                "no"
+            ],
+            [
+                "CSE 3544",
+                "yes"
+            ],
+            [
+                "CSE 1564",
+                "yes"
+            ],
+            [
+                "CSE 3630",
+                "no"
+            ],
+            [
+                "CSE 5111",
+                "yes"
+            ],
+            [
+                "CSE 3627",
+                "yes"
+            ],
+            [
+                "CSE 5644",
+                "yes"
+            ],
+            [
+                "CSE 1194",
+                "yes"
+            ],
+            [
+                "CSE 3328",
+                "yes"
+            ],
+            [
+                "CSE 2401",
+                "no"
+            ],
+            [
+                "CSE 4747",
+                "no"
+            ],
+            [
+                "CSE 2035",
+                "yes"
+            ],
+            [
+                "CSE 2415",
+                "no"
+            ],
+            [
+                "CSE 4943",
+                "yes"
+            ],
+            [
+                "CSE 3168",
+                "no"
+            ],
+            [
+                "CSE 1704",
+                "no"
+            ],
+            [
+                "CSE 4725",
+                "yes"
+            ],
+            [
+                "CSE 2031",
+                "no"
+            ],
+            [
+                "CSE 3542",
+                "yes"
+            ],
+            [
+                "CSE 1967",
+                "yes"
+            ],
+            [
+                "CSE 5795",
+                "no"
+            ],
+            [
+                "CSE 4156",
+                "no"
+            ],
+            [
+                "CSE 4295",
+                "yes"
+            ],
+            [
+                "CSE 3762",
+                "yes"
+            ],
+            [
+                "CSE 4732",
+                "yes"
+            ],
+            [
+                "CSE 3475",
+                "yes"
+            ],
+            [
+                "CSE 3001",
+                "no"
+            ],
+            [
+                "CSE 1121",
+                "yes"
+            ],
+            [
+                "CSE 3106",
+                "yes"
+            ],
+            [
+                "CSE 5683",
+                "no"
+            ],
+            [
+                "CSE 2764",
+                "yes"
+            ],
+            [
+                "CSE 1053",
+                "yes"
+            ],
+            [
+                "CSE 3699",
+                "no"
+            ],
+            [
+                "CSE 5065",
+                "yes"
+            ],
+            [
+                "CSE 4469",
+                "no"
+            ],
+            [
+                "CSE 4845",
+                "yes"
+            ],
+            [
+                "CSE 2915",
+                "no"
+            ],
+            [
+                "CSE 3510",
+                "yes"
+            ],
+            [
+                "CSE 1977",
+                "yes"
+            ],
+            [
+                "CSE 2710",
+                "yes"
+            ],
+            [
+                "CSE 1954",
+                "yes"
+            ],
+            [
+                "CSE 1924",
+                "yes"
+            ],
+            [
+                "CSE 1260",
+                "yes"
+            ],
+            [
+                "CSE 5286",
+                "no"
+            ],
+            [
+                "CSE 2435",
+                "no"
+            ],
+            [
+                "CSE 2703",
+                "yes"
+            ],
+            [
+                "CSE 3192",
+                "yes"
+            ],
+            [
+                "CSE 3790",
+                "no"
+            ],
+            [
+                "CSE 1825",
+                "yes"
+            ],
+            [
+                "CSE 4084",
+                "yes"
+            ],
+            [
+                "CSE 2180",
+                "no"
+            ],
+            [
+                "CSE 2985",
+                "yes"
+            ],
+            [
+                "CSE 5850",
+                "yes"
+            ],
+            [
+                "CSE 4668",
+                "yes"
+            ],
+            [
+                "CSE 3174",
+                "yes"
+            ],
+            [
+                "CSE 2845",
+                "yes"
+            ],
+            [
+                "CSE 4147",
+                "yes"
+            ],
+            [
+                "CSE 5443",
+                "yes"
+            ],
+            [
+                "CSE 3188",
+                "yes"
+            ],
+            [
+                "CSE 2998",
+                "yes"
+            ],
+            [
+                "CSE 1250",
+                "no"
+            ],
+            [
+                "CSE 2805",
+                "yes"
+            ],
+            [
+                "CSE 1468",
+                "no"
+            ],
+            [
+                "CSE 3658",
+                "no"
+            ],
+            [
+                "CSE 4239",
+                "no"
+            ],
+            [
+                "CSE 1342",
+                "yes"
+            ],
+            [
+                "CSE 1672",
+                "no"
+            ],
+            [
+                "CSE 3465",
+                "no"
+            ],
+            [
+                "CSE 1450",
+                "yes"
+            ],
+            [
+                "CSE 4478",
+                "yes"
+            ],
+            [
+                "CSE 3045",
+                "yes"
+            ],
+            [
+                "CSE 2708",
+                "no"
+            ],
+            [
+                "CSE 2829",
+                "yes"
+            ],
+            [
+                "CSE 5808",
+                "yes"
+            ],
+            [
+                "CSE 1577",
+                "yes"
+            ],
+            [
+                "CSE 3509",
+                "yes"
+            ],
+            [
+                "CSE 1561",
+                "yes"
+            ],
+            [
+                "CSE 5127",
+                "yes"
+            ],
+            [
+                "CSE 2964",
+                "no"
+            ],
+            [
+                "CSE 3364",
+                "yes"
+            ],
+            [
+                "CSE 4760",
+                "no"
+            ],
+            [
+                "CSE 3237",
+                "yes"
+            ],
+            [
+                "CSE 1817",
+                "no"
+            ],
+            [
+                "CSE 2727",
+                "no"
+            ],
+            [
+                "CSE 4513",
+                "yes"
+            ],
+            [
+                "CSE 2795",
+                "no"
+            ],
+            [
+                "CSE 4541",
+                "yes"
+            ],
+            [
+                "CSE 3005",
+                "yes"
+            ],
+            [
+                "CSE 5211",
+                "yes"
+            ],
+            [
+                "CSE 4071",
+                "no"
+            ],
+            [
+                "CSE 5562",
+                "yes"
+            ],
+            [
+                "CSE 3936",
+                "no"
+            ],
+            [
+                "CSE 5027",
+                "yes"
+            ],
+            [
+                "CSE 4043",
+                "yes"
+            ],
+            [
+                "CSE 2045",
+                "no"
+            ],
+            [
+                "CSE 1710",
+                "yes"
+            ],
+            [
+                "CSE 5990",
+                "yes"
+            ],
+            [
+                "CSE 4364",
+                "yes"
+            ],
+            [
+                "CSE 3609",
+                "yes"
+            ],
+            [
+                "CSE 5985",
+                "yes"
+            ],
+            [
+                "CSE 2990",
+                "no"
+            ],
+            [
+                "CSE 4419",
+                "yes"
+            ],
+            [
+                "CSE 5164",
+                "no"
+            ],
+            [
+                "CSE 4101",
+                "no"
+            ],
+            [
+                "CSE 4498",
+                "yes"
+            ],
+            [
+                "CSE 3338",
+                "yes"
+            ],
+            [
+                "CSE 4713",
+                "no"
+            ],
+            [
+                "CSE 3359",
+                "no"
+            ],
+            [
+                "CSE 3204",
+                "no"
+            ],
+            [
+                "CSE 5644",
+                "no"
+            ],
+            [
+                "CSE 5949",
+                "yes"
+            ],
+            [
+                "CSE 1339",
+                "yes"
+            ],
+            [
+                "CSE 1865",
+                "no"
+            ],
+            [
+                "CSE 2620",
+                "no"
+            ],
+            [
+                "CSE 1143",
+                "no"
+            ],
+            [
+                "CSE 2114",
+                "yes"
+            ],
+            [
+                "CSE 3579",
+                "no"
+            ],
+            [
+                "CSE 4366",
+                "no"
+            ],
+            [
+                "CSE 4138",
+                "yes"
+            ],
+            [
+                "CSE 1129",
+                "no"
+            ],
+            [
+                "CSE 3647",
+                "yes"
+            ],
+            [
+                "CSE 4787",
+                "no"
+            ],
+            [
+                "CSE 3255",
+                "no"
+            ],
+            [
+                "CSE 2158",
+                "yes"
+            ],
+            [
+                "CSE 3722",
+                "no"
+            ],
+            [
+                "CSE 1126",
+                "yes"
+            ],
+            [
+                "CSE 2380",
+                "yes"
+            ],
+            [
+                "CSE 1264",
+                "yes"
+            ],
+            [
+                "CSE 2242",
+                "no"
+            ],
+            [
+                "CSE 5515",
+                "yes"
+            ],
+            [
+                "CSE 2149",
+                "yes"
+            ],
+            [
+                "CSE 2161",
+                "no"
+            ],
+            [
+                "CSE 4761",
+                "yes"
+            ],
+            [
+                "CSE 3544",
+                "no"
+            ],
+            [
+                "CSE 1048",
+                "yes"
+            ],
+            [
+                "CSE 2882",
+                "yes"
+            ],
+            [
+                "CSE 4341",
+                "yes"
+            ],
+            [
+                "CSE 2053",
+                "yes"
+            ],
+            [
+                "CSE 1498",
+                "yes"
+            ],
+            [
+                "CSE 5495",
+                "no"
+            ],
+            [
+                "CSE 1623",
+                "yes"
+            ],
+            [
+                "CSE 4908",
+                "yes"
+            ],
+            [
+                "CSE 2103",
+                "yes"
+            ],
+            [
+                "CSE 2576",
+                "no"
+            ],
+            [
+                "CSE 4280",
+                "yes"
+            ],
+            [
+                "CSE 3634",
+                "no"
+            ],
+            [
+                "CSE 2429",
+                "yes"
+            ],
+            [
+                "CSE 2837",
+                "yes"
+            ],
+            [
+                "CSE 3290",
+                "yes"
+            ],
+            [
+                "CSE 2009",
+                "yes"
+            ],
+            [
+                "CSE 2043",
+                "yes"
+            ],
+            [
+                "CSE 2375",
+                "no"
+            ],
+            [
+                "CSE 3321",
+                "yes"
+            ],
+            [
+                "CSE 4162",
+                "no"
+            ],
+            [
+                "CSE 3516",
+                "yes"
+            ],
+            [
+                "CSE 1482",
+                "no"
+            ],
+            [
+                "CSE 2983",
+                "yes"
+            ],
+            [
+                "CSE 4037",
+                "yes"
+            ],
+            [
+                "CSE 3610",
+                "no"
+            ],
+            [
+                "CSE 3806",
+                "yes"
+            ],
+            [
+                "CSE 5624",
+                "yes"
+            ],
+            [
+                "CSE 5805",
+                "yes"
+            ],
+            [
+                "CSE 2910",
+                "yes"
+            ],
+            [
+                "CSE 1884",
+                "yes"
+            ],
+            [
+                "CSE 3660",
+                "yes"
+            ],
+            [
+                "CSE 3169",
+                "yes"
+            ],
+            [
+                "CSE 3548",
+                "yes"
+            ],
+            [
+                "CSE 3163",
+                "no"
+            ],
+            [
+                "CSE 5523",
+                "yes"
+            ],
+            [
+                "CSE 2884",
+                "yes"
+            ],
+            [
+                "CSE 5473",
+                "no"
+            ],
+            [
+                "CSE 4065",
+                "yes"
+            ],
+            [
+                "CSE 3139",
+                "yes"
+            ],
+            [
+                "CSE 5352",
+                "no"
+            ],
+            [
+                "CSE 2105",
+                "yes"
+            ],
+            [
+                "CSE 4836",
+                "yes"
+            ],
+            [
+                "CSE 2174",
+                "yes"
+            ],
+            [
+                "CSE 2900",
+                "yes"
+            ],
+            [
+                "CSE 2785",
+                "no"
+            ],
+            [
+                "CSE 3992",
+                "yes"
+            ],
+            [
+                "CSE 3661",
+                "no"
+            ],
+            [
+                "CSE 5730",
+                "yes"
+            ],
+            [
+                "CSE 5457",
+                "no"
+            ],
+            [
+                "CSE 4525",
+                "no"
+            ],
+            [
+                "CSE 5302",
+                "yes"
+            ],
+            [
+                "CSE 2677",
+                "no"
+            ],
+            [
+                "CSE 1737",
+                "yes"
+            ],
+            [
+                "CSE 3454",
+                "yes"
+            ],
+            [
+                "CSE 2626",
+                "yes"
+            ],
+            [
+                "CSE 3798",
+                "yes"
+            ],
+            [
+                "CSE 3571",
+                "no"
+            ],
+            [
+                "CSE 4125",
+                "no"
+            ],
+            [
+                "CSE 2664",
+                "no"
+            ],
+            [
+                "CSE 3433",
+                "yes"
+            ],
+            [
+                "CSE 2942",
+                "no"
+            ],
+            [
+                "CSE 4403",
+                "yes"
+            ],
+            [
+                "CSE 2168",
+                "no"
+            ],
+            [
+                "CSE 2313",
+                "no"
+            ],
+            [
+                "CSE 2885",
+                "no"
+            ],
+            [
+                "CSE 4620",
+                "yes"
+            ],
+            [
+                "CSE 5301",
+                "yes"
+            ],
+            [
+                "CSE 2170",
+                "yes"
+            ],
+            [
+                "CSE 5998",
+                "yes"
+            ],
+            [
+                "CSE 5487",
+                "yes"
+            ],
+            [
+                "CSE 5007",
+                "yes"
+            ],
+            [
+                "CSE 3859",
+                "yes"
+            ],
+            [
+                "CSE 2820",
+                "yes"
+            ],
+            [
+                "CSE 2373",
+                "yes"
+            ],
+            [
+                "CSE 5325",
+                "yes"
+            ],
+            [
+                "CSE 2086",
+                "yes"
+            ],
+            [
+                "CSE 2027",
+                "no"
+            ],
+            [
+                "CSE 4853",
+                "yes"
+            ],
+            [
+                "CSE 5586",
+                "yes"
+            ],
+            [
+                "CSE 2239",
+                "yes"
+            ],
+            [
+                "CSE 1093",
+                "no"
+            ],
+            [
+                "CSE 2670",
+                "yes"
+            ],
+            [
+                "CSE 1646",
+                "yes"
+            ],
+            [
+                "CSE 4086",
+                "no"
+            ],
+            [
+                "CSE 1987",
+                "yes"
+            ],
+            [
+                "CSE 4450",
+                "yes"
+            ],
+            [
+                "CSE 3454",
+                "no"
+            ],
+            [
+                "CSE 4613",
+                "yes"
+            ],
+            [
+                "CSE 1442",
+                "yes"
+            ],
+            [
+                "CSE 1618",
+                "yes"
+            ],
+            [
+                "CSE 3600",
+                "no"
+            ],
+            [
+                "CSE 2511",
+                "yes"
+            ],
+            [
+                "CSE 3496",
+                "no"
+            ],
+            [
+                "CSE 4383",
+                "yes"
+            ],
+            [
+                "CSE 3525",
+                "yes"
+            ],
+            [
+                "CSE 1869",
+                "yes"
+            ],
+            [
+                "CSE 4289",
+                "yes"
+            ],
+            [
+                "CSE 5382",
+                "no"
+            ],
+            [
+                "CSE 5576",
+                "no"
+            ],
+            [
+                "CSE 3583",
+                "yes"
+            ],
+            [
+                "CSE 4114",
+                "yes"
+            ],
+            [
+                "CSE 5323",
+                "yes"
+            ],
+            [
+                "CSE 3918",
+                "yes"
+            ],
+            [
+                "CSE 5635",
+                "no"
+            ],
+            [
+                "CSE 2646",
+                "yes"
+            ],
+            [
+                "CSE 2461",
+                "yes"
+            ],
+            [
+                "CSE 5743",
+                "yes"
+            ],
+            [
+                "CSE 1938",
+                "yes"
+            ],
+            [
+                "CSE 5140",
+                "no"
+            ],
+            [
+                "CSE 4601",
+                "yes"
+            ],
+            [
+                "CSE 4923",
+                "yes"
+            ],
+            [
+                "CSE 4245",
+                "no"
+            ],
+            [
+                "CSE 4962",
+                "no"
+            ],
+            [
+                "CSE 4554",
+                "yes"
+            ],
+            [
+                "CSE 3625",
+                "no"
+            ],
+            [
+                "CSE 2675",
+                "yes"
+            ],
+            [
+                "CSE 2980",
+                "no"
+            ],
+            [
+                "CSE 1329",
+                "yes"
+            ],
+            [
+                "CSE 3608",
+                "no"
+            ],
+            [
+                "CSE 1474",
+                "no"
+            ],
+            [
+                "CSE 1109",
+                "no"
+            ],
+            [
+                "CSE 2391",
+                "yes"
+            ],
+            [
+                "CSE 4241",
+                "yes"
+            ],
+            [
+                "CSE 5094",
+                "yes"
+            ],
+            [
+                "CSE 1380",
+                "yes"
+            ],
+            [
+                "CSE 5577",
+                "yes"
+            ],
+            [
+                "CSE 2236",
+                "yes"
+            ],
+            [
+                "CSE 3678",
+                "yes"
+            ],
+            [
+                "CSE 3636",
+                "no"
+            ],
+            [
+                "CSE 3496",
+                "yes"
+            ],
+            [
+                "CSE 1229",
+                "no"
+            ],
+            [
+                "CSE 3330",
+                "yes"
+            ],
+            [
+                "CSE 5674",
+                "yes"
+            ],
+            [
+                "CSE 1156",
+                "no"
+            ],
+            [
+                "CSE 5824",
+                "yes"
+            ],
+            [
+                "CSE 1197",
+                "yes"
+            ],
+            [
+                "CSE 1495",
+                "no"
+            ],
+            [
+                "CSE 1589",
+                "yes"
+            ],
+            [
+                "CSE 3453",
+                "no"
+            ],
+            [
+                "CSE 3044",
+                "no"
+            ],
+            [
+                "CSE 3207",
+                "yes"
+            ],
+            [
+                "CSE 5752",
+                "yes"
+            ],
+            [
+                "CSE 4197",
+                "yes"
+            ],
+            [
+                "CSE 1726",
+                "yes"
+            ],
+            [
+                "CSE 1240",
+                "yes"
+            ],
+            [
+                "CSE 3893",
+                "yes"
+            ],
+            [
+                "CSE 2798",
+                "no"
+            ],
+            [
+                "CSE 4543",
+                "no"
+            ],
+            [
+                "CSE 4207",
+                "yes"
+            ],
+            [
+                "CSE 1629",
+                "yes"
+            ],
+            [
+                "CSE 1981",
+                "no"
+            ],
+            [
+                "CSE 5434",
+                "no"
+            ],
+            [
+                "CSE 4026",
+                "yes"
+            ],
+            [
+                "CSE 4423",
+                "yes"
+            ],
+            [
+                "CSE 1793",
+                "yes"
+            ],
+            [
+                "CSE 3687",
+                "yes"
+            ],
+            [
+                "CSE 3795",
+                "yes"
+            ],
+            [
+                "CSE 3425",
+                "yes"
+            ],
+            [
+                "CSE 4794",
+                "no"
+            ],
+            [
+                "CSE 4537",
+                "yes"
+            ],
+            [
+                "CSE 2619",
+                "yes"
+            ],
+            [
+                "CSE 5568",
+                "yes"
+            ],
+            [
+                "CSE 3120",
+                "no"
+            ],
+            [
+                "CSE 2332",
+                "no"
+            ],
+            [
+                "CSE 5811",
+                "yes"
+            ],
+            [
+                "CSE 5063",
+                "yes"
+            ],
+            [
+                "CSE 5647",
+                "no"
+            ],
+            [
+                "CSE 5038",
+                "yes"
+            ],
+            [
+                "CSE 1942",
+                "yes"
+            ],
+            [
+                "CSE 3739",
+                "yes"
+            ],
+            [
+                "CSE 1550",
+                "yes"
+            ],
+            [
+                "CSE 3034",
+                "no"
+            ],
+            [
+                "CSE 1096",
+                "yes"
+            ],
+            [
+                "CSE 3770",
+                "yes"
+            ],
+            [
+                "CSE 1434",
+                "yes"
+            ],
+            [
+                "CSE 5341",
+                "yes"
+            ],
+            [
+                "CSE 4842",
+                "yes"
+            ],
+            [
+                "CSE 3428",
+                "no"
+            ],
+            [
+                "CSE 1188",
+                "no"
+            ],
+            [
+                "CSE 2826",
+                "no"
+            ],
+            [
+                "CSE 3747",
+                "yes"
+            ],
+            [
+                "CSE 3814",
+                "yes"
+            ],
+            [
+                "CSE 1714",
+                "yes"
+            ],
+            [
+                "CSE 3489",
+                "yes"
+            ],
+            [
+                "CSE 5348",
+                "no"
+            ],
+            [
+                "CSE 4986",
+                "no"
+            ],
+            [
+                "CSE 3386",
+                "yes"
+            ],
+            [
+                "CSE 2414",
+                "yes"
+            ],
+            [
+                "CSE 5110",
+                "yes"
+            ],
+            [
+                "CSE 2093",
+                "no"
+            ],
+            [
+                "CSE 4399",
+                "no"
+            ],
+            [
+                "CSE 4119",
+                "yes"
+            ],
+            [
+                "CSE 5103",
+                "yes"
+            ],
+            [
+                "CSE 2742",
+                "yes"
+            ],
+            [
+                "CSE 4697",
+                "yes"
+            ],
+            [
+                "CSE 3649",
+                "yes"
+            ],
+            [
+                "CSE 2531",
+                "yes"
+            ],
+            [
+                "CSE 2848",
+                "no"
+            ],
+            [
+                "CSE 4577",
+                "no"
+            ],
+            [
+                "CSE 2195",
+                "yes"
+            ],
+            [
+                "CSE 1959",
+                "yes"
+            ],
+            [
+                "CSE 1215",
+                "yes"
+            ],
+            [
+                "CSE 3648",
+                "yes"
+            ],
+            [
+                "CSE 3357",
+                "yes"
+            ],
+            [
+                "CSE 5200",
+                "yes"
+            ],
+            [
+                "CSE 4408",
+                "no"
+            ],
+            [
+                "CSE 2625",
+                "no"
+            ],
+            [
+                "CSE 3430",
+                "no"
+            ],
+            [
+                "CSE 4696",
+                "yes"
+            ],
+            [
+                "CSE 4203",
+                "no"
+            ],
+            [
+                "CSE 4452",
+                "yes"
+            ],
+            [
+                "CSE 1293",
+                "yes"
+            ],
+            [
+                "CSE 1640",
+                "yes"
+            ],
+            [
+                "CSE 5357",
+                "yes"
+            ],
+            [
+                "CSE 1508",
+                "yes"
+            ],
+            [
+                "CSE 2740",
+                "yes"
+            ],
+            [
+                "CSE 5875",
+                "yes"
+            ],
+            [
+                "CSE 1581",
+                "yes"
+            ],
+            [
+                "CSE 5758",
+                "yes"
+            ],
+            [
+                "CSE 1728",
+                "yes"
+            ],
+            [
+                "CSE 1622",
+                "yes"
+            ],
+            [
+                "CSE 1683",
+                "yes"
+            ],
+            [
+                "CSE 2790",
+                "yes"
+            ],
+            [
+                "CSE 1960",
+                "yes"
+            ],
+            [
+                "CSE 2677",
+                "yes"
+            ],
+            [
+                "CSE 2811",
+                "no"
+            ],
+            [
+                "CSE 4409",
+                "yes"
+            ],
+            [
+                "CSE 3177",
+                "no"
+            ],
+            [
+                "CSE 1820",
+                "yes"
+            ],
+            [
+                "CSE 4522",
+                "no"
+            ],
+            [
+                "CSE 1167",
+                "yes"
+            ],
+            [
+                "CSE 2990",
+                "yes"
+            ],
+            [
+                "CSE 4941",
+                "yes"
+            ],
+            [
+                "CSE 2906",
+                "yes"
+            ]
+        ]
+    }
+}
