@@ -2,7 +2,7 @@ import argparse
 import json
 
 import torch
-import numpy
+from sklearn.metrics import accuracy_score
 
 from learning.models import PhiNet
 
@@ -13,7 +13,7 @@ parser = argparse.ArgumentParser(description='Try to learn embeddings',
                                  formatter_class=argparse.
                                     ArgumentDefaultsHelpFormatter)
 
-parser.add_argument('-e', '--epochs', default=50, type=int,
+parser.add_argument('-e', '--epochs', default=100, type=int,
                      help='Number of epochs to train for')
 parser.add_argument('instance', metavar = "instance.json",
                     help="Location of DB instance JSON file",
@@ -75,15 +75,17 @@ def train(model, data, labels, epochs):
     optimizer = torch.optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
 
     for e in range(epochs):
-        for i in range(len(data), 128):
+        all_losses = []
+        for i in range(len(data)):
             optimizer.zero_grad()
-            output = model(torch.Tensor([data['difficulty'][i:i+128]]),
-                           torch.Tensor(data['teaching_skills'][i:i+128]),
-                           torch.Tensor(data['student_aptitude'][i:i+128]))
-            loss = criterion(output, torch.Tensor(labels[i:i+128]))
+            output = model(torch.Tensor([data['difficulty'][i]]),
+                           torch.Tensor(data['teaching_skills'][i]),
+                           torch.Tensor(data['student_aptitude'][i]))
+            loss = criterion(output, torch.Tensor([labels[i]]))
+            all_losses.append(loss.item())
             loss.backward()
             optimizer.step()
-        print(f"Epoch {e}/{epochs}, loss: {loss:.3f}")
+        print(f"Epoch {e}/{epochs}, loss: {sum(all_losses) / len(all_losses):.3f}")
 
 
 def main():
@@ -100,13 +102,21 @@ def main():
 
     train(model, train_data, train_answers, args.epochs)
 
+    results = model(torch.Tensor([train_data['difficulty']]),
+                    torch.Tensor(train_data['teaching_skills']),
+                    torch.Tensor(train_data['student_aptitude']))
+    train_accuracy = accuracy_score(train_answers, results.detach().numpy().round())
+    print(f"Train Accuracy: {train_accuracy}")
+
     results = model(torch.Tensor([test_data['difficulty']]),
                            torch.Tensor(test_data['teaching_skills']),
                            torch.Tensor(test_data['student_aptitude']))
-    correct = (results.round() == torch.Tensor(test_answers)
-               .squeeze().unsqueeze(1)).sum()
-    print(f"Got {correct} right out of {len(test_answers)}")
+    accuracy = accuracy_score(test_answers, results.detach().numpy().round())
+
+    print(f"Accuracy: {accuracy}")
     print(f"Courses that actually have tutoring: {sum(test_answers)}")
+    print(f"Teaching skills weights: {list(model.summarize[0].weight.detach())}")
+    print(f"Student intelligence weights: {list(model.summarize[1].weight.detach())}")
 
 
 # execute only if run as a script

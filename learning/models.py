@@ -7,27 +7,11 @@ class PhiNet(torch.nn.Module):
 
         self.n = direct + len(summaries)
 
-        self.final = torch.nn.Sequential(
-            torch.nn.Linear(self.n, self.n),
-            torch.nn.ReLU(),
-            torch.nn.BatchNorm1d(self.n),
-            torch.nn.Linear(self.n, self.n),
-            torch.nn.ReLU(),
-            torch.nn.BatchNorm1d(self.n),
-            torch.nn.Linear(self.n, 1)
-        )
+        self.final = torch.nn.Linear(self.n, 1)
 
-        self.summarize = torch.nn.ModuleList([
-            torch.nn.Sequential(
-                torch.nn.Linear(s, s),
-                torch.nn.ReLU(),
-                torch.nn.BatchNorm1d(s),
-                torch.nn.Linear(s, s),
-                torch.nn.ReLU(),
-                torch.nn.BatchNorm1d(s),
-                torch.nn.Linear(s, 1)
-            ) for s in summaries
-        ])
+        self.summarize = torch.nn.ModuleList(
+            [ torch.nn.Linear(s, 1) for s in summaries ]
+        )
 
     def forward(self, direct, *args):
         if len(args) + len(direct) != self.n:
