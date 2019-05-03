@@ -13,7 +13,7 @@ random.seed(344)
 '''
     Parameters
 '''
-epochs = 200
+epochs = 175
 
 # entities
 courses = range(0, 5000)
@@ -30,7 +30,7 @@ p_skilled_instructor = 0.5
 p_difficult_course = 0.5
 
 difficulty = np.array([random.random() < p_difficult_course
-                       for _ in courses]).reshape(-1, 1)
+                       for _ in courses], dtype=np.uint8).reshape(-1, 1)
 skill = np.array([random.random() < p_skilled_instructor
                   for _ in instructors]).reshape(-1, 1)
 intelligence = np.array([random.random() < p_intelligent_student
@@ -46,8 +46,8 @@ for c in courses:
     course_instructors = random.sample(instructors, class_inst)
     lecturers.append([skill[i][0] for i in course_instructors])
 
-registered = np.array(registered)
-lecturers = np.array(lecturers)
+registered = np.array(registered, dtype=np.uint8)
+lecturers = np.array(lecturers, dtype=np.uint8)
 
 embeddings = []
 p_labels = []
@@ -75,13 +75,20 @@ labels = np.array(labels, dtype=np.uint8)
 class SimpleClassifier(torch.nn.Module):
     def __init__(self):
         super(SimpleClassifier, self).__init__()
+        self.phi_sk = torch.nn.Linear(class_inst, 1)
+        self.phi_i  = torch.nn.Linear(class_size, 1)
+
         self.model = torch.nn.Sequential(
             torch.nn.Linear(3, 1),
             torch.nn.Sigmoid()
         )
 
     def forward(self, input):
-        return self.model(input)
+        sk = self.phi_sk(input[:, 1:1+class_inst])
+        i = self.phi_i(input[:, 1+class_inst:1+class_inst+class_size])
+        d = input[:, 0].reshape(-1, 1)
+        processed = torch.cat([d, sk, i], dim = 1)
+        return self.model(processed)
 
 
 model = SimpleClassifier()
@@ -89,12 +96,15 @@ criterion = torch.nn.MSELoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
 
 labels_t = torch.FloatTensor(labels)
-embeddings_t = torch.Tensor(embeddings)
 p_labels_t = torch.FloatTensor(p_labels)
+
+grounding = torch.cat([torch.FloatTensor(difficulty),
+                       torch.FloatTensor(registered),
+                       torch.FloatTensor(lecturers)], dim=1)
 
 for i in range(epochs):
     optimizer.zero_grad()
-    output = model(embeddings_t)
+    output = model(grounding)
     loss = criterion(output, p_labels_t)
     loss.backward()
     optimizer.step()
