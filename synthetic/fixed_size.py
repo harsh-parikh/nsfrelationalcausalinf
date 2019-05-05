@@ -5,6 +5,13 @@
 import torch
 import numpy as np
 from scipy.special import expit as logistic
+from sklearn.metrics import accuracy_score, roc_curve, auc
+from sklearn import preprocessing
+import matplotlib
+matplotlib.use('TkAgg')
+
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 import random
 
@@ -13,7 +20,7 @@ random.seed(344)
 '''
     Parameters
 '''
-epochs = 175
+epochs = 215
 
 # entities
 courses = range(0, 5000)
@@ -22,7 +29,7 @@ students = range(0, 25000)
 
 # embedding sizes
 class_size = 25
-class_inst = 2
+class_inst = 3
 
 # probabilities
 p_intelligent_student = 0.5
@@ -54,17 +61,21 @@ p_labels = []
 labels = []
 for c in courses:
     e = [
-        difficulty[c][0] - 0.5,
-        np.mean(registered[c]) - 0.5,
-        np.sum(lecturers[c] / 2) - 0.5
+        difficulty[c][0],
+        np.mean(registered[c]),
+        np.sum(lecturers[c])
     ]
     embeddings.append(e)
-    p = logistic(sum(e))
+
+embeddings = np.array(embeddings)
+embeddings = preprocessing.scale(embeddings)
+
+for e in embeddings:
+    p = logistic(e[0] - e[1] - e[2] - 1)
     p_labels.append([p])
     labels.append([random.random() < p])
 
 
-embeddings = np.array(embeddings)
 p_labels = np.array(p_labels)
 labels = np.array(labels, dtype=np.uint8)
 
@@ -72,10 +83,11 @@ labels = np.array(labels, dtype=np.uint8)
   Now attempt to teach a classifier these embeddings
 '''
 
-class SimpleClassifier(torch.nn.Module):
+class SimpleEmbeddingClassifier(torch.nn.Module):
     def __init__(self):
-        super(SimpleClassifier, self).__init__()
+        super(SimpleEmbeddingClassifier, self).__init__()
         self.phi_sk = torch.nn.Linear(class_inst, 1)
+
         self.phi_i  = torch.nn.Linear(class_size, 1)
 
         self.model = torch.nn.Sequential(
@@ -87,29 +99,83 @@ class SimpleClassifier(torch.nn.Module):
         sk = self.phi_sk(input[:, 1:1+class_inst])
         i = self.phi_i(input[:, 1+class_inst:1+class_inst+class_size])
         d = input[:, 0].reshape(-1, 1)
-        processed = torch.cat([d, sk, i], dim = 1)
+        processed = torch.cat((d, sk, i), dim = 1)
         return self.model(processed)
 
 
-model = SimpleClassifier()
+class SimpleClassifier(torch.nn.Module):
+    def __init__(self):
+        super(SimpleClassifier, self).__init__()
+        self.model = torch.nn.Sequential(
+            torch.nn.Linear(3, 1),
+            torch.nn.Sigmoid()
+        )
+
+    def forward(self, input):
+        return self.model(input)
+
+
+oracle_model = SimpleClassifier()
+model = SimpleEmbeddingClassifier()
 criterion = torch.nn.MSELoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
+oracle_optimizer = torch.optim.Adam(oracle_model.parameters(), lr=0.01)
 
 labels_t = torch.FloatTensor(labels)
-p_labels_t = torch.FloatTensor(p_labels)
+embeddings_t = torch.FloatTensor(embeddings)
 
-grounding = torch.cat([torch.FloatTensor(difficulty),
+grounding = torch.cat((torch.FloatTensor(difficulty),
                        torch.FloatTensor(registered),
-                       torch.FloatTensor(lecturers)], dim=1)
+                       torch.FloatTensor(lecturers)), dim=1)
+
+'''
+    Train the models
+'''
+
+print("training oracle")
+
+for i in range(epochs):
+    oracle_optimizer.zero_grad()
+    oracle_output = oracle_model(embeddings_t)
+    loss = criterion(oracle_output, labels_t)
+    loss.backward()
+    oracle_optimizer.step()
+    print(f"loss: {loss:.04}, "
+          f"{(oracle_output.round() == labels_t).sum()} / 5000 correct, ")
+print("training learned")
 
 for i in range(epochs):
     optimizer.zero_grad()
     output = model(grounding)
-    loss = criterion(output, p_labels_t)
+    loss = criterion(output, labels_t)
     loss.backward()
     optimizer.step()
-    print(f"loss: {loss:.04}, " 
-          f"{((p_labels_t - output) < 0.05).sum()} / 5000 correct")
+    print(f"loss: {loss:.04}, "
+          f"{(output.round() == labels_t).sum()} / 5000 correct, ")
 
-
+print(f"{labels_t.detach().numpy().sum()} true")
 print(f"weights: {model.model[0].weight.detach().numpy()}")
+
+'''
+    Plot ROC curves
+'''
+
+plt.title('Receiver Operating Characteristic')
+
+fpr, tpr, threshold = roc_curve(labels, output.detach().numpy())
+roc_auc = auc(fpr, tpr)
+
+plt.plot(fpr, tpr, 'b', label = 'Learned Embeddings, AUC = %0.2f' % roc_auc)
+
+fpr, tpr, threshold = roc_curve(labels, oracle_output.detach().numpy())
+roc_auc = auc(fpr, tpr)
+
+plt.plot(fpr, tpr, 'g', label = 'Oracle, AUC = %0.2f' % roc_auc)
+
+plt.legend(loc = 'lower right')
+plt.plot([0, 1], [0, 1],'r--')
+plt.xlim([0, 1])
+plt.ylim([0, 1])
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+plt.show()
