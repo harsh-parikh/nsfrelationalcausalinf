@@ -20,7 +20,7 @@ random.seed(344)
 '''
     Parameters
 '''
-epochs = 215
+epochs = 150
 
 # entities
 courses = range(0, 5000)
@@ -71,7 +71,7 @@ embeddings = np.array(embeddings)
 embeddings = preprocessing.scale(embeddings)
 
 for e in embeddings:
-    p = logistic(e[0] - e[1] - e[2] - 1)
+    p = logistic(e[0] - 3 * e[1] - e[2] - 1)
     p_labels.append([p])
     labels.append([random.random() < p])
 
