@@ -1,3 +1,3 @@
-from .generate import main
+from synthetic import main
 
-main()
+main.main()
