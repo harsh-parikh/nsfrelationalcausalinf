@@ -18,7 +18,7 @@ def collaboration(paper):
             continue
         domains.add(d)
 
-    return len(domains) > 1
+    return int(len(domains) > 1)
 
 
 with open("../openreview-dataset/results/papers.json", "r") as f:
@@ -26,6 +26,9 @@ with open("../openreview-dataset/results/papers.json", "r") as f:
 
 with open("../openreview-dataset/results/reviews.json", "r") as f:
     reviews = json.load(f)
+
+with open("../openreview-dataset/results/confs.json", "r") as f:
+    confs = json.load(f)
 
 # maps unit (symbol, value) to set of incoming edges
 grounding = defaultdict(set)
@@ -40,3 +43,6 @@ for r in reviews:
 for p in papers:
     # Accept[P] ⃪ Is_Collab[P].
     grounding[("accept", p["paperhash"])].add(("is_collab", collaboration(p)))
+
+    # Accept[P] ⃪ Rigor[C] where Submitted(P, C).
+    grounding[("accept", p["paperhash"])].add(("rigor", confs[p["conf"]]["rigor"]))
