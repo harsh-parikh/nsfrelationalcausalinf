@@ -3,6 +3,8 @@
 import json
 from collections import defaultdict
 
+import numpy as np
+import sklearn
 
 def collaboration(paper):
     '''Decide if paper is a collaboration between multiple institutions.
@@ -20,6 +22,8 @@ def collaboration(paper):
 
     return int(len(domains) > 1)
 
+with open("../openreview-dataset/results/authors.json", "r") as f:
+    authors = json.load(f)
 
 with open("../openreview-dataset/results/papers.json", "r") as f:
     papers = json.load(f)
@@ -45,4 +49,5 @@ for p in papers:
     grounding[("accept", p["paperhash"])].add(("is_collab", collaboration(p)))
 
     # Accept[P] ⃪ Rigor[C] where Submitted(P, C).
-    grounding[("accept", p["paperhash"])].add(("rigor", confs[p["conf"]]["rigor"]))
+    grounding[("accept", p["paperhash"])].add(("rigor",
+                                               confs[p["conf"]]["rigor"]))
