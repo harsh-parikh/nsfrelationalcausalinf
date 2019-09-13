@@ -63,7 +63,7 @@ for p in papers:
         data[id]['conf_avg'] = np.mean([r['norm_conf'] for r in reviews[id]])
         
     data[id]['conf_rigor'] = confs[p['conf']]['rigor']
-    data[id]['popular_avg'] = max([citations(a_id) for a_id in p['author_keys']])
+    data[id]['popular_avg'] = np.mean([citations(a_id) for a_id in p['author_keys']])
 
 data = np.array([process(data[k]) for k in sorted(data)])
 target = np.array(process(target))
