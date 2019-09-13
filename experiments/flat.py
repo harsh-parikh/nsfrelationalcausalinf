@@ -9,7 +9,6 @@ import sklearn
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_score
 
-
 def collaboration(paper):
     '''Decide if paper is a collaboration between multiple institutions.
 
@@ -64,6 +63,8 @@ for p in papers:
         
     data[id]['conf_rigor'] = confs[p['conf']]['rigor']
     data[id]['popular_avg'] = np.mean([citations(a_id) for a_id in p['author_keys']])
+    data[id]['blind'] = confs[p['conf']]['blind']
+    data[id]['workshop'] = confs[p['conf']]['workshop']
 
 data = np.array([process(data[k]) for k in sorted(data)])
 target = np.array(process(target))
