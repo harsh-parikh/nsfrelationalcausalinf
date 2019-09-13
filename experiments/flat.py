@@ -30,6 +30,12 @@ def collaboration(paper):
 def process(d):
     return [d[k] for k in sorted(d)]
 
+def citations(a_id):
+    try:
+        return int(authors[a_id]['scopus']['_json']['coredata']['citation-count'])
+    except (KeyError, TypeError):
+        return 0
+
 with open("../openreview-dataset/results/authors.json", "r") as f:
     authors = json.load(f)
 
@@ -42,24 +48,22 @@ with open("../openreview-dataset/results/reviews.json", "r") as f:
 with open("../openreview-dataset/results/confs.json", "r") as f:
     confs = json.load(f)
 
-hash_to_review = defaultdict(list)
-for r in reviews:
-    hash_to_review[r['paperhash']].append(r)
-
 data = defaultdict(dict)
 target = {}
 
 for p in papers:
-    id = p['paperhash']
+    id = p['paper_id']
     target[id] = 'reject' in p['decision'].lower()
     data[id]['collab'] = collaboration(p)
-    if not hash_to_review[id]:
+    if id not in reviews:
         data[id]['rating_avg'] = 0.5
         data[id]['conf_avg'] = 0
     else:
-        data[id]['rating_avg'] = np.mean([r['norm_rating'] for r in hash_to_review[id]])
-        data[id]['conf_avg'] = np.mean([r['norm_conf'] for r in hash_to_review[id]])
+        data[id]['rating_avg'] = np.mean([r['norm_rating'] for r in reviews[id]])
+        data[id]['conf_avg'] = np.mean([r['norm_conf'] for r in reviews[id]])
+        
     data[id]['conf_rigor'] = confs[p['conf']]['rigor']
+    data[id]['popular_avg'] = max([citations(a_id) for a_id in p['author_keys']])
 
 data = np.array([process(data[k]) for k in sorted(data)])
 target = np.array(process(target))
