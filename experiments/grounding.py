@@ -39,15 +39,15 @@ grounding = defaultdict(set)
 
 for r in reviews:
     # Accept[P] ⃪ Score[P, R] where Reviewed(R, P).
-    grounding[("accept", r["paperhash"])].add(("score", r["norm_rating"]))
+    grounding[("accept", r)].add(("score", r["norm_rating"]))
 
     # Accept[P] ⃪ Confidence[P, R] where Reviewed(R, P).
-    grounding[("accept", r["paperhash"])].add(("confidence", r["norm_conf"]))
+    grounding[("accept", r)].add(("confidence", r["norm_conf"]))
 
 for p in papers:
     # Accept[P] ⃪ Is_Collab[P].
-    grounding[("accept", p["paperhash"])].add(("is_collab", collaboration(p)))
+    grounding[("accept", p["paper_id"])].add(("is_collab", collaboration(p)))
 
     # Accept[P] ⃪ Rigor[C] where Submitted(P, C).
-    grounding[("accept", p["paperhash"])].add(("rigor",
+    grounding[("accept", p["paper_id"])].add(("rigor",
                                                confs[p["conf"]]["rigor"]))
