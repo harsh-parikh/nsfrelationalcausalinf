@@ -9,6 +9,9 @@ import sklearn
 import matplotlib.pyplot as plt
 
 from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import Ridge
+from sklearn.svm import SVR
+from sklearn.ensemble import RandomForestRegressor as RFR
 from sklearn.model_selection import cross_val_score
 
 def collaboration(paper):
@@ -85,6 +88,9 @@ lr = LinearRegression()
 scores = cross_val_score(lr, data, target, cv=5)
 print("Accuracy: %0.2f (± %0.2f)" % (scores.mean(), scores.std() * 2))
 
+keys = list(range(0,len(confs.keys())))
+conf_keys = list(confs.keys())
+
 acc = np.zeros((len(confs.keys()),))
 blind = np.zeros((len(confs.keys()),))
 for i in range(0,len(confs.keys())):
@@ -93,19 +99,43 @@ for i in range(0,len(confs.keys())):
         if data[j,1] == i:
             d_temp.append(list(data[j,:])+[target[j]])
     d_temp = np.array(d_temp)
-    lr = LinearRegression()
+    lr = RFR()
     lr = lr.fit(np.array(d_temp)[:,2].reshape(-1,1), np.array(d_temp)[:,3])
     scores = lr.score( np.array(d_temp)[:,2].reshape(-1,1), np.array(d_temp)[:,3])#, cv=5)            
-    acc[i] = -scores
+    acc[i] = 1-scores
     blind[i] = np.mean(d_temp[:,0])
+    fig = plt.figure(figsize=(8.75,7))
+    plt.scatter(np.array(d_temp)[:,2], np.array(d_temp)[:,3])
+    plt.title('Conference %s'%(conf_keys[i]))
+    fig.savefig('status_review_conference_%d.png'%(keys[i]))
     
-plt.scatter(range(0,len(acc)),acc,c=blind)
+#plt.scatter(range(0,len(acc)),acc,c=blind)
 collector_1 = []
+label_0 = []
 collector_0 = []
+label_1 = []
+keys = list(range(0,len(confs.keys())))
 for i in range(0,len(acc)):
     if blind[i] == 1.0:
         collector_1.append(acc[i])
+        label_1.append(keys[i])
     else:
         collector_0.append(acc[i])
+        label_0.append(keys[i])
         
 stupid_ATE = (np.mean(collector_1) - np.mean(collector_0))
+fig = plt.figure(figsize=(8.75,7))
+position_0 = np.random.normal(1,0.05,size=len(collector_0))
+position_1 = np.random.normal(2,0.05,size=len(collector_1))
+plt.scatter(position_0,collector_0,alpha=0.4,s=150)
+plt.scatter(position_1,collector_1,alpha=0.4,s=150)
+plt.violinplot(collector_0,positions=[1])
+plt.violinplot(collector_1,positions=[2])
+for i in range(len(label_0)):
+    plt.annotate(label_0[i],(position_0[i],collector_0[i]))
+for i in range(len(label_1)):
+    plt.annotate(label_1[i],(position_1[i],collector_1[i]))
+plt.title('Fairness vs Review')
+fig.savefig('Fairness_Review.png')
+
+print(stupid_ATE)
