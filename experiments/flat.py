@@ -6,6 +6,8 @@ from collections import defaultdict
 import numpy as np
 import sklearn
 
+import matplotlib.pyplot as plt
+
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import cross_val_score
 
@@ -72,9 +74,9 @@ for p in papers:
         
     # data[id]['conf_rigor'] = confs[p['conf']]['rigor']
     data[id]['popularity_avg'] = np.mean([citations(a_id) for a_id in p['author_keys']])
-    # data[id]['blind'] = confs[p['conf']]['blind']
+    data[id]['blind'] = confs[p['conf']]['blind']
     # data[id]['workshop'] = confs[p['conf']]['workshop']
-    # data[id]['conf_id'] = conf_hash[p['conf']]
+    data[id]['conf_id'] = conf_hash[p['conf']]
 
 data = np.array([process(data[k]) for k in sorted(data)])
 target = np.array(process(target))
@@ -82,3 +84,28 @@ target = np.array(process(target))
 lr = LinearRegression()
 scores = cross_val_score(lr, data, target, cv=5)
 print("Accuracy: %0.2f (± %0.2f)" % (scores.mean(), scores.std() * 2))
+
+acc = np.zeros((len(confs.keys()),))
+blind = np.zeros((len(confs.keys()),))
+for i in range(0,len(confs.keys())):
+    d_temp = []
+    for j in range(0,len(data)):
+        if data[j,1] == i:
+            d_temp.append(list(data[j,:])+[target[j]])
+    d_temp = np.array(d_temp)
+    lr = LinearRegression()
+    lr = lr.fit(np.array(d_temp)[:,2].reshape(-1,1), np.array(d_temp)[:,3])
+    scores = lr.score( np.array(d_temp)[:,2].reshape(-1,1), np.array(d_temp)[:,3])#, cv=5)            
+    acc[i] = -scores
+    blind[i] = np.mean(d_temp[:,0])
+    
+plt.scatter(range(0,len(acc)),acc,c=blind)
+collector_1 = []
+collector_0 = []
+for i in range(0,len(acc)):
+    if blind[i] == 1.0:
+        collector_1.append(acc[i])
+    else:
+        collector_0.append(acc[i])
+        
+stupid_ATE = (np.mean(collector_1) - np.mean(collector_0))
