@@ -107,7 +107,7 @@ for i in range(0,len(confs.keys())):
     fig = plt.figure(figsize=(8.75,7))
     plt.scatter(np.array(d_temp)[:,2], np.array(d_temp)[:,3])
     plt.title('Conference %s'%(conf_keys[i]))
-    fig.savefig('status_review_conference_%d.png'%(keys[i]))
+    fig.savefig('output/status_review_conference_%d.png'%(keys[i]))
     
 #plt.scatter(range(0,len(acc)),acc,c=blind)
 collector_1 = []
@@ -136,6 +136,6 @@ for i in range(len(label_0)):
 for i in range(len(label_1)):
     plt.annotate(label_1[i],(position_1[i],collector_1[i]))
 plt.title('Fairness vs Review')
-fig.savefig('Fairness_Review.png')
+fig.savefig('output/Fairness_Review.png')
 
 print(stupid_ATE)
