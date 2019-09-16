@@ -60,7 +60,7 @@ conf_hash = {pair[1]: pair[0] for pair in enumerate(confs.keys())}
 for p in papers:
     id = p['paper_id']
 
-    target[id] = np.mean([r['norm_rating'] for r in reviews[id]]) if id in reviews else 0.5
+    target[id] = np.mean([r['norm_rating'] for r in reviews[id]])
 
     # target[id] = 'reject' in p['decision'].lower()
 
