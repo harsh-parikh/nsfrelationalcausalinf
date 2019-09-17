@@ -2,7 +2,7 @@ import pandas as pd
 import torch
 from torch import nn
 from sklearn.metrics import roc_curve, auc, mean_squared_error, log_loss
-
+import progressbar
 from movielens.models import PartitioningNN, EmbeddingSum
 
 '''
@@ -65,7 +65,7 @@ train_target = demographics.loc[train_ratings.groups].gender == "F"
 test_target = demographics.loc[test_ratings.groups].gender == "F"
 
 n = 10
-epochs = 300
+epochs = 200
 
 train_target = torch.Tensor(train_target.values.astype("int"))
 test_target = torch.Tensor(test_target.values.astype("int")).unsqueeze(-1)
@@ -89,13 +89,13 @@ user_movies_test = [nn.functional.pad(torch.Tensor(group["movie"].values.astype(
 def train(model, inputs, target):
     criterion = nn.BCELoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=0.005)
-    for i in range(epochs):
+    for i in progressbar.progressbar(range(epochs)):
         optimizer.zero_grad()
         output = model.forward_all(inputs)
         loss = criterion(output, target)
         loss.backward()
         optimizer.step()
-        print(f"training loss: {loss:.03}")
+        print(f"\ntraining loss: {loss:.03}")
 
 def ll_criterion(a, p):
     return -(a * torch.log2(p) + (1 - a) * torch.log2(1 - p)).mean()
@@ -113,8 +113,8 @@ partitioningNN = PartitioningNN.PartitioningNN(n)
 train(partitioningNN, user_ratings, train_target)
 test(partitioningNN, user_ratings_test, test_target)
 
-print("Embedding Sum")
-embeddingSum = EmbeddingSum.EmbeddingSum()
-train(embeddingSum, user_movies, train_target)
-test(embeddingSum, user_movies_test, test_target)
+#print("Embedding Sum")
+#embeddingSum = EmbeddingSum.EmbeddingSum()
+#train(embeddingSum, user_movies, train_target)
+#test(embeddingSum, user_movies_test, test_target)
 
