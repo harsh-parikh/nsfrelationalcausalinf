@@ -1,39 +1,12 @@
 #!/usr/bin/env python
-import json
+from common import prestigious, load_dataset
 
 import numpy as np
 
 # universities ranked higher than this are prestigious
 PRESTIGE_CUTOFF = 40
 
-with open("../openreview-dataset/results/authors.json", "r") as f:
-    all_authors = json.load(f)
-
-with open("../openreview-dataset/results/papers.json", "r") as f:
-    papers = json.load(f)
-
-with open("../openreview-dataset/results/reviews.json", "r") as f:
-    reviews = json.load(f)
-
-with open("../openreview-dataset/results/confs.json", "r") as f:
-    confs = json.load(f)
-
-
-def prestigious(ranking):
-    # "corp" means one of few prestigious corporations (e.g. MSR)
-    if ranking == "corp":
-        return True
-
-    # either low-ranking corporation or university that is not in top 2000
-    if ranking == "":
-        return False
-
-    # rankings past 100 are in the form "150-200".
-    if "-" in ranking:
-        return False
-
-    return int(ranking) < 40
-
+all_authors, papers, reviews, confs = load_dataset()
 
 flat = []
 for p in papers:
