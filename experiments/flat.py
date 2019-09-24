@@ -3,11 +3,8 @@
 import json
 from collections import defaultdict
 
-<<<<<<< HEAD
 from common import prestigious, load_dataset, experience
 
-=======
->>>>>>> e186328de3b727ac5992564cf67370073de66e2b
 import numpy as np
 import sklearn
 
@@ -72,7 +69,6 @@ experience_scaler = sklearn.preprocessing.StandardScaler().fit(
 )
 
 for p in papers:
-<<<<<<< HEAD
     id = p["paper_id"]
     target[id] = np.mean([r["norm_rating"] for r in reviews[id]])
     data[id]["popularity_avg"] = np.mean(
