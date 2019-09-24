@@ -34,3 +34,12 @@ def prestigious(ranking):
         return False
 
     return int(ranking) < 40
+
+
+def experience(author):
+    """Return range of publication years, given an author object."""
+    try:
+        pub_info = author["scopus"]["_json"]["author-profile"]["publication-range"]
+        return int(pub_info["@end"]) - int(pub_info["@start"])
+    except (KeyError, TypeError):
+        return 0
