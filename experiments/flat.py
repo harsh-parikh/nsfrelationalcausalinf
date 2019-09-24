@@ -2,7 +2,7 @@
 
 from collections import defaultdict
 
-from common import prestigious, load_dataset
+from common import prestigious, load_dataset, experience
 
 import numpy as np
 import sklearn
@@ -33,14 +33,6 @@ def collaboration(paper):
     return int(len(domains) > 1)
 
 
-def popularity(author_id):
-    if author_id is None:
-        return 0
-
-    a = authors[author_id]
-    return prestigious(a["world_rank"])
-
-
 def process(d):
     return [d[k] for k in sorted(d)]
 
@@ -59,11 +51,25 @@ target = {}
 
 conf_hash = {pair[1]: pair[0] for pair in enumerate(confs.keys())}
 
+
+citation_scaler = sklearn.preprocessing.StandardScaler().fit(
+    np.array([citations(a) for a in range(len(authors))]).reshape(-1, 1)
+)
+
+experience_scaler = sklearn.preprocessing.StandardScaler().fit(
+    np.array([experience(a) for a in range(len(authors))]).reshape(-1, 1)
+)
+
 for p in papers:
     id = p["paper_id"]
     target[id] = np.mean([r["norm_rating"] for r in reviews[id]])
     data[id]["popularity_avg"] = np.mean(
-        [popularity(a_id) for a_id in p["author_keys"]]
+        [
+            (prestigious(authors[a_id]["world_rank"]) - 0.5) * 2
+            + citation_scaler.transform([[citations(a_id)]])
+            + experience_scaler.transform([[experience(authors[a_id])]])
+            for a_id in filter(None, p["author_keys"])
+        ]
     )
     data[id]["blind"] = confs[p["conf"]]["blind"]
     data[id]["conf_id"] = conf_hash[p["conf"]]
@@ -86,7 +92,7 @@ for i in range(0, len(confs.keys())):
         if data[j, 1] == i:
             d_temp.append(list(data[j, :]) + [target[j]])
     d_temp = np.array(d_temp)
-    lr = RFR()
+    lr = LinearRegression()
     lr = lr.fit(np.array(d_temp)[:, 2].reshape(-1, 1), np.array(d_temp)[:, 3])
     scores = lr.score(
         np.array(d_temp)[:, 2].reshape(-1, 1), np.array(d_temp)[:, 3]
