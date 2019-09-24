@@ -59,27 +59,27 @@ conf_hash = {pair[1]: pair[0] for pair in enumerate(confs.keys())}
 
 for p in papers:
     id = p['paper_id']
-
-    target[id] = np.mean([r['norm_rating'] for r in reviews[id]])
-
-    # target[id] = 'reject' in p['decision'].lower()
-
-    # data[id]['collab'] = collaboration(p)
-
-    """
-    if id not in reviews:
-        data[id]['rating_avg'] = 0.5
-        data[id]['conf_avg'] = 0
-    else:
-        data[id]['rating_avg'] = np.mean([r['norm_rating'] for r in reviews[id]])
-        data[id]['conf_avg'] = np.mean([r['norm_conf'] for r in reviews[id]])
-    """
-        
-    # data[id]['conf_rigor'] = confs[p['conf']]['rigor']
-    data[id]['popularity_avg'] = np.mean([citations(a_id) for a_id in p['author_keys']])
-    data[id]['blind'] = confs[p['conf']]['blind']
-    # data[id]['workshop'] = confs[p['conf']]['workshop']
-    data[id]['conf_id'] = conf_hash[p['conf']]
+    if id in reviews:
+        target[id] = np.mean([r['norm_rating'] for r in reviews[id]])
+    
+        # target[id] = 'reject' in p['decision'].lower()
+    
+        # data[id]['collab'] = collaboration(p)
+    
+        """
+        if id not in reviews:
+            data[id]['rating_avg'] = 0.5
+            data[id]['conf_avg'] = 0
+        else:
+            data[id]['rating_avg'] = np.mean([r['norm_rating'] for r in reviews[id]])
+            data[id]['conf_avg'] = np.mean([r['norm_conf'] for r in reviews[id]])
+        """
+            
+        # data[id]['conf_rigor'] = confs[p['conf']]['rigor']
+        data[id]['popularity_avg'] = np.mean([citations(a_id) for a_id in p['author_keys']])
+        data[id]['blind'] = confs[p['conf']]['blind']
+        # data[id]['workshop'] = confs[p['conf']]['workshop']
+        data[id]['conf_id'] = conf_hash[p['conf']]
 
 data = np.array([process(data[k]) for k in sorted(data)])
 target = np.array(process(target))
@@ -98,16 +98,17 @@ for i in range(0,len(confs.keys())):
     for j in range(0,len(data)):
         if data[j,1] == i:
             d_temp.append(list(data[j,:])+[target[j]])
-    d_temp = np.array(d_temp)
-    lr = RFR()
-    lr = lr.fit(np.array(d_temp)[:,2].reshape(-1,1), np.array(d_temp)[:,3])
-    scores = lr.score( np.array(d_temp)[:,2].reshape(-1,1), np.array(d_temp)[:,3])#, cv=5)            
-    acc[i] = 1-scores
-    blind[i] = np.mean(d_temp[:,0])
-    fig = plt.figure(figsize=(8.75,7))
-    plt.scatter(np.array(d_temp)[:,2], np.array(d_temp)[:,3])
-    plt.title('Conference %s'%(conf_keys[i]))
-    fig.savefig('output/status_review_conference_%d.png'%(keys[i]))
+    if len(d_temp)>0:
+        d_temp = np.array(d_temp)
+        lr = RFR()
+        lr = lr.fit(np.array(d_temp)[:,2].reshape(-1,1), np.array(d_temp)[:,3])
+        scores = lr.score( np.array(d_temp)[:,2].reshape(-1,1), np.array(d_temp)[:,3])#, cv=5)            
+        acc[i] = 1-scores
+        blind[i] = np.mean(d_temp[:,0])
+        fig = plt.figure(figsize=(8.75,7))
+        plt.scatter(np.array(d_temp)[:,2], np.array(d_temp)[:,3])
+        plt.title('Conference %s'%(conf_keys[i]))
+        fig.savefig('output/status_review_conference_%d.png'%(keys[i]))
     
 #plt.scatter(range(0,len(acc)),acc,c=blind)
 collector_1 = []
