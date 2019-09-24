@@ -1,15 +1,13 @@
 #!/usr/bin/env python
-from common import prestigious, load_dataset
+from common import load_dataset, prestigious, h_index
 
 import numpy as np
-
-# universities ranked higher than this are prestigious
-PRESTIGE_CUTOFF = 40
 
 all_authors, papers, reviews, confs = load_dataset()
 
 flat = []
 for p in papers:
+    conf_blind = confs[p["conf"]]["blind"]
     authors = [all_authors[i] for i in filter(None, p["author_keys"])]
     for a in authors:
         # experience is range of publication years
@@ -20,9 +18,10 @@ for p in papers:
             experience = 0
 
         prestige = prestigious(a["world_rank"])
+        impact = h_index(a)
         decision = "reject" not in p["decision"].lower()
-        row = [prestige, experience, decision]
+        row = [impact, prestige, experience, conf_blind, decision]
         flat.append(row)
 
 flat = np.array(flat)
-print(flat)
+print(np.mean(flat, axis=0))

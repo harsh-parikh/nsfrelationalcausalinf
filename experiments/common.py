@@ -1,5 +1,8 @@
 import json
 
+# universities ranked higher than this are prestigious
+PRESTIGE_CUTOFF = 40
+
 
 def load_dataset():
     """Load OpenReview dataset.
@@ -33,7 +36,7 @@ def prestigious(ranking):
     if "-" in ranking:
         return False
 
-    return int(ranking) < 40
+    return int(ranking) < PRESTIGE_CUTOFF
 
 
 def experience(author):
@@ -41,5 +44,12 @@ def experience(author):
     try:
         pub_info = author["scopus"]["_json"]["author-profile"]["publication-range"]
         return int(pub_info["@end"]) - int(pub_info["@start"])
+    except (KeyError, TypeError):
+        return 0
+
+
+def h_index(author):
+    try:
+        return int(author["scopus"]["_json"]["h-index"])
     except (KeyError, TypeError):
         return 0
