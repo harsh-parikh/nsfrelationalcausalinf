@@ -15,16 +15,18 @@ from sklearn.linear_model import Ridge
 from sklearn.svm import SVR
 from sklearn.ensemble import RandomForestRegressor as RFR
 from sklearn.model_selection import cross_val_score
+from scipy.special import expit
+
 
 def collaboration(paper):
-    '''Decide if paper is a collaboration between multiple institutions.
+    """Decide if paper is a collaboration between multiple institutions.
 
     Do this by looking at email domains, ignoring commercial providers.
-    '''
+    """
     ignore = {"gmail", "yahoo", "hotmail"}
     domains = set()
 
-    for a in paper['authorids']:
+    for a in paper["authorids"]:
         d = a.split("@")[-1]
         if any(x in d for x in ignore):
             continue
@@ -36,11 +38,13 @@ def collaboration(paper):
 def process(d):
     return [d[k] for k in sorted(d)]
 
+
 def citations(a_id):
     try:
-        return int(authors[a_id]['scopus']['_json']['coredata']['citation-count'])
+        return int(authors[a_id]["scopus"]["_json"]["coredata"]["citation-count"])
     except (KeyError, TypeError):
         return 0
+
 
 with open("../openreview-dataset/results/authors.json", "r") as f:
     authors = json.load(f)
@@ -73,9 +77,11 @@ for p in papers:
     target[id] = np.mean([r["norm_rating"] for r in reviews[id]])
     data[id]["popularity_avg"] = np.mean(
         [
-            (prestigious(authors[a_id]["world_rank"]) - 0.5) * 2
-            + citation_scaler.transform([[citations(a_id)]])
-            + experience_scaler.transform([[experience(authors[a_id])]])
+            expit(
+                (prestigious(authors[a_id]["world_rank"]) - 0.5) * 2
+                + citation_scaler.transform([[citations(a_id)]])
+                + experience_scaler.transform([[experience(authors[a_id])]])
+            )
             for a_id in filter(None, p["author_keys"])
         ]
     )
@@ -89,57 +95,59 @@ lr = LinearRegression()
 scores = cross_val_score(lr, data, target, cv=5)
 print("Accuracy: %0.2f (± %0.2f)" % (scores.mean(), scores.std() * 2))
 
-keys = list(range(0,len(confs.keys())))
+keys = list(range(0, len(confs.keys())))
 conf_keys = list(confs.keys())
 
 acc = np.zeros((len(confs.keys()),))
 blind = np.zeros((len(confs.keys()),))
-for i in range(0,len(confs.keys())):
+for i in range(0, len(confs.keys())):
     d_temp = []
 
-    for j in range(0,len(data)):
-        if data[j,1] == i:
-            d_temp.append(list(data[j,:])+[target[j]])
-    if len(d_temp)>0:
+    for j in range(0, len(data)):
+        if data[j, 1] == i:
+            d_temp.append(list(data[j, :]) + [target[j]])
+    if len(d_temp) > 0:
         d_temp = np.array(d_temp)
         lr = RFR()
-        lr = lr.fit(np.array(d_temp)[:,2].reshape(-1,1), np.array(d_temp)[:,3])
-        scores = lr.score( np.array(d_temp)[:,2].reshape(-1,1), np.array(d_temp)[:,3])#, cv=5)            
-        acc[i] = 1-scores
-        blind[i] = np.mean(d_temp[:,0])
-        fig = plt.figure(figsize=(8.75,7))
-        plt.scatter(np.array(d_temp)[:,2], np.array(d_temp)[:,3])
-        plt.title('Conference %s'%(conf_keys[i]))
-        fig.savefig('output/status_review_conference_%d.png'%(keys[i]))
-    
-#plt.scatter(range(0,len(acc)),acc,c=blind)
+        lr = lr.fit(np.array(d_temp)[:, 2].reshape(-1, 1), np.array(d_temp)[:, 3])
+        scores = lr.score(
+            np.array(d_temp)[:, 2].reshape(-1, 1), np.array(d_temp)[:, 3]
+        )  # , cv=5)
+        acc[i] = 1 - scores
+        blind[i] = np.mean(d_temp[:, 0])
+        fig = plt.figure(figsize=(8.75, 7))
+        plt.scatter(np.array(d_temp)[:, 2], np.array(d_temp)[:, 3])
+        plt.title("Conference %s" % (conf_keys[i]))
+        fig.savefig("output/status_review_conference_%d.png" % (keys[i]))
+
+# plt.scatter(range(0,len(acc)),acc,c=blind)
 
 collector_1 = []
 label_0 = []
 collector_0 = []
 label_1 = []
-keys = list(range(0,len(confs.keys())))
-for i in range(0,len(acc)):
+keys = list(range(0, len(confs.keys())))
+for i in range(0, len(acc)):
     if blind[i] == 1.0:
         collector_1.append(acc[i])
         label_1.append(keys[i])
     else:
         collector_0.append(acc[i])
         label_0.append(keys[i])
-        
-stupid_ATE = (np.mean(collector_1) - np.mean(collector_0))
-fig = plt.figure(figsize=(8.75,7))
-position_0 = np.random.normal(1,0.05,size=len(collector_0))
-position_1 = np.random.normal(2,0.05,size=len(collector_1))
-plt.scatter(position_0,collector_0,alpha=0.4,s=150)
-plt.scatter(position_1,collector_1,alpha=0.4,s=150)
-plt.violinplot(collector_0,positions=[1])
-plt.violinplot(collector_1,positions=[2])
+
+stupid_ATE = np.mean(collector_1) - np.mean(collector_0)
+fig = plt.figure(figsize=(8.75, 7))
+position_0 = np.random.normal(1, 0.05, size=len(collector_0))
+position_1 = np.random.normal(2, 0.05, size=len(collector_1))
+plt.scatter(position_0, collector_0, alpha=0.4, s=150)
+plt.scatter(position_1, collector_1, alpha=0.4, s=150)
+plt.violinplot(collector_0, positions=[1])
+plt.violinplot(collector_1, positions=[2])
 for i in range(len(label_0)):
-    plt.annotate(label_0[i],(position_0[i],collector_0[i]))
+    plt.annotate(label_0[i], (position_0[i], collector_0[i]))
 for i in range(len(label_1)):
-    plt.annotate(label_1[i],(position_1[i],collector_1[i]))
-plt.title('Fairness vs Review')
-fig.savefig('output/Fairness_Review.png')
+    plt.annotate(label_1[i], (position_1[i], collector_1[i]))
+plt.title("Fairness vs Review")
+fig.savefig("output/Fairness_Review.png")
 
 print(stupid_ATE)
