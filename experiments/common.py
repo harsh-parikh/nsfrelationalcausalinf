@@ -23,7 +23,9 @@ def load_dataset():
     return (authors, papers, reviews, confs)
 
 
-def prestigious(ranking):
+def prestigious(author):
+    ranking = author["world_rank"]
+
     # "corp" means one of few prestigious corporations (e.g. MSR)
     if ranking == "corp":
         return True
@@ -39,7 +41,7 @@ def prestigious(ranking):
     return int(ranking) < PRESTIGE_CUTOFF
 
 
-def experience(author):
+def publishing_years(author):
     """Return range of publication years, given an author object."""
     try:
         pub_info = author["scopus"]["_json"]["author-profile"]["publication-range"]
