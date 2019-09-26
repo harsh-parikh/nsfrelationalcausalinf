@@ -42,7 +42,7 @@ for p in papers:
             # impact,
             # prestige,
             # experience,
-            co_prestige > 0.4, 
+            co_prestige > 0, 
             co_impact,
             co_experience,
             # score,
@@ -67,51 +67,58 @@ flat_double[:, 1:-1] = binner.transform(flat_double[:, 1:-1])
 count_p = len([r for r in flat if r[0]])
 count_np = len(flat) - count_p
 
-result_p = 0
+print("==== Matching ====")
+result_sb = 0
 for target_i in range(3):
     for target_e in range(3):
-        single_outcomes = []
+        p_outcomes = []
+        np_outcomes = []
+
         for r in flat_single:
+            if r[0] == 0 and r[1] == target_i and r[2] == target_e:
+                np_outcomes.append(r[3])
             if r[0] == 1 and r[1] == target_i and r[2] == target_e:
-                single_outcomes.append(r[3])
-        
-        double_outcomes = []
-        for r in flat_double:
-            if r[0] == 1 and r[1] == target_i and r[2] == target_e:
-                double_outcomes.append(r[3])
+                p_outcomes.append(r[3])
 
-        delta = np.mean(double_outcomes) - np.mean(single_outcomes)
+        delta = np.mean(p_outcomes) - np.mean(np_outcomes)
         if not np.isnan(delta):
-            count = len(single_outcomes) + len(double_outcomes)
-            adjustment = count / count_p
-            result_p += delta * adjustment
+            count = len(p_outcomes) + len(np_outcomes)
+            adjustment = count / len(flat_single)
+            result_sb += delta * adjustment
         else:
-            print("no match")
-print(result_p)
+            pass
+print("single blind: ", result_sb)
 
-result_np = 0
+result_db = 0
 for target_i in range(3):
     for target_e in range(3):
-        single_outcomes = []
-        for r in flat_single:
-            if r[0] == 0 and r[1] == target_i and r[2] == target_e:
-                single_outcomes.append(r[3])
-        
-        double_outcomes = []
+        p_outcomes = []
+        np_outcomes = []
+
         for r in flat_double:
             if r[0] == 0 and r[1] == target_i and r[2] == target_e:
-                double_outcomes.append(r[3])
+                np_outcomes.append(r[3])
+            if r[0] == 1 and r[1] == target_i and r[2] == target_e:
+                p_outcomes.append(r[3])
 
-        delta = np.mean(double_outcomes) - np.mean(single_outcomes)
+        delta = np.mean(p_outcomes) - np.mean(np_outcomes)
         if not np.isnan(delta):
-            count = len(single_outcomes) + len(double_outcomes)
-            adjustment = count / count_np
-            result_np += delta * adjustment
+            count = len(p_outcomes) + len(np_outcomes)
+            adjustment = count / len(flat_double)
+            result_db += delta * adjustment
         else:
-            print("no match")
-print(result_np)
+            pass
+print("double blind: ", result_db)
 
-print(result_p - result_np)
+print("difference:", result_db - result_sb)
 # plt.hist(X_single[:, 1], alpha=0.2)
 # plt.hist(X_double[:, 1], alpha=0.2)
 # plt.show()
+
+print("===== Naive Averaging ===")
+print("single blind, prestigious: ", np.mean([r[3] for r in flat_single if r[0]]))
+print("single blind, not prestigious: ", np.mean([r[3] for r in flat_single if not r[0]]))
+print("single blind, p - np: ", np.mean([r[3] for r in flat_single if r[0]]) - np.mean([r[3] for r in flat_single if not r[0]]))
+print("double blind, prestigious: ", np.mean([r[3] for r in flat_double if r[0]]))
+print("double blind, not prestigious: ", np.mean([r[3] for r in flat_double if not r[0]]))
+print("double blind, p - np: ", np.mean([r[3] for r in flat_double if r[0]]) - np.mean([r[3] for r in flat_double if not r[0]]))
