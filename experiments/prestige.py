@@ -2,9 +2,11 @@
 from common import load_dataset, publishing_years, prestigious, h_index
 
 import numpy as np
-from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import KBinsDiscretizer
+from sklearn.linear_model import LogisticRegressionCV
 from sklearn.model_selection import train_test_split
-
+from sklearn.model_selection import cross_val_score
+import pandas as pd
 import matplotlib.pyplot as plt
 
 all_authors, papers, reviews, confs = load_dataset()
@@ -29,19 +31,19 @@ for p in papers:
         else:
             co_impact = co_prestige = co_experience = 0
 
-        rs = reviews[p['paper_id']]
-        score = np.mean([r['norm_rating'] for r in rs]) if rs else 0
+        rs = reviews[p["paper_id"]]
+        score = np.mean([r["norm_rating"] for r in rs]) if rs else 0
 
         # target
         decision = "reject" not in p["decision"].lower()
 
         # insert the row
         row = [
-            #impact,
-            #prestige,
-            #experience,
+            # impact,
+            # prestige,
+            # experience,
+            co_prestige > 0.4, 
             co_impact,
-            co_prestige,
             co_experience,
             # score,
             decision,
@@ -54,28 +56,62 @@ for p in papers:
 
 flat_single = np.array(flat_single)
 flat_double = np.array(flat_double)
+flat = np.vstack((flat_single, flat_double))
 
-X_single = flat_single[:, :-1]
-y_single = np.ravel(flat_single[:, -1:])
+binner = KBinsDiscretizer(n_bins=[3, 3], encode="ordinal", strategy="kmeans")
+binner.fit(flat[:, 1:-1])
 
-X_double = flat_double[:, :-1]
-y_double = np.ravel(flat_double[:, -1:])
+flat_single[:, 1:-1] = binner.transform(flat_single[:, 1:-1])
+flat_double[:, 1:-1] = binner.transform(flat_double[:, 1:-1])
 
-X_single_train, X_single_test, y_single_train, y_single_test = train_test_split(X_single, y_single, test_size=0.25)
-X_double_train, X_double_test, y_double_train, y_double_test = train_test_split(X_double, y_double, test_size=0.25)
+count_p = len([r for r in flat if r[0]])
+count_np = len(flat) - count_p
 
-single_model = LogisticRegression()
-single_model.fit(X_single_train, y_single_train)
+result_p = 0
+for target_i in range(3):
+    for target_e in range(3):
+        single_outcomes = []
+        for r in flat_single:
+            if r[0] == 1 and r[1] == target_i and r[2] == target_e:
+                single_outcomes.append(r[3])
+        
+        double_outcomes = []
+        for r in flat_double:
+            if r[0] == 1 and r[1] == target_i and r[2] == target_e:
+                double_outcomes.append(r[3])
 
-double_model = LogisticRegression()
-double_model.fit(X_double_train, y_double_train)
+        delta = np.mean(double_outcomes) - np.mean(single_outcomes)
+        if not np.isnan(delta):
+            count = len(single_outcomes) + len(double_outcomes)
+            adjustment = count / count_p
+            result_p += delta * adjustment
+        else:
+            print("no match")
+print(result_p)
 
-# estimation
-print(double_model.coef_)
-print(single_model.coef_)
-print("====")
-print(double_model.coef_ - single_model.coef_)
+result_np = 0
+for target_i in range(3):
+    for target_e in range(3):
+        single_outcomes = []
+        for r in flat_single:
+            if r[0] == 0 and r[1] == target_i and r[2] == target_e:
+                single_outcomes.append(r[3])
+        
+        double_outcomes = []
+        for r in flat_double:
+            if r[0] == 0 and r[1] == target_i and r[2] == target_e:
+                double_outcomes.append(r[3])
 
-plt.hist(X_single[:, 1], alpha=0.2)
-plt.hist(X_double[:, 1], alpha=0.2)
-plt.show()
+        delta = np.mean(double_outcomes) - np.mean(single_outcomes)
+        if not np.isnan(delta):
+            count = len(single_outcomes) + len(double_outcomes)
+            adjustment = count / count_np
+            result_np += delta * adjustment
+        else:
+            print("no match")
+print(result_np)
+
+print(result_p - result_np)
+# plt.hist(X_single[:, 1], alpha=0.2)
+# plt.hist(X_double[:, 1], alpha=0.2)
+# plt.show()
