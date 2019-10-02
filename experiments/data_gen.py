@@ -66,7 +66,7 @@ def gen_conf(n_conf):
     def gen():
         impact_fac = np.random.exponential(10)
         area = np.random.randint(0,10)
-        blind = np.random.binomial(1,1/3)
+        blind = np.random.binomial(1,2/3)
         return [area,impact_fac,blind]
     d_conf = {}
     for i in range(n_conf):
@@ -82,7 +82,7 @@ def gen_paper(n_paper,df_conf,df_auth,df_inst):
     def gen():
         num_auth = int(np.random.exponential(2.5) + 1)
         authors = np.random.choice(len(df_auth), size = num_auth, replace=False) #randomly choose K authors, can be made more meaningful
-        quality = scipy.special.expit(np.random.normal(0,1) + np.sum([ (2**(-i))*df_auth.loc[authors[i]]['citation'] for i in range(num_auth) ])/1000) - 0.5
+        quality = scipy.special.expit(np.random.normal(0,1) + np.sum([ (2**(-i))*df_auth.loc[authors[i]]['citation'] for i in range(num_auth) ])/500)
         quality = quality * (quality > 0)
         paper_conf = np.random.randint(0,len(df_conf)) #randomly apply to any conference, could be made better
         median_prestige = np.median([ df_inst.loc[df_auth.loc[a]['affiliation']]['prestige'] for a in authors]) #median prestige of all authors
@@ -110,4 +110,13 @@ def generate_data(n_auth,n_inst,n_paper,n_conf):
 
 np.random.seed(0) #reproducability
 df = generate_data(1000,100,10000,50)
+df_inst = df['institutes']
+df_auth = df['authors']
+df_conf = df['conferences']
+df_paper = df['papers']
+
+df_unit_table ={}
+n_paper = len(d_paper)
+for i in range(n_paper):
+    
 
