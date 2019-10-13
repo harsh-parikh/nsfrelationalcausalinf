@@ -19,14 +19,20 @@ from data_gen import *
 
 def eval_outcome_estimation(X,y,learn_type='regression'):
     if learn_type=='regression':
-        model = RFR(n_estimators=100)
-        scores = cross_validate(model,X,y,cv=5, return_estimator=True)
-        return np.mean(scores['test_score']), scores['estimator'][np.argmax(scores['test_score'])]
+        try:
+            model = RFR(n_estimators=500)
+            scores = cross_validate(model,X,y,cv=5, return_estimator=True)
+            return np.mean(scores['test_score']), scores['estimator'][np.argmax(scores['test_score'])]
+        except:
+            return 0, None
     else:
-        model = RFC(n_estimators=100)
-        scores = cross_validate(model,X,y,cv=5,  return_estimator=True)
-        return np.mean(scores['test_score']), scores['estimator'][np.argmax(scores['test_score'])]
-    
+        try:
+            model = RFC(n_estimators=500)
+            scores = cross_validate(model,X,y,cv=5, return_estimator=True)
+            return np.mean(scores['test_score']), scores['estimator'][np.argmax(scores['test_score'])]
+        except:
+            return 0, None
+        
 def moment_summarization(X,level=1):
     x = []
     for row in X:
@@ -37,7 +43,7 @@ def moment_summarization(X,level=1):
     return np.array(x)
 
 def learn_moment_summary(X,y,learn_type='regression',max_moment=10):
-    scores = [eval_outcome_estimation(moment_summarization(X,level=i),y,learn_type)[0] for i in range(1,max_moment)]
+    scores = np.nan_to_num(np.array([eval_outcome_estimation(moment_summarization(X,level=i),y,learn_type)[0] for i in range(1,max_moment)]))
     best_moment = np.argmax(scores)+1
     return scores, best_moment, eval_outcome_estimation(moment_summarization(X,level=best_moment),y,learn_type)[1]
 #

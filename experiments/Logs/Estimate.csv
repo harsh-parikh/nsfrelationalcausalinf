@@ -1,0 +1,60 @@
+Mean as Embedding
+,Mean Difference of Reviews (Single-Double), 0.750008
+Single Blind, Mean Difference of Reviews (Treated-Control), 1.370417
+Double Blind, Mean Difference of Reviews (Treated-Control), 0.395400
+Single-Blind 
+ATE, 1.173226 
+Median, 1.158384 
+True TE, 1.000000
+Double-Blind 
+ATE, 0.198048 
+Median, 0.205839 
+True TE, 0.000000
+Median as Embedding
+,Mean Difference of Reviews (Single-Double), 0.750008
+Single Blind, Mean Difference of Reviews (Treated-Control), 1.370417
+Double Blind, Mean Difference of Reviews (Treated-Control), 0.395400
+Single-Blind 
+ATE, 1.084213 
+Median, 1.076648 
+True TE, 1.000000
+Double-Blind 
+ATE, 0.134854 
+Median, 0.160029 
+True TE, 0.000000
+True Embedding
+,Mean Difference of Reviews (Single-Double), 0.750008
+Single Blind, Mean Difference of Reviews (Treated-Control), 1.370417
+Double Blind, Mean Difference of Reviews (Treated-Control), 0.395400
+Single-Blind 
+ATE, 1.147072 
+Median, 1.122515 
+True TE, 1.000000
+Double-Blind 
+ATE, 0.175888 
+Median, 0.161079 
+True TE, 0.000000
+Learned Embedding using Moment Summarization followed by Random Forest
+,Mean Difference of Reviews (Single-Double), 0.750008
+Single Blind, Mean Difference of Reviews (Treated-Control), 1.370417
+Double Blind, Mean Difference of Reviews (Treated-Control), 0.395400
+Single-Blind 
+ATE, 1.200773 
+Median, 1.181956 
+True TE, 1.000000
+Double-Blind 
+ATE, 0.244178 
+Median, 0.207252 
+True TE, 0.000000
+Learned Embedding using Moment Summarization
+,Mean Difference of Reviews (Single-Double), 0.750008
+Single Blind, Mean Difference of Reviews (Treated-Control), 1.370417
+Double Blind, Mean Difference of Reviews (Treated-Control), 0.395400
+Single-Blind 
+ATE, 1.199226 
+Median, 1.142562 
+True TE, 1.000000
+Double-Blind 
+ATE, 0.201953 
+Median, 0.188553 
+True TE, 0.000000

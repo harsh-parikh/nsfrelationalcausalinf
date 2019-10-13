@@ -19,7 +19,7 @@ from data_gen import *
 from learn_embedding import *
 
 np.random.seed(0) #reproducability
-df = generate_data(10000,200,75000,50)
+df = generate_data(1000,20,7500,50)
 df_inst = df['institutes']
 df_auth = df['authors']
 df_conf = df['conferences']
@@ -713,8 +713,8 @@ plt.legend(['control','treated'])
 plt.title('Double-Blind')
 fig.savefig('Figures/Mean/pdf_double_treated_control_review.png')
 
-m_s_c = RandomForestRegressor()
-m_s_d = RandomForestRegressor()
+m_s_c = RandomForestRegressor(n_estimators=1000)
+m_s_d = RandomForestRegressor(n_estimators=1000)
 
 m_s_c = m_s_c.fit(df_single_control[['venue_impact_factor','mean_citation','embedded_experience']],df_single_control['review'])
 m_s_d = m_s_d.fit(df_single_treated[['venue_impact_factor','mean_citation','embedded_experience']],df_single_treated['review'])
@@ -723,8 +723,8 @@ ate_single = np.mean(tau_single)
 mediante_single = np.median(tau_single)
 truth_single = 1.0
 
-m_d_c = RandomForestRegressor()
-m_d_d = RandomForestRegressor()
+m_d_c = RandomForestRegressor(n_estimators=1000)
+m_d_d = RandomForestRegressor(n_estimators=1000)
 
 m_d_c = m_d_c.fit(df_double_control[['venue_impact_factor','mean_citation','embedded_experience']],df_double_control['review'])
 m_d_d = m_d_d.fit(df_double_treated[['venue_impact_factor','mean_citation','embedded_experience']],df_double_treated['review'])
@@ -816,8 +816,8 @@ plt.legend(['control','treated'])
 plt.title('Double-Blind')
 fig.savefig('Figures/Median/pdf_double_treated_control_review.png')
 
-m_s_c = RandomForestRegressor()
-m_s_d = RandomForestRegressor()
+m_s_c = RandomForestRegressor(n_estimators=1000)
+m_s_d = RandomForestRegressor(n_estimators=1000)
 
 m_s_c = m_s_c.fit(df_single_control[['venue_impact_factor','median_citation','embedded_experience']],df_single_control['review'])
 m_s_d = m_s_d.fit(df_single_treated[['venue_impact_factor','median_citation','embedded_experience']],df_single_treated['review'])
@@ -826,8 +826,8 @@ ate_single = np.mean(tau_single)
 mediante_single = np.median(tau_single)
 truth_single = 1.0
 
-m_d_c = RandomForestRegressor()
-m_d_d = RandomForestRegressor()
+m_d_c = RandomForestRegressor(n_estimators=1000)
+m_d_d = RandomForestRegressor(n_estimators=1000)
 
 m_d_c = m_d_c.fit(df_double_control[['venue_impact_factor','median_citation','embedded_experience']],df_double_control['review'])
 m_d_d = m_d_d.fit(df_double_treated[['venue_impact_factor','median_citation','embedded_experience']],df_double_treated['review'])
@@ -868,9 +868,9 @@ for i in range(n_paper):
     authors = paper['authors']
     prestige_vec = [ df_inst.loc[df_auth.loc[a]['affiliation']]['prestige'] for a in authors ]
     citation_vec = [ df_auth.loc[a]['citation'] for a in authors ]
-    experience_vec = [ df_auth.loc[a]['experience'] for a in authors ]
+    experience_vec = np.array([ df_auth.loc[a]['experience'] for a in authors ])
     median_prestige = np.percentile(prestige_vec,75)
-    median_citation = scipy.special.expit(np.dot( [ 2**(-i) for i in range(len(citation_vec)) ], citation_vec )/500 - 1)
+    median_citation = scipy.special.expit(np.dot( [ np.e**(-i) for i in range(len(citation_vec)) ], np.log(citation_vec) )/5 - 1)
     d_paperi = {}
     d_paperi['quality'] = paper['quality']
     d_paperi['venue_area'] = df_conf.loc[paper['venue']]['area']
@@ -879,7 +879,7 @@ for i in range(n_paper):
     d_paperi['review'] = paper['review']
     d_paperi['quantile_75_prestige'] = median_prestige
     d_paperi['expit_citation'] = median_citation
-    d_paperi['embedded_experience'] = np.max(experience_vec)
+    d_paperi['embedded_experience'] = np.mean(1/(experience_vec+1))
     df_unit_table[i] = d_paperi
 
 df_unit_table = pd.DataFrame.from_dict(df_unit_table,orient='index')
@@ -919,8 +919,8 @@ plt.legend(['control','treated'])
 plt.title('Double-Blind')
 fig.savefig('Figures/Complex_1/pdf_double_treated_control_review.png')
 
-m_s_c = RandomForestRegressor()
-m_s_d = RandomForestRegressor()
+m_s_c = RandomForestRegressor(n_estimators=1000)
+m_s_d = RandomForestRegressor(n_estimators=1000)
 
 m_s_c = m_s_c.fit(df_single_control[['venue_impact_factor','expit_citation','embedded_experience']],df_single_control['review'])
 m_s_d = m_s_d.fit(df_single_treated[['venue_impact_factor','expit_citation','embedded_experience']],df_single_treated['review'])
@@ -929,8 +929,8 @@ ate_single = np.mean(tau_single)
 mediante_single = np.median(tau_single)
 truth_single = 1.0
 
-m_d_c = RandomForestRegressor()
-m_d_d = RandomForestRegressor()
+m_d_c = RandomForestRegressor(n_estimators=1000)
+m_d_d = RandomForestRegressor(n_estimators=1000)
 
 m_d_c = m_d_c.fit(df_double_control[['venue_impact_factor','expit_citation','embedded_experience']],df_double_control['review'])
 m_d_d = m_d_d.fit(df_double_treated[['venue_impact_factor','expit_citation','embedded_experience']],df_double_treated['review'])
@@ -988,7 +988,7 @@ embedding_cov = []
 y = np.array(df_unit_table_1['review'])
 for cov in embedding_needed_covariates:
     X_cov = df_unit_table_1[cov]
-    output = learn_moment_summary(X_cov,y,learn_type='regression',max_moment=10)
+    output = learn_moment_summary(X_cov,y,learn_type='regression',max_moment=7)
     embedding_cov.append( lambda x: output[2].predict( np.array([[np.mean(x)]+[stats.moment(x,moment=i) for i in range(2,output[1])]]) )[0] )
     
 
@@ -1051,8 +1051,8 @@ plt.legend(['control','treated'])
 plt.title('Double-Blind')
 fig.savefig('Figures/Learn_MomSum_RF/pdf_double_treated_control_review.png')
 
-m_s_c = RandomForestRegressor()
-m_s_d = RandomForestRegressor()
+m_s_c = RandomForestRegressor(n_estimators=1000)
+m_s_d = RandomForestRegressor(n_estimators=1000)
 
 m_s_c = m_s_c.fit(df_single_control[['venue_impact_factor','embedded_citation']],df_single_control['review'])
 m_s_d = m_s_d.fit(df_single_treated[['venue_impact_factor','embedded_citation']],df_single_treated['review'])
@@ -1061,8 +1061,8 @@ ate_single = np.mean(tau_single)
 mediante_single = np.median(tau_single)
 truth_single = 1.0
 
-m_d_c = RandomForestRegressor()
-m_d_d = RandomForestRegressor()
+m_d_c = RandomForestRegressor(n_estimators=1000)
+m_d_d = RandomForestRegressor(n_estimators=1000)
 
 m_d_c = m_d_c.fit(df_double_control[['venue_impact_factor','embedded_citation']],df_double_control['review'])
 m_d_d = m_d_d.fit(df_double_treated[['venue_impact_factor','embedded_citation']],df_double_treated['review'])
@@ -1121,7 +1121,7 @@ embedding_cov = []
 y = np.array(df_unit_table_1['review'])
 for cov in embedding_needed_covariates:
     X_cov = df_unit_table_1[cov]
-    output = learn_moment_summary(X_cov,y,learn_type='regression',max_moment=10)
+    output = learn_moment_summary(X_cov,y,learn_type='regression',max_moment=7)
     embedding_cov.append( lambda x: [np.mean(x)]+[stats.moment(x,moment=i) for i in range(2,output[1])] ) 
     
 
@@ -1187,8 +1187,8 @@ plt.legend(['control','treated'])
 plt.title('Double-Blind')
 fig.savefig('Figures/Learn_MomSum/pdf_double_treated_control_review.png')
 
-m_s_c = RandomForestRegressor()
-m_s_d = RandomForestRegressor()
+m_s_c = RandomForestRegressor(n_estimators=1000)
+m_s_d = RandomForestRegressor(n_estimators=1000)
 
 m_s_c = m_s_c.fit(df_single_control[['venue_impact_factor']+['embedded_citation_'+str(k) for k in range(0,len(embedded_citation))]+['embedded_experience_'+str(k) for k in range(0,len(embedded_experience))]],df_single_control['review'])
 m_s_d = m_s_d.fit(df_single_treated[['venue_impact_factor']+['embedded_citation_%d'%(k) for k in range(0,len(embedded_citation))]+['embedded_experience_'+str(k) for k in range(0,len(embedded_experience))]],df_single_treated['review'])
@@ -1197,8 +1197,8 @@ ate_single = np.mean(tau_single)
 mediante_single = np.median(tau_single)
 truth_single = 1.0
 
-m_d_c = RandomForestRegressor()
-m_d_d = RandomForestRegressor()
+m_d_c = RandomForestRegressor(n_estimators=1000)
+m_d_d = RandomForestRegressor(n_estimators=1000)
 
 m_d_c = m_d_c.fit(df_double_control[['venue_impact_factor']+['embedded_citation_%d'%(k) for k in range(0,len(embedded_citation))]+['embedded_experience_'+str(k) for k in range(0,len(embedded_experience))] ],df_double_control['review'])
 m_d_d = m_d_d.fit(df_double_treated[['venue_impact_factor']+['embedded_citation_%d'%(k) for k in range(0,len(embedded_citation))]+['embedded_experience_'+str(k) for k in range(0,len(embedded_experience))] ],df_double_treated['review'])
@@ -1237,7 +1237,7 @@ plt.violinplot(df_tau['complex_single'],positions=[3],showmeans=True,showextrema
 plt.violinplot(df_tau['learn_comsum_rf_single'],positions=[4],showmeans=True,showextrema=False)
 plt.violinplot(df_tau['learn_comsum_single'],positions=[5],showmeans=True,showextrema=False)
 
-plt.ylim((-0.5,2))
+#plt.ylim((-0.5,2))
 plt.xlabel('CATEs')
 plt.xticks(list(np.arange(1,6)),['mean_single','median_single','complex_single','learn_comsum_rf_single','learn_comsum_single'], rotation=75)
 plt.legend(['True TE Single-Blind'])
@@ -1253,7 +1253,7 @@ plt.violinplot(df_tau['complex_double'],positions=[3],showmeans=True,showextrema
 plt.violinplot(df_tau['learn_comsum_rf_double'],positions=[4],showmeans=True,showextrema=False)
 plt.violinplot(df_tau['learn_comsum_double'],positions=[5],showmeans=True,showextrema=False)
 
-plt.ylim((-2,1))
+#plt.ylim((-2,1))
 plt.xlabel('CATEs')
 plt.xticks(list(np.arange(1,6)),['mean_double','median_double','complex_double','learn_comsum_rf_double','learn_comsum_double'], rotation=75)
 plt.legend(['True TE Double-Blind'])
