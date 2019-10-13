@@ -40,11 +40,11 @@ def gen_inst(n_inst):
 def gen_author(n_auth,df_inst):
     def gen():
         x = np.random.binomial(1,1/3)*np.random.exponential(0.75) + np.random.binomial(1,1/2)*np.random.normal(20,4) + np.random.binomial(1,1/4)*np.random.normal(35,1)
-        experience = max(0,x) #experience is normally distributed but always positive
+        experience = max(0,x)+1 #experience is normally distributed but always positive
         gender = np.random.binomial(1,1/2) #gender 0: male or 1: female
         w = [np.random.binomial(1,1/2), np.random.binomial(1,1/3), np.random.binomial(1,1/5), np.random.binomial(1,1/16)]
         x = [np.random.poisson(100), np.random.poisson(200), np.random.poisson(500), np.random.poisson(1000)]
-        citation = int(np.dot(w,x)*experience/30) #citation count as generated using multimodal poisson distribution
+        citation = int(np.dot(w,x)*experience/30)+1 #citation count as generated using multimodal poisson distribution
         expertise = np.random.randint(0,10) #field of expertise
         high = np.array(df_inst['prestige']) #prestige of each school
         low = 10/high #inverse of prestige of school normalized by 10
@@ -88,7 +88,7 @@ def gen_paper(n_paper,df_conf,df_auth,df_inst):
         quality = scipy.special.expit(np.sum([ (np.e**(-2*i))*np.log(30*(df_auth.loc[authors[i]]['citation']/(df_auth.loc[authors[i]]['experience']+5))+1) for i in range(num_auth) ])/5 - 1)#*((np.random.normal(20,5) + stats.mode([ df_auth.loc[authors[i]]['experience'] for i in range(num_auth) ])[0][0]**2)/500)#+ 0.5(np.mode())
         paper_conf = np.random.randint(0,len(df_conf)) #randomly apply to any conference, could be made better
         collapsed_prestige = np.percentile( np.array([ df_inst.loc[df_auth.loc[a]['affiliation']]['prestige'] for a in authors] ), 75 )#collective prestige of all authors
-        review_score = max( 0, min( 10, 3+df_conf.loc[paper_conf]['single-blind']*(collapsed_prestige>10) + ( 10*np.random.normal(np.log(quality+1) - np.log(df_conf.loc[paper_conf]['impact_factor'])/10,0.1*quality))/2)) #max(0,min(20,(df_conf.loc[paper_conf]['single-blind'])*(median_prestige>10) + (80*quality)/(df_conf.loc[paper_conf]['impact_factor']))) #if it is single-blind then the treatment effect of median-prestige=high is 1.
+        review_score = max( 0, min( 10, 3+df_conf.loc[paper_conf]['single-blind']*(collapsed_prestige>10) + ( 10*np.random.normal(np.log(quality+1) - np.log(df_conf.loc[paper_conf]['impact_factor'])/10,0.1*quality))/1.5)) #max(0,min(20,(df_conf.loc[paper_conf]['single-blind'])*(median_prestige>10) + (80*quality)/(df_conf.loc[paper_conf]['impact_factor']))) #if it is single-blind then the treatment effect of median-prestige=high is 1.
         return [authors,quality,paper_conf,review_score]
     d_paper = {}
     for i in range(0,n_paper):

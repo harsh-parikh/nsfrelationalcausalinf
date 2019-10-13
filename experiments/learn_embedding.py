@@ -34,15 +34,20 @@ def eval_outcome_estimation(X,y,learn_type='regression'):
             return 0, None
         
 def moment_summarization(X,level=1):
+    log_check = np.array([ (np.array(row)>0).all() for row in X ]).all()
     x = []
     for row in X:
-        a = [np.mean(row)]
+        a = []
+        if log_check:
+            log_row = np.log(row)
+            a += [np.mean(log_row),stats.gmean(row),stats.hmean(row)]
+        a += [np.mean(row)]
         if level>1:
             a += [stats.moment(row,moment=i) for i in range(2,level)]
         x.append(a)
     return np.array(x)
 
-def learn_moment_summary(X,y,learn_type='regression',max_moment=10):
+def learn_moment_summary(X,y,learn_type='regression',log=False,max_moment=10):
     scores = np.nan_to_num(np.array([eval_outcome_estimation(moment_summarization(X,level=i),y,learn_type)[0] for i in range(1,max_moment)]))
     best_moment = np.argmax(scores)+1
     return scores, best_moment, eval_outcome_estimation(moment_summarization(X,level=best_moment),y,learn_type)[1]

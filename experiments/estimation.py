@@ -650,6 +650,7 @@ fl.close()
 
 
 df_tau = {}
+
 #---------------------------------------------------------
 # Mean as the embedding
 #---------------------------------------------------------
@@ -989,7 +990,7 @@ y = np.array(df_unit_table_1['review'])
 for cov in embedding_needed_covariates:
     X_cov = df_unit_table_1[cov]
     output = learn_moment_summary(X_cov,y,learn_type='regression',max_moment=7)
-    embedding_cov.append( lambda x: output[2].predict( np.array([[np.mean(x)]+[stats.moment(x,moment=i) for i in range(2,output[1])]]) )[0] )
+    embedding_cov.append( lambda x: output[2].predict( moment_summarization([x],level=output[1]) )  [0] )
     
 
 df_unit_table = {}
@@ -1122,7 +1123,7 @@ y = np.array(df_unit_table_1['review'])
 for cov in embedding_needed_covariates:
     X_cov = df_unit_table_1[cov]
     output = learn_moment_summary(X_cov,y,learn_type='regression',max_moment=7)
-    embedding_cov.append( lambda x: [np.mean(x)]+[stats.moment(x,moment=i) for i in range(2,output[1])] ) 
+    embedding_cov.append( lambda x: moment_summarization([x],level=output[1])[0,:] ) 
     
 
 df_unit_table = {}
@@ -1229,33 +1230,33 @@ print('Double-Blind \nATE, %f \nMedian, %f \nTrue TE, %f'%(ate_double,mediante_d
 
 
 fig = plt.figure(figsize=(10.5,9.5))
-
+plt.rcParams.update({'font.size': 16})
 plt.axhline(y=1,color='m',linestyle='--',alpha=0.3)
-plt.violinplot(df_tau['mean_single'],positions=[1],showmeans=True,showextrema=False)
-plt.violinplot(df_tau['median_single'],positions=[2],showmeans=True,showextrema=False)
-plt.violinplot(df_tau['complex_single'],positions=[3],showmeans=True,showextrema=False)
-plt.violinplot(df_tau['learn_comsum_rf_single'],positions=[4],showmeans=True,showextrema=False)
-plt.violinplot(df_tau['learn_comsum_single'],positions=[5],showmeans=True,showextrema=False)
+plt.violinplot(df_tau['mean_single'],positions=[1],showmeans=True,showextrema=True)
+plt.violinplot(df_tau['median_single'],positions=[2],showmeans=True,showextrema=True)
+plt.violinplot(df_tau['complex_single'],positions=[3],showmeans=True,showextrema=True)
+plt.violinplot(df_tau['learn_comsum_rf_single'],positions=[4],showmeans=True,showextrema=True)
+plt.violinplot(df_tau['learn_comsum_single'],positions=[5],showmeans=True,showextrema=True)
 
 #plt.ylim((-0.5,2))
 plt.xlabel('CATEs')
-plt.xticks(list(np.arange(1,6)),['mean_single','median_single','complex_single','learn_comsum_rf_single','learn_comsum_single'], rotation=75)
+plt.xticks(list(np.arange(1,6)),['Mean','Median','Complex','Learned: Moments+RF','Learned: Moments'], rotation=75)
 plt.legend(['True TE Single-Blind'])
 plt.tight_layout()
 fig.savefig('Figures/violin_single_cate.png')
 
 fig = plt.figure(figsize=(10.5,9.5))
-
+plt.rcParams.update({'font.size': 16})
 plt.axhline(y=0,color='m',linestyle='--',alpha=0.3)
-plt.violinplot(df_tau['mean_double'],positions=[1],showmeans=True,showextrema=False)
-plt.violinplot(df_tau['median_double'],positions=[2],showmeans=True,showextrema=False)
-plt.violinplot(df_tau['complex_double'],positions=[3],showmeans=True,showextrema=False)
-plt.violinplot(df_tau['learn_comsum_rf_double'],positions=[4],showmeans=True,showextrema=False)
-plt.violinplot(df_tau['learn_comsum_double'],positions=[5],showmeans=True,showextrema=False)
+plt.violinplot(df_tau['mean_double'],positions=[1],showmeans=True,showextrema=True)
+plt.violinplot(df_tau['median_double'],positions=[2],showmeans=True,showextrema=True)
+plt.violinplot(df_tau['complex_double'],positions=[3],showmeans=True,showextrema=True)
+plt.violinplot(df_tau['learn_comsum_rf_double'],positions=[4],showmeans=True,showextrema=True)
+plt.violinplot(df_tau['learn_comsum_double'],positions=[5],showmeans=True,showextrema=True)
 
 #plt.ylim((-2,1))
 plt.xlabel('CATEs')
-plt.xticks(list(np.arange(1,6)),['mean_double','median_double','complex_double','learn_comsum_rf_double','learn_comsum_double'], rotation=75)
+plt.xticks(list(np.arange(1,6)),['Mean','Median','Complex','Learned: Moments+RF','Learned: Moments'], rotation=75)
 plt.legend(['True TE Double-Blind'])
 plt.tight_layout()
 fig.savefig('Figures/violin_double_cate.png')
