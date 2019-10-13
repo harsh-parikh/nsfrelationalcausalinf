@@ -1,11 +1,11 @@
-,Mean Difference of Reviews (Single-Double), 0.484498
-Single Blind, Mean Difference of Reviews (Treated-Control), 1.424642
-Double Blind, Mean Difference of Reviews (Treated-Control), 0.616045
+,Mean Difference of Reviews (Single-Double), 0.480998
+Single Blind, Mean Difference of Reviews (Treated-Control), 1.422791
+Double Blind, Mean Difference of Reviews (Treated-Control), 0.629370
 Single-Blind 
-ATE, 0.759845 
-Median, 0.822259 
+ATE, 0.766943 
+Median, 0.831963 
 True TE, 1.000000
 Double-Blind 
-ATE, 0.008777 
-Median, 0.004517 
+ATE, 0.009699 
+Median, 0.004706 
 True TE, 0.000000
