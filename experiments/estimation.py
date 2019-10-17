@@ -677,6 +677,7 @@ for i in range(n_paper):
     df_unit_table[i] = d_paperi
 
 df_unit_table = pd.DataFrame.from_dict(df_unit_table,orient='index')
+df_unit_table.to_csv('Unit_Table_Mean.csv')
 
 df_single = df_unit_table.loc[df_unit_table['venue_single-blind'] == 1]
 df_double = df_unit_table.loc[df_unit_table['venue_single-blind'] == 0]
@@ -780,6 +781,7 @@ for i in range(n_paper):
     df_unit_table[i] = d_paperi
 
 df_unit_table = pd.DataFrame.from_dict(df_unit_table,orient='index')
+df_unit_table.to_csv('Unit_Table_Median.csv')
 
 df_single = df_unit_table.loc[df_unit_table['venue_single-blind'] == 1]
 df_double = df_unit_table.loc[df_unit_table['venue_single-blind'] == 0]
@@ -884,6 +886,7 @@ for i in range(n_paper):
     df_unit_table[i] = d_paperi
 
 df_unit_table = pd.DataFrame.from_dict(df_unit_table,orient='index')
+df_unit_table.to_csv('Unit_Table_Complex.csv')
 
 df_single = df_unit_table.loc[df_unit_table['venue_single-blind'] == 1]
 df_double = df_unit_table.loc[df_unit_table['venue_single-blind'] == 0]
@@ -1152,6 +1155,7 @@ for i in range(n_paper):
 
 
 df_unit_table = pd.DataFrame.from_dict(df_unit_table,orient='index')
+df_unit_table.to_csv('Unit_Table_Learned_Moment_Summary.csv')
 
 df_single = df_unit_table.loc[df_unit_table['venue_single-blind'] == 1]
 df_double = df_unit_table.loc[df_unit_table['venue_single-blind'] == 0]
