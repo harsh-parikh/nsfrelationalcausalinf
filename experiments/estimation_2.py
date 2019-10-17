@@ -15,15 +15,16 @@ from sklearn.ensemble import RandomForestRegressor
 import matplotlib.cm as cm
 import scipy.stats as stats
 
-from data_gen import *
+import data_gen_2 as dgp
 from learn_embedding import *
 
 np.random.seed(0) #reproducability
-df = generate_data(1000,20,7500,50)
+df = dgp.generate_data(10000,20,75000,50)
 df_inst = df['institutes']
 df_auth = df['authors']
 df_conf = df['conferences']
 df_paper = df['papers']
+df_coauthors = df['coauthors']
 
 
 fig = plt.figure(figsize=(8.5,9.5))
@@ -663,6 +664,12 @@ for i in range(n_paper):
     prestige_vec = [ df_inst.loc[df_auth.loc[a]['affiliation']]['prestige'] for a in authors ]
     citation_vec = [ df_auth.loc[a]['citation'] for a in authors ]
     experience_vec = [ df_auth.loc[a]['experience'] for a in authors ]
+    coauth = set()
+    for at in authors:
+        coauth = coauth.union(df_coauthors.loc[at]['coauthor_set'])
+    coauth = coauth-set(authors)
+    ca_prestige_vec = [ df_inst.loc[df_auth.loc[ca]['affiliation']]['prestige'] for ca in coauth ]
+    mean_rel_prestige = np.mean(ca_prestige_vec)
     mean_prestige = np.percentile(prestige_vec,75)
     mean_citation = np.mean(citation_vec)
     d_paperi = {}
@@ -674,86 +681,123 @@ for i in range(n_paper):
     d_paperi['mean_prestige'] = mean_prestige
     d_paperi['mean_citation'] = mean_citation
     d_paperi['embedded_experience'] = np.mean(experience_vec)
+    d_paperi['embedded_rel_prestige'] = mean_rel_prestige
     df_unit_table[i] = d_paperi
 
 df_unit_table = pd.DataFrame.from_dict(df_unit_table,orient='index')
 
 df_single = df_unit_table.loc[df_unit_table['venue_single-blind'] == 1]
 df_double = df_unit_table.loc[df_unit_table['venue_single-blind'] == 0]
-df_single_treated = df_single.loc[df_single['mean_prestige']>10]
-df_single_control = df_single.loc[df_single['mean_prestige']<=10]
-df_double_treated = df_double.loc[df_double['mean_prestige']>10]
-df_double_control = df_double.loc[df_double['mean_prestige']<=10]
 
-review_diff = np.mean(df_single['review']) - np.mean(df_double['review'])
-naive_single_ate = np.mean(df_single_treated['review']) - np.mean(df_single_control['review'])
-naive_double_ate = np.mean(df_double_treated['review']) - np.mean(df_double_control['review'])
+df_single_11 = (df_single.loc[df_single['mean_prestige']>10]).loc[df_single['embedded_rel_prestige']>10]
+df_single_01 = (df_single.loc[df_single['mean_prestige']<=10]).loc[df_single['embedded_rel_prestige']>10]
+df_single_10 = (df_single.loc[df_single['mean_prestige']>10]).loc[df_single['embedded_rel_prestige']<=10]
+df_single_00 = (df_single.loc[df_single['mean_prestige']<=10]).loc[df_single['embedded_rel_prestige']<=10]
 
-print('Mean as Embedding',file=fl)
-print(',Mean Difference of Reviews (Single-Double), %f'%(review_diff),file=fl)
-print('Single Blind, Mean Difference of Reviews (Treated-Control), %f'%(naive_single_ate),file=fl)
-print('Double Blind, Mean Difference of Reviews (Treated-Control), %f'%(naive_double_ate),file=fl)
+df_double_11 = (df_double.loc[df_double['mean_prestige']>10]).loc[df_double['embedded_rel_prestige']>10]
+df_double_01 = (df_double.loc[df_double['mean_prestige']<=10]).loc[df_double['embedded_rel_prestige']>10]
+df_double_10 = (df_double.loc[df_double['mean_prestige']>10]).loc[df_double['embedded_rel_prestige']<=10]
+df_double_00 = (df_double.loc[df_double['mean_prestige']<=10]).loc[df_double['embedded_rel_prestige']<=10]
 
-fig = plt.figure(figsize=(10.5,9.5))
-sns.distplot(df_single_control['review'],hist=False,kde_kws={'shade': True})
-sns.distplot(df_single_treated['review'],hist=False,kde_kws={'shade': True})
-plt.xlim((0,10))
-plt.xlabel('Review Score')
-plt.ylabel('Probability Density Estimate')
-plt.legend(['control','treated'])
-plt.title('Single-Blind')
-fig.savefig('Figures/Mean/pdf_single_treated_control_review.png')
 
-fig = plt.figure(figsize=(10.5,9.5))
-sns.distplot(df_double_control['review'],hist=False,kde_kws={'shade': True})
-sns.distplot(df_double_treated['review'],hist=False,kde_kws={'shade': True})
-plt.xlim((0,10))
-plt.xlabel('Review Score')
-plt.ylabel('Probability Density Estimate')
-plt.legend(['control','treated'])
-plt.title('Double-Blind')
-fig.savefig('Figures/Mean/pdf_double_treated_control_review.png')
+m_s_11 = RandomForestRegressor(n_estimators=1000)
+m_s_10 = RandomForestRegressor(n_estimators=1000)
+m_s_01 = RandomForestRegressor(n_estimators=1000)
+m_s_00 = RandomForestRegressor(n_estimators=1000)
 
-m_s_c = RandomForestRegressor(n_estimators=1000)
-m_s_d = RandomForestRegressor(n_estimators=1000)
+m_d_11 = RandomForestRegressor(n_estimators=1000)
+m_d_10 = RandomForestRegressor(n_estimators=1000)
+m_d_01 = RandomForestRegressor(n_estimators=1000)
+m_d_00 = RandomForestRegressor(n_estimators=1000)
 
-m_s_c = m_s_c.fit(df_single_control[['venue_impact_factor','mean_citation','embedded_experience']],df_single_control['review'])
-m_s_d = m_s_d.fit(df_single_treated[['venue_impact_factor','mean_citation','embedded_experience']],df_single_treated['review'])
-tau_single = m_s_d.predict(df_double[['venue_impact_factor','mean_citation','embedded_experience']]) - m_s_c.predict(df_double[['venue_impact_factor','mean_citation','embedded_experience']])
-ate_single = np.mean(tau_single)
-mediante_single = np.median(tau_single)
-truth_single = 1.0
+m_s_11 = m_s_11.fit(df_single_11[['venue_impact_factor','mean_citation','embedded_experience']],df_single_11['review'])
+m_s_10 = m_s_10.fit(df_single_10[['venue_impact_factor','mean_citation','embedded_experience']],df_single_10['review'])
+m_s_01 = m_s_01.fit(df_single_01[['venue_impact_factor','mean_citation','embedded_experience']],df_single_01['review'])
+m_s_00 = m_s_00.fit(df_single_00[['venue_impact_factor','mean_citation','embedded_experience']],df_single_00['review'])
 
-m_d_c = RandomForestRegressor(n_estimators=1000)
-m_d_d = RandomForestRegressor(n_estimators=1000)
+m_d_11 = m_d_11.fit(df_double_11[['venue_impact_factor','mean_citation','embedded_experience']],df_double_11['review'])
+m_d_10 = m_d_10.fit(df_double_10[['venue_impact_factor','mean_citation','embedded_experience']],df_double_10['review'])
+m_d_01 = m_d_01.fit(df_double_01[['venue_impact_factor','mean_citation','embedded_experience']],df_double_01['review'])
+m_d_00 = m_d_00.fit(df_double_00[['venue_impact_factor','mean_citation','embedded_experience']],df_double_00['review'])
 
-m_d_c = m_d_c.fit(df_double_control[['venue_impact_factor','mean_citation','embedded_experience']],df_double_control['review'])
-m_d_d = m_d_d.fit(df_double_treated[['venue_impact_factor','mean_citation','embedded_experience']],df_double_treated['review'])
-tau_double = m_d_d.predict(df_single[['venue_impact_factor','mean_citation','embedded_experience']]) - m_d_c.predict(df_single[['venue_impact_factor','mean_citation','embedded_experience']])
-ate_double = np.mean(tau_double)
-mediante_double = np.median(tau_double)
-truth_double= 0.0
 
-df_tau['mean_single'] = tau_single
-df_tau['mean_double'] = tau_double
-fig = plt.figure(figsize=(10.5,9.5))
-sns.distplot(tau_single,hist=False,kde_kws={'shade': True})
-sns.distplot(tau_double,hist=False,kde_kws={'shade': True})
-plt.axvline(ate_single,color='r',linestyle='--',alpha=0.6)
-plt.axvline(mediante_single,color='g',linestyle='-',alpha=0.6)
-plt.axvline(truth_single, color='b', linestyle='-',alpha=0.6)
-plt.axvline(ate_double,color='y',linestyle='--',alpha=0.6)
-plt.axvline(mediante_double,color='m',linestyle='-',alpha=0.6)
-plt.axvline(truth_double, color='c', linestyle='-',alpha=0.6)
-plt.legend([r'Mean $\tau$ Single-Blind',r'Median $\tau$ Single-Blind',r'True $\tau$ Single-Blind',r'Mean $\tau$ Double-Blind',r'Median $\tau$ Double-Blind',r'True $\tau$ Double-Blind','Single-Blind','Double-Blind'])
+tau_single_iso_1 = m_s_11.predict(df_single[['venue_impact_factor','mean_citation','embedded_experience']]) - m_s_01.predict(df_single[['venue_impact_factor','mean_citation','embedded_experience']])
+tau_single_iso_0 = m_s_10.predict(df_single[['venue_impact_factor','mean_citation','embedded_experience']]) - m_s_00.predict(df_single[['venue_impact_factor','mean_citation','embedded_experience']])
+
+tau_single_rel_1 = m_s_11.predict(df_single[['venue_impact_factor','mean_citation','embedded_experience']]) - m_s_10.predict(df_single[['venue_impact_factor','mean_citation','embedded_experience']])
+tau_single_rel_0 = m_s_01.predict(df_single[['venue_impact_factor','mean_citation','embedded_experience']]) - m_s_00.predict(df_single[['venue_impact_factor','mean_citation','embedded_experience']])
+
+tau_double_iso_1 = m_d_11.predict(df_double[['venue_impact_factor','mean_citation','embedded_experience']]) - m_d_01.predict(df_double[['venue_impact_factor','mean_citation','embedded_experience']])
+tau_double_iso_0 = m_d_10.predict(df_double[['venue_impact_factor','mean_citation','embedded_experience']]) - m_d_00.predict(df_double[['venue_impact_factor','mean_citation','embedded_experience']])
+
+tau_double_rel_1 = m_d_11.predict(df_double[['venue_impact_factor','mean_citation','embedded_experience']]) - m_d_10.predict(df_double[['venue_impact_factor','mean_citation','embedded_experience']])
+tau_double_rel_0 = m_d_01.predict(df_double[['venue_impact_factor','mean_citation','embedded_experience']]) - m_d_00.predict(df_double[['venue_impact_factor','mean_citation','embedded_experience']])
+
+tau_single_tot = m_s_11.predict(df_single[['venue_impact_factor','mean_citation','embedded_experience']]) - m_s_00.predict(df_single[['venue_impact_factor','mean_citation','embedded_experience']])
+tau_double_tot = m_d_11.predict(df_double[['venue_impact_factor','mean_citation','embedded_experience']]) - m_s_00.predict(df_double[['venue_impact_factor','mean_citation','embedded_experience']])
+
+df_tau_mean = {}
+df_tau_mean['isolated, single, treated neighbors'] = tau_single_iso_1
+df_tau_mean['isolated, single, control neighbors'] = tau_single_iso_0
+df_tau_mean['relational, single, treated units'] = tau_single_rel_1
+df_tau_mean['relational, single, control units'] = tau_single_rel_0
+
+df_tau_mean['isolated, double, treated neighbors'] = tau_double_iso_1
+df_tau_mean['isolated, double, control neighbors'] = tau_double_iso_0
+df_tau_mean['relational, double, treated units'] = tau_double_rel_1
+df_tau_mean['relational, double, control units'] = tau_double_rel_0
+
+df_tau_mean['total, single'] = tau_single_tot
+df_tau_mean['total, double'] = tau_double_tot
+
+df_tau['mean'] = df_tau_mean
+
+
+fig = plt.figure(figsize=(15.5,20.5))
+plt.rcParams.update({'font.size': 16})
+sns.distplot(list(tau_single_iso_0) + list(tau_single_iso_1),hist=False,kde_kws={'shade': True})
+#sns.distplot(tau_single_iso_1,hist=False,kde_kws={'shade': True})
+plt.axvline(x = np.mean( list(tau_single_iso_0) + list(tau_single_iso_1) ), color='r',linestyle='--' )
+sns.distplot(list(tau_single_rel_0) + list(tau_single_rel_1),hist=False,kde_kws={'shade': True})
+#sns.distplot(tau_single_rel_0,hist=False,kde_kws={'shade': True})
+plt.axvline(x = np.mean( list(tau_single_rel_0) + list(tau_single_rel_1) ), color='g',linestyle='--' )
+sns.distplot(tau_single_tot,hist=False,kde_kws={'shade': True})
+plt.axvline(np.mean(tau_single_tot),color='y',linestyle='--')
+plt.axvline(x=1,color='m')
+plt.axvline(x=0.5,color='b')
+plt.axvline(x=1.5,color='c')
+#extraticks = [np.mean( list(tau_single_iso_0) + list(tau_single_iso_1)),np.mean( list(tau_single_rel_0) + list(tau_single_rel_1) ),np.mean(tau_single_tot),0.5,1,1.5]
+#plt.xticks(list(plt.xticks()[0]) + extraticks,rotation=90)
+plt.legend(['Isolated ATE = %0.3f'%(np.mean( list(tau_single_iso_0) + list(tau_single_iso_1) )),'Relational ATE = %0.3f'%(np.mean( list(tau_single_rel_0) + list(tau_single_rel_1) )),'Total ATE = %0.3f'%(np.mean(tau_single_tot)),'True Isolated TE = %0.3f'%(1), 'True Relational TE = %0.3f'%(0.5),'True Total TE = %0.3f'%(1.5),'PDF Isolated TE','PDF Relational TE','PDF Total TE'],loc='upper center',bbox_to_anchor=(0.5, -0.1),ncol=3)
 plt.xlabel('Estimated Treatment Effect')
 plt.ylabel('Probability Density Estimate')
-plt.title(r'Single Blind vs Double Blind $\tau$ s')
-fig.savefig('Figures/Mean/pdf_single_double_cate.png')
-print('Single-Blind \nATE, %f \nMedian, %f \nTrue TE, %f'%(ate_single,mediante_single,truth_single),file=fl)
-print('Double-Blind \nATE, %f \nMedian, %f \nTrue TE, %f'%(ate_double,mediante_double,truth_double),file=fl)
+plt.title('Single-Blind Submissions TEs')
+plt.subplots_adjust(bottom=0.2)
+fig.savefig('Figures/pdf_rel_single_cate.png')
 
+fig = plt.figure(figsize=(15.5,20.5))
+plt.rcParams.update({'font.size': 16})
+sns.distplot(list(tau_double_iso_0) + list(tau_double_iso_1),hist=False,kde_kws={'shade': True})
+#sns.distplot(tau_single_iso_1,hist=False,kde_kws={'shade': True})
+plt.axvline(x = np.mean( list(tau_double_iso_0) + list(tau_double_iso_1) ), color='r',linestyle='--' )
+sns.distplot(list(tau_double_rel_0) + list(tau_double_rel_1),hist=False,kde_kws={'shade': True})
+#sns.distplot(tau_single_rel_0,hist=False,kde_kws={'shade': True})
+plt.axvline(x = np.mean( list(tau_double_rel_0) + list(tau_double_rel_1) ), color='g',linestyle='--' )
+sns.distplot(tau_double_tot,hist=False,kde_kws={'shade': True})
+plt.axvline(np.mean(tau_double_tot),color='y',linestyle='--')
+plt.axvline(x=0,color='m')
+plt.axvline(x=0.5,color='b')
+plt.axvline(x=0.5,color='c')
+#extraticks = [np.mean( list(tau_single_iso_0) + list(tau_single_iso_1)),np.mean( list(tau_single_rel_0) + list(tau_single_rel_1) ),np.mean(tau_single_tot),0.5,1,1.5]
+#plt.xticks(list(plt.xticks()[0]) + extraticks,rotation=90)
+plt.legend(['Isolated ATE = %0.3f'%(np.mean( list(tau_double_iso_0) + list(tau_double_iso_1) )),'Relational ATE = %0.3f'%(np.mean( list(tau_double_rel_0) + list(tau_double_rel_1) )),'Total ATE = %0.3f'%(np.mean(tau_double_tot)),'True Isolated TE = %0.3f'%(0), 'True Relational TE = %0.3f'%(0.5),'True Total TE = %0.3f'%(0.5),'PDF Isolated TE','PDF Relational TE','PDF Total TE'],loc='upper center',bbox_to_anchor=(0.5, -0.1),ncol=3)
+plt.xlabel('Estimated Treatment Effect')
+plt.ylabel('Probability Density Estimate')
+plt.title('Double-Blind Submissions TEs')
+plt.subplots_adjust(bottom=0.2)
+fig.savefig('Figures/pdf_rel_double_cate.png')
 
+'''
 #---------------------------------------------------------
 # Median as the embedding
 #---------------------------------------------------------
@@ -1024,5 +1068,6 @@ plt.xticks(list(np.arange(1,6)),['Mean','Median','Complex','Learned: Moments+RF'
 plt.legend(['True TE Double-Blind'])
 plt.tight_layout()
 fig.savefig('Figures/violin_double_cate.png')
-
+'''
 fl.close()
+
