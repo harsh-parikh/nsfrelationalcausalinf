@@ -1,0 +1,12 @@
+Median as Embedding
+,Mean Difference of Reviews (Single-Double), 0.480998
+Single Blind, Mean Difference of Reviews (Treated-Control), 1.770705
+Double Blind, Mean Difference of Reviews (Treated-Control), 0.774093
+Single-Blind 
+ATE, 1.005085 
+Median, 1.005970 
+True TE, 1.000000
+Double-Blind 
+ATE, 0.005945 
+Median, 0.003860 
+True TE, 0.000000
