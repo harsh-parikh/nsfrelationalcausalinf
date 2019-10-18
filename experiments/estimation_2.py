@@ -655,6 +655,36 @@ df_tau = {}
 #---------------------------------------------------------
 # Mean as the embedding
 #---------------------------------------------------------
+df_unit_table = {}
+n_paper = len(df_paper)
+for i in range(n_paper):
+    paper =  df_paper.loc[i]
+    authors = paper['authors']
+    prestige_vec = [ df_inst.loc[df_auth.loc[a]['affiliation']]['prestige'] for a in authors ]
+    citation_vec = [ df_auth.loc[a]['citation'] for a in authors ]
+    experience_vec = [ df_auth.loc[a]['experience'] for a in authors ]
+    coauth = set()
+    for at in authors:
+        coauth = coauth.union(df_coauthors.loc[at]['coauthor_set'])
+    coauth = coauth-set(authors)
+    ca_prestige_vec = [ df_inst.loc[df_auth.loc[ca]['affiliation']]['prestige'] for ca in coauth ]
+    ca_citation_vec = [ df_auth.loc[ca]['citation'] for ca in coauth ]
+    mean_rel_prestige = np.mean(ca_prestige_vec)
+    mean_prestige = np.percentile(prestige_vec,75)
+    mean_citation = np.mean(citation_vec)
+    d_paperi = {}
+    d_paperi['quality'] = paper['quality']
+    d_paperi['venue_area'] = df_conf.loc[paper['venue']]['area']
+    d_paperi['venue_impact_factor'] = df_conf.loc[paper['venue']]['impact_factor']
+    d_paperi['venue_single-blind'] = df_conf.loc[paper['venue']]['single-blind']
+    d_paperi['review'] = paper['review']
+    d_paperi['mean_prestige'] = mean_prestige
+    d_paperi['mean_citation'] = mean_citation
+    d_paperi['embedded_experience'] = np.mean(experience_vec)
+    d_paperi['embedded_rel_prestige'] = mean_rel_prestige
+    df_unit_table[i] = d_paperi
+
+
 fl = open('Logs/Estimate.csv','w')
 df_unit_table = {}
 n_paper = len(df_paper)
@@ -754,7 +784,7 @@ df_tau['mean'] = df_tau_mean
 
 
 fig = plt.figure(figsize=(15.5,20.5))
-plt.rcParams.update({'font.size': 16})
+plt.rcParams.update({'font.size': 20})
 sns.distplot(list(tau_single_iso_0) + list(tau_single_iso_1),hist=False,kde_kws={'shade': True})
 #sns.distplot(tau_single_iso_1,hist=False,kde_kws={'shade': True})
 plt.axvline(x = np.mean( list(tau_single_iso_0) + list(tau_single_iso_1) ), color='r',linestyle='--' )
@@ -768,15 +798,15 @@ plt.axvline(x=0.5,color='b')
 plt.axvline(x=1.5,color='c')
 #extraticks = [np.mean( list(tau_single_iso_0) + list(tau_single_iso_1)),np.mean( list(tau_single_rel_0) + list(tau_single_rel_1) ),np.mean(tau_single_tot),0.5,1,1.5]
 #plt.xticks(list(plt.xticks()[0]) + extraticks,rotation=90)
-plt.legend(['Isolated ATE = %0.3f'%(np.mean( list(tau_single_iso_0) + list(tau_single_iso_1) )),'Relational ATE = %0.3f'%(np.mean( list(tau_single_rel_0) + list(tau_single_rel_1) )),'Total ATE = %0.3f'%(np.mean(tau_single_tot)),'True Isolated TE = %0.3f'%(1), 'True Relational TE = %0.3f'%(0.5),'True Total TE = %0.3f'%(1.5),'PDF Isolated TE','PDF Relational TE','PDF Total TE'],loc='upper center',bbox_to_anchor=(0.5, -0.1),ncol=3)
+plt.legend(['Estimated Isolated ATE = %0.3f'%(np.mean( list(tau_single_iso_0) + list(tau_single_iso_1) )),'Estimated Relational ATE = %0.3f'%(np.mean( list(tau_single_rel_0) + list(tau_single_rel_1) )),'Estimated Total ATE = %0.3f'%(np.mean(tau_single_tot)),'True Isolated TE = %0.3f'%(1), 'True Relational TE = %0.3f'%(0.5),'True Total TE = %0.3f'%(1.5),'PDF Isolated TE','PDF Relational TE','PDF Total TE'],loc='upper center',bbox_to_anchor=(0.5, -0.1),ncol=3)
 plt.xlabel('Estimated Treatment Effect')
 plt.ylabel('Probability Density Estimate')
 plt.title('Single-Blind Submissions TEs')
-plt.subplots_adjust(bottom=0.2)
+plt.subplots_adjust(bottom=0.235)
 fig.savefig('Figures/pdf_rel_single_cate.png')
 
 fig = plt.figure(figsize=(15.5,20.5))
-plt.rcParams.update({'font.size': 16})
+plt.rcParams.update({'font.size': 20})
 sns.distplot(list(tau_double_iso_0) + list(tau_double_iso_1),hist=False,kde_kws={'shade': True})
 #sns.distplot(tau_single_iso_1,hist=False,kde_kws={'shade': True})
 plt.axvline(x = np.mean( list(tau_double_iso_0) + list(tau_double_iso_1) ), color='r',linestyle='--' )
@@ -790,11 +820,11 @@ plt.axvline(x=0.5,color='b')
 plt.axvline(x=0.5,color='c')
 #extraticks = [np.mean( list(tau_single_iso_0) + list(tau_single_iso_1)),np.mean( list(tau_single_rel_0) + list(tau_single_rel_1) ),np.mean(tau_single_tot),0.5,1,1.5]
 #plt.xticks(list(plt.xticks()[0]) + extraticks,rotation=90)
-plt.legend(['Isolated ATE = %0.3f'%(np.mean( list(tau_double_iso_0) + list(tau_double_iso_1) )),'Relational ATE = %0.3f'%(np.mean( list(tau_double_rel_0) + list(tau_double_rel_1) )),'Total ATE = %0.3f'%(np.mean(tau_double_tot)),'True Isolated TE = %0.3f'%(0), 'True Relational TE = %0.3f'%(0.5),'True Total TE = %0.3f'%(0.5),'PDF Isolated TE','PDF Relational TE','PDF Total TE'],loc='upper center',bbox_to_anchor=(0.5, -0.1),ncol=3)
+plt.legend(['Estimated Isolated ATE = %0.3f'%(np.mean( list(tau_double_iso_0) + list(tau_double_iso_1) )),'Estimated Relational ATE = %0.3f'%(np.mean( list(tau_double_rel_0) + list(tau_double_rel_1) )),'Estimated Total ATE = %0.3f'%(np.mean(tau_double_tot)),'True Isolated TE = %0.3f'%(0), 'True Relational TE = %0.3f'%(0.5),'True Total TE = %0.3f'%(0.5),'PDF Isolated TE','PDF Relational TE','PDF Total TE'],loc='upper center',bbox_to_anchor=(0.5, -0.1),ncol=3)
 plt.xlabel('Estimated Treatment Effect')
 plt.ylabel('Probability Density Estimate')
 plt.title('Double-Blind Submissions TEs')
-plt.subplots_adjust(bottom=0.2)
+plt.subplots_adjust(bottom=0.235)
 fig.savefig('Figures/pdf_rel_double_cate.png')
 
 '''

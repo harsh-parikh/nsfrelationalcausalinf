@@ -753,7 +753,7 @@ plt.title(r'Single Blind vs Double Blind $\tau$ s')
 fig.savefig('Figures/Mean/pdf_single_double_cate.png')
 print('Single-Blind \nATE, %f \nMedian, %f \nTrue TE, %f'%(ate_single,mediante_single,truth_single),file=fl)
 print('Double-Blind \nATE, %f \nMedian, %f \nTrue TE, %f'%(ate_double,mediante_double,truth_double),file=fl)
-
+'''
 
 #---------------------------------------------------------
 # Median as the embedding
@@ -961,7 +961,7 @@ plt.title(r'Single Blind vs Double Blind $\tau$ s')
 fig.savefig('Figures/Complex_1/pdf_single_double_cate.png')
 print('Single-Blind \nATE, %f \nMedian, %f \nTrue TE, %f'%(ate_single,mediante_single,truth_single),file=fl)
 print('Double-Blind \nATE, %f \nMedian, %f \nTrue TE, %f'%(ate_double,mediante_double,truth_double),file=fl)
-
+'''
 '''
 ##---------------------------------------------------------
 ##Learn RF + Moment Summary Embedding
@@ -1095,7 +1095,7 @@ fig.savefig('Figures/Learn_MomSum_RF/pdf_single_double_cate.png')
 print('Single-Blind \nATE, %f \nMedian, %f \nTrue TE, %f'%(ate_single,mediante_single,truth_single),file=fl)
 print('Double-Blind \nATE, %f \nMedian, %f \nTrue TE, %f'%(ate_double,mediante_double,truth_double),file=fl)
 '''
-
+'''
 #---------------------------------------------------------
 #Learn Moment Summary Embedding
 #---------------------------------------------------------
@@ -1267,3 +1267,4 @@ plt.tight_layout()
 fig.savefig('Figures/violin_double_cate.png')
 
 fl.close()
+'''
