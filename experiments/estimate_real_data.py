@@ -131,7 +131,7 @@ for p in splot.patches:
 #sns.distplot(tau_single,hist=False,kde_kws={'bw':0.4,'shade': True})
 #sns.distplot(tau_double,hist=False,kde_kws={'bw':0.4,'shade': True})
 
-plt.axvhline(y=0,color='y')
+plt.axhline(y=0,color='black',alpha=0.3)
 #plt.axvline(cc_d,color='c')
 #plt.xlim((-1,1))
 #plt.xlabel('estimated CATEs')
@@ -219,4 +219,5 @@ df_ce['Estimates'] = [np.corrcoef(dsa['prestige'],dsa['review'])[0,1],np.mean(li
 splot = sns.barplot(x='Quantity',y='Estimates',data=df_ce,palette='vlag' )
 for p in splot.patches:
     splot.annotate(format(p.get_height(), '.4f'), (p.get_x() + p.get_width() / 2., p.get_height()/2), ha = 'center', va = 'center', xytext = (0, 10), textcoords = 'offset points')
+plt.title('Single=Blind Submissions')
 fig.savefig('Figures/box_real_a.png')

@@ -1188,7 +1188,8 @@ for cov in embedding_needed_covariates:
     X_cov = df_unit_table_1[cov]
     output = learn_moment_summary(X_cov,y,learn_type='regression',max_moment=7)
     embedding_cov.append( lambda x: moment_summarization([x],level=output[1])[0,:] ) 
-    
+
+df
 
 df_unit_table = {}
 for i in range(n_paper):
