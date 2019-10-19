@@ -621,18 +621,18 @@ print('Double-Blind \nATE, %f \nMedian, %f \nTrue TE, %f'%(ate_double,mediante_d
 fig = plt.figure(figsize=(10.5,9.5))
 
 plt.axhline(y=1,color='m',linestyle='--',alpha=0.3)
-plt.violinplot(df_tau_latent['mean_single'],positions=[1],showmeans=True)
-plt.violinplot(df_tau_latent['median_single'],positions=[2],showmeans=True)
-plt.violinplot(df_tau_latent['complex_single'],positions=[3],showmeans=True)
-plt.violinplot(df_tau_latent['learn_comsum_rf_single'],positions=[4],showmeans=True)
-plt.violinplot(df_tau_latent['learn_comsum_single'],positions=[5],showmeans=True)
+plt.boxplot(df_tau_latent['mean_single'],positions=[1],showmeans=True)
+plt.boxplot(df_tau_latent['median_single'],positions=[2],showmeans=True)
+plt.boxplot(df_tau_latent['complex_single'],positions=[3],showmeans=True)
+plt.boxplot(df_tau_latent['learn_comsum_rf_single'],positions=[4],showmeans=True)
+plt.boxplot(df_tau_latent['learn_comsum_single'],positions=[5],showmeans=True)
 
 plt.axhline(y=0,color='c',linestyle='--',alpha=0.3)
-plt.violinplot(df_tau_latent['mean_double'],positions=[6],showmeans=True)
-plt.violinplot(df_tau_latent['median_double'],positions=[7],showmeans=True)
-plt.violinplot(df_tau_latent['complex_double'],positions=[8],showmeans=True)
-plt.violinplot(df_tau_latent['learn_comsum_rf_double'],positions=[9],showmeans=True)
-plt.violinplot(df_tau_latent['learn_comsum_double'],positions=[10],showmeans=True)
+plt.boxplot(df_tau_latent['mean_double'],positions=[6],showmeans=True)
+plt.boxplot(df_tau_latent['median_double'],positions=[7],showmeans=True)
+plt.boxplot(df_tau_latent['complex_double'],positions=[8],showmeans=True)
+plt.boxplot(df_tau_latent['learn_comsum_rf_double'],positions=[9],showmeans=True)
+plt.boxplot(df_tau_latent['learn_comsum_double'],positions=[10],showmeans=True)
 
 plt.xlabel('CATEs')
 plt.xticks(list(np.arange(1,11)),['mean_single','median_single','complex_single','learn_comsum_rf_single','learn_comsum_single','mean_double','median_double','complex_double','learn_comsum_rf_double','learn_comsum_double'], rotation=75)
@@ -650,6 +650,67 @@ fl.close()
 
 
 df_tau = {}
+
+#---------------------------------------------------------
+# Naive Join
+#---------------------------------------------------------
+df_a_i = df_auth.join(df_inst, on='affiliation')
+df_a_i.columns
+df_p_c = df_paper.join(df_conf,on='venue')
+df_full = {}
+n_paper = len(df_paper)
+j = 0
+for i in range(n_paper):
+    paper = df_p_c.loc[i]
+    paper_prime = df_p_c.loc[ i, df_p_c.columns != 'authors' ]
+    authors = paper['authors']
+    for a in authors:
+        a_cov = df_a_i.loc[a]
+        a_p = a_cov.append(paper_prime).to_dict()
+        df_full[j] = a_p
+        j+=1
+        
+df_full = pd.DataFrame.from_dict( df_full, orient='index' ) 
+df_f_s = df_full.loc[df_full['single-blind']==1]
+df_f_d = df_full.loc[df_full['single-blind']==0]
+df_f_s_1 = df_f_s.loc[df_f_s['prestige']>10]
+df_f_s_0 = df_f_s.loc[df_f_s['prestige']<=10]
+df_f_d_1 = df_f_d.loc[df_f_d['prestige']>10]
+df_f_d_0 = df_f_d.loc[df_f_d['prestige']<=10]
+
+m_s_c = RandomForestRegressor(n_estimators=1000)
+m_s_d = RandomForestRegressor(n_estimators=1000)
+
+m_s_c = m_s_c.fit(df_f_s_0[['age','experience','citation','impact_factor']],df_f_s_0['review'])
+m_s_d = m_s_d.fit(df_f_s_1[['age','experience','citation','impact_factor']],df_f_s_1['review'])
+
+m_d_c = RandomForestRegressor(n_estimators=1000)
+m_d_d = RandomForestRegressor(n_estimators=1000)
+
+m_d_c = m_d_c.fit(df_f_d_0[['age','experience','citation','impact_factor']],df_f_d_0['review'])
+m_d_d = m_d_d.fit(df_f_d_1[['age','experience','citation','impact_factor']],df_f_d_1['review'])
+
+tau_s = m_s_d.predict(df_f_s[['age','experience','citation','impact_factor']]) - m_s_c.predict(df_f_s[['age','experience','citation','impact_factor']])
+tau_d = m_d_d.predict(df_f_d[['age','experience','citation','impact_factor']]) - m_d_c.predict(df_f_d[['age','experience','citation','impact_factor']])
+
+ate_single = np.mean(tau_s)
+ate_double = np.mean(tau_d)
+truth_single = 1
+truth_double = 0
+fig = plt.figure(figsize=(10.5,9.5))
+sns.distplot(tau_s,hist=False,kde_kws={'shade': True})
+sns.distplot(tau_d,hist=False,kde_kws={'shade': True})
+plt.axvline(ate_single,color='r',linestyle='--',alpha=0.6)
+plt.axvline(truth_single, color='b', linestyle='-',alpha=0.6)
+plt.axvline(ate_double,color='y',linestyle='--',alpha=0.6)
+plt.axvline(truth_double, color='c', linestyle='-',alpha=0.6)
+plt.legend([r'Mean $\tau$ Single-Blind',r'True $\tau$ Single-Blind',r'Mean $\tau$ Double-Blind',r'True $\tau$ Double-Blind','Single-Blind','Double-Blind'])
+plt.xlabel('Estimated Treatment Effect')
+plt.ylabel('Probability Density Estimate')
+plt.title(r'Single Blind vs Double Blind $\tau$ s')
+fig.savefig('Figures/pdf_fulljoin_single_double_cate.png')
+df_tau['join_single'] = tau_s
+df_tau['join_double'] = tau_d
 
 #---------------------------------------------------------
 # Mean as the embedding
@@ -753,7 +814,6 @@ plt.title(r'Single Blind vs Double Blind $\tau$ s')
 fig.savefig('Figures/Mean/pdf_single_double_cate.png')
 print('Single-Blind \nATE, %f \nMedian, %f \nTrue TE, %f'%(ate_single,mediante_single,truth_single),file=fl)
 print('Double-Blind \nATE, %f \nMedian, %f \nTrue TE, %f'%(ate_double,mediante_double,truth_double),file=fl)
-'''
 
 #---------------------------------------------------------
 # Median as the embedding
@@ -961,7 +1021,7 @@ plt.title(r'Single Blind vs Double Blind $\tau$ s')
 fig.savefig('Figures/Complex_1/pdf_single_double_cate.png')
 print('Single-Blind \nATE, %f \nMedian, %f \nTrue TE, %f'%(ate_single,mediante_single,truth_single),file=fl)
 print('Double-Blind \nATE, %f \nMedian, %f \nTrue TE, %f'%(ate_double,mediante_double,truth_double),file=fl)
-'''
+
 '''
 ##---------------------------------------------------------
 ##Learn RF + Moment Summary Embedding
@@ -1095,7 +1155,7 @@ fig.savefig('Figures/Learn_MomSum_RF/pdf_single_double_cate.png')
 print('Single-Blind \nATE, %f \nMedian, %f \nTrue TE, %f'%(ate_single,mediante_single,truth_single),file=fl)
 print('Double-Blind \nATE, %f \nMedian, %f \nTrue TE, %f'%(ate_double,mediante_double,truth_double),file=fl)
 '''
-'''
+
 #---------------------------------------------------------
 #Learn Moment Summary Embedding
 #---------------------------------------------------------
@@ -1232,37 +1292,57 @@ fig.savefig('Figures/Learn_MomSum/pdf_single_double_cate.png')
 print('Single-Blind \nATE, %f \nMedian, %f \nTrue TE, %f'%(ate_single,mediante_single,truth_single),file=fl)
 print('Double-Blind \nATE, %f \nMedian, %f \nTrue TE, %f'%(ate_double,mediante_double,truth_double),file=fl)
 
-
-
-fig = plt.figure(figsize=(10.5,9.5))
-plt.rcParams.update({'font.size': 20})
-plt.axhline(y=1,color='m',linestyle='--',alpha=0.3)
-plt.violinplot(df_tau['mean_single'],positions=[1],showmeans=True,showextrema=True)
-plt.violinplot(df_tau['median_single'],positions=[2],showmeans=True,showextrema=True)
-plt.violinplot(df_tau['complex_single'],positions=[3],showmeans=True,showextrema=True)
-#plt.violinplot(df_tau['learn_comsum_rf_single'],positions=[4],showmeans=True,showextrema=True)
-plt.violinplot(df_tau['learn_comsum_single'],positions=[4],showmeans=True,showextrema=True)
+fig = plt.figure(figsize=(10.5,7))
+plt.rcParams.update({'font.size': 22.5})
+plt.axhline(y=1,color='r',linestyle='--',alpha=0.8)
+plt.boxplot(df_tau['join_single'],positions=[1],showmeans=True,showfliers=False)
+#plt.boxplot(df_tau['mean_single'],positions=[1],showmeans=True,showfliers=False)
+#plt.boxplot(df_tau['median_single'],positions=[2],showmeans=True,showfliers=False)
+plt.boxplot(df_tau['complex_single'],positions=[2],showmeans=True,showfliers=False)
+#plt.boxplot(df_tau['learn_comsum_rf_single'],positions=[4],showmeans=True,showfliers=False)
+#plt.boxplot(df_tau['learn_comsum_single'],positions=[4],showmeans=True,showfliers=False)
 
 #plt.ylim((-0.5,2))
-plt.ylabel('Estimated CATEs')
-plt.xticks(list(np.arange(1,5)),['Mean','Median','Complex','Learned: Moments'], rotation=75)
-plt.legend(['True TE Single-Blind'])
+plt.ylabel('Estimated CATE')
+plt.xticks(list(np.arange(0,3)),['','Universal Table','CaRL'])
+plt.legend(['True CATE'])
+plt.title('Single-Blind')
+plt.tight_layout()
+fig.savefig('Figures/violin_universal_cate.png')
+
+fig = plt.figure(figsize=(10.5,7))
+plt.rcParams.update({'font.size': 22.5})
+plt.axhline(y=1,color='r',linestyle='--',alpha=0.8)
+#plt.boxplot(df_tau['join_single'],positions=[1],showmeans=True,showfliers=False)
+plt.boxplot(df_tau['mean_single'],positions=[1],showmeans=True,showfliers=False)
+plt.boxplot(df_tau['median_single'],positions=[2],showmeans=True,showfliers=False)
+plt.boxplot(df_tau['complex_single'],positions=[3],showmeans=True,showfliers=False)
+#plt.boxplot(df_tau['learn_comsum_rf_single'],positions=[4],showmeans=True,showfliers=False)
+plt.boxplot(df_tau['learn_comsum_single'],positions=[4],showmeans=True,showfliers=False)
+
+#plt.ylim((-0.5,2))
+plt.ylabel('Estimated CATE')
+plt.xticks(list(np.arange(0,5)),['','Mean','Median','True','Moments'])
+plt.legend(['True CATE'])
+plt.title('Single-Blind')
 plt.tight_layout()
 fig.savefig('Figures/violin_single_cate.png')
 
-fig = plt.figure(figsize=(10.5,9.5))
-plt.rcParams.update({'font.size': 20})
-plt.axhline(y=0,color='m',linestyle='--',alpha=0.3)
-plt.violinplot(df_tau['mean_double'],positions=[1],showmeans=True,showextrema=True)
-plt.violinplot(df_tau['median_double'],positions=[2],showmeans=True,showextrema=True)
-plt.violinplot(df_tau['complex_double'],positions=[3],showmeans=True,showextrema=True)
-#plt.violinplot(df_tau['learn_comsum_rf_double'],positions=[4],showmeans=True,showextrema=True)
-plt.violinplot(df_tau['learn_comsum_double'],positions=[4],showmeans=True,showextrema=True)
+fig = plt.figure(figsize=(10.5,7))
+plt.rcParams.update({'font.size': 22.5})
+plt.axhline(y=0,color='r',linestyle='--',alpha=0.8)
+#plt.boxplot(df_tau['join_double'],positions=[1],showmeans=True,showfliers=False)
+plt.boxplot(df_tau['mean_double'],positions=[1],showmeans=True,showfliers=False)
+plt.boxplot(df_tau['median_double'],positions=[2],showmeans=True,showfliers=False)
+plt.boxplot(df_tau['complex_double'],positions=[3],showmeans=True,showfliers=False)
+#plt.boxplot(df_tau['learn_comsum_rf_double'],positions=[4],showmeans=True,showfliers=False)
+plt.boxplot(df_tau['learn_comsum_double'],positions=[4],showmeans=True,showfliers=False)
 
 #plt.ylim((-2,1))
-plt.ylabel('Estimated CATEs')
-plt.xticks(list(np.arange(1,5)),['Mean','Median','Complex','Learned: Moments'], rotation=75)
-plt.legend(['True TE Double-Blind'],loc=4)
+plt.ylabel('Estimated CATE')
+plt.xticks(list(np.arange(0,5)),['','Mean','Median','True','Moments'])
+plt.legend(['True CATE'])
+plt.title('Double-Blind')
 plt.tight_layout()
 fig.savefig('Figures/violin_double_cate.png')
 

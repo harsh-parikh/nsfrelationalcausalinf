@@ -34,7 +34,6 @@ def eval_outcome_estimation(X,y,learn_type='regression'):
             return 0, None
         
 def moment_summarization(X,level=1):
-    print(X)
     log_check = np.array([ (np.array(row)>0).all() for row in X ]).all()
     x = []
     for row in X:

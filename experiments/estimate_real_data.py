@@ -84,7 +84,7 @@ for index, row in df_double.iterrows():
 df_double_unit_table = pd.DataFrame.from_dict(df_double_emb,orient='index')
 
 #---------------------------------------------------------
-# Isolated Effect
+# Average Treatment Effect
 #---------------------------------------------------------
 
 df_single_1 = df_single_unit_table.loc[df_single_unit_table['embedded_prestige'] >= 0.35]
@@ -113,24 +113,34 @@ iso_ate_d = np.mean(tau_double)
 
 print(iso_ate_s)
 print(iso_ate_d)
-
+df_ate = pd.DataFrame()
 cc_s = np.corrcoef(df_single_unit_table['embedded_prestige'],df_single_unit_table['decision'])[0,1]
 cc_d = np.corrcoef(df_double_unit_table['embedded_prestige'],df_double_unit_table['decision'])[0,1]
-fig = plt.figure(figsize=(10.5,9.5))
-plt.rcParams.update({'font.size': 16})
-sns.distplot(tau_single,hist=False,kde_kws={'bw':0.4,'shade': True})
-sns.distplot(tau_double,hist=False,kde_kws={'bw':0.4,'shade': True})
-plt.axvline(np.mean(tau_single),color='b')
-plt.axvline(np.mean(tau_double),color='r')
-plt.axvline(cc_s,color='y')
-plt.axvline(cc_d,color='c')
-plt.xlim((-1,1))
-plt.xlabel('estimated CATEs')
-plt.ylabel('estimated probability density')
-plt.title('PDF of Isolated TE (Embedding: Mean)')
-plt.legend(['ATE, Single-Blind = %0.4f'%(iso_ate_s),'ATE, Double-Blind = %0.4f'%(iso_ate_d),'Single-Blind, CorrCoef = %0.4f'%(cc_s),'Double-Blind, CorrCoef = %0.4f'%(cc_d),'PDF TE Single-Blind','PDF TE Double-Blind'],loc='upper center',bbox_to_anchor=(0.5, -0.1),ncol=3)
-plt.tight_layout()
-fig.savefig('Figures/pdf_real_mean_single_double_cate.png')
+
+fig = plt.figure(figsize=(10.5,7))
+plt.rcParams.update({'font.size': 20})
+
+df_ate = pd.DataFrame()
+df_ate['Quantity'] = ['ATE','ATE','Correlation','Correlation']
+df_ate['Estimates'] = [iso_ate_s,iso_ate_d,cc_s,cc_d]
+df_ate['Venue'] = ['Single-Blind','Double-Blind','Single-Blind','Double-Blind']
+splot = sns.barplot(x='Quantity',y='Estimates',hue='Venue',data=df_ate, palette="RdBu")
+for p in splot.patches:
+    splot.annotate(format(p.get_height(), '.4f'), (p.get_x() + p.get_width() / 2., p.get_height()/2), ha = 'center', va = 'center', xytext = (0, 10), textcoords = 'offset points')
+
+#sns.distplot(tau_single,hist=False,kde_kws={'bw':0.4,'shade': True})
+#sns.distplot(tau_double,hist=False,kde_kws={'bw':0.4,'shade': True})
+
+plt.axvhline(y=0,color='y')
+#plt.axvline(cc_d,color='c')
+#plt.xlim((-1,1))
+#plt.xlabel('estimated CATEs')
+#plt.ylabel('estimated probability density')
+#plt.yscale('log')
+#plt.title('Average ')
+#plt.legend(['ATE, Single-Blind = %0.4f'%(iso_ate_s),'ATE, Double-Blind = %0.4f'%(iso_ate_d),'Single-Blind, CorrCoef = %0.4f'%(cc_s),'Double-Blind, CorrCoef = %0.4f'%(cc_d),'PDF TE Single-Blind','PDF TE Double-Blind'],loc='upper center',bbox_to_anchor=(0.5, -0.1),ncol=3)
+#plt.tight_layout()
+fig.savefig('Figures/real_ate.png')
 
 corrm_s = df_single_unit_table.corr()
 print(corrm_s.to_string())
@@ -139,13 +149,74 @@ corrm_d = df_double_unit_table.corr()
 print(corrm_d.to_string())
 
 #---------------------------------------------------------
-# Learning embedding
+# Isolated and Relational Effects
 #---------------------------------------------------------
 
-embedding_needed_covariates = ['isolated citations','relational citations','relational prestige']
-embedding_cov = []
-y = np.array(df_single['review'])
-for cov in embedding_needed_covariates:
-    X_cov = df_single[cov]
-    output = learn_moment_summary(X_cov,y,learn_type='regression',max_moment=7)
-    embedding_cov.append( lambda x: moment_summarization([x],level=output[1])[0,:] ) 
+def read_df_auth():
+    df_s_a = pd.read_csv('single_authors.csv')
+    return df_s_a
+
+df_s_a = read_df_auth()
+
+df_s_a_emb = {}
+for index, row in df_s_a.iterrows():
+    author = row
+    prestige = int(row['ego prestige'])
+    citation = int(row['ego citations'])
+    prestige_ca_vec = parse_as_list( row['relational prestige'] ,dtype='int')
+    citation_ca_vec = parse_as_list(row['relational citations'],dtype='int')
+    review = float(row['avg review score'])
+    dpaperi = {}
+    dpaperi['prestige'] = int(np.nan_to_num( np.exp(50) / ( np.exp(50) + np.exp(prestige) ) ) >= 0.35)
+    dpaperi['citation'] = np.nan_to_num(np.mean(citation))
+    dpaperi['collab_prestige'] = int(np.nan_to_num(np.median(np.exp(50) / ( np.exp(50) + np.exp(prestige_ca_vec) ))) >= 0.35)
+    dpaperi['collab_citation'] = np.nan_to_num(np.mean(citation_ca_vec))
+    dpaperi['review'] = scipy.special.expit(20*(review-0.5))
+    df_s_a_emb[index] = dpaperi
+
+dsa = pd.DataFrame.from_dict(df_s_a_emb,orient='index')
+
+dsa11 = dsa.loc[dsa['prestige']==1].loc[dsa['collab_prestige']==1]
+dsa10 = dsa.loc[dsa['prestige']==1].loc[dsa['collab_prestige']==0]
+dsa01 = dsa.loc[dsa['prestige']==0].loc[dsa['collab_prestige']==1]
+dsa00 = dsa.loc[dsa['prestige']==0].loc[dsa['collab_prestige']==0]
+
+rfs11 = RFR(n_estimators = 50)
+rfs10 = RFR(n_estimators = 50)
+rfs01 = RFR(n_estimators = 50)
+rfs00 = RFR(n_estimators = 50)
+
+rfs11 = rfs11.fit(dsa11[['citation','collab_citation']],dsa11['review'])
+rfs10 = rfs10.fit(dsa10[['citation','collab_citation']],dsa10['review'])
+rfs01 = rfs01.fit(dsa01[['citation','collab_citation']],dsa01['review'])
+rfs00 = rfs00.fit(dsa00[['citation','collab_citation']],dsa00['review'])
+
+ie1 = rfs11.predict(dsa[['citation','collab_citation']]) - rfs01.predict(dsa[['citation','collab_citation']])
+ie0 = rfs10.predict(dsa[['citation','collab_citation']]) - rfs00.predict(dsa[['citation','collab_citation']])
+
+re1 = rfs11.predict(dsa[['citation','collab_citation']]) - rfs10.predict(dsa[['citation','collab_citation']])
+re0 = rfs01.predict(dsa[['citation','collab_citation']]) - rfs00.predict(dsa[['citation','collab_citation']])
+
+oe = rfs11.predict(dsa[['citation','collab_citation']]) - rfs00.predict(dsa[['citation','collab_citation']])
+
+fig = plt.figure(figsize=(10.5,7))
+plt.rcParams.update({'font.size': 20})
+
+#plt.boxplot(df_tau['join_single'],positions=[1],showmeans=True,showfliers=False)
+#plt.boxplot(list(ie0)+list(ie1),positions=[1],showmeans=True,showfliers=False)
+#plt.boxplot(list(re0)+list(re1),positions=[2],showmeans=True,showfliers=False)
+#plt.boxplot(oe,positions=[3],showmeans=True,showfliers=False)
+#plt.xticks(list(np.arange(0,4)),['','Isolated','Relational','Overall'])
+#plt.ylabel('Estimated Causal Effects')
+
+#sns.distplot(list(ie0)+list(ie1))
+#sns.distplot(list(re0)+list(re1))
+#sns.distplot(oe)
+
+df_ce = pd.DataFrame()
+df_ce['Quantity'] = ['Correlation','AIE','ARE','AOE']
+df_ce['Estimates'] = [np.corrcoef(dsa['prestige'],dsa['review'])[0,1],np.mean(list(ie0)+list(ie1)),np.mean(list(re0)+list(re1)),np.mean(oe)]
+splot = sns.barplot(x='Quantity',y='Estimates',data=df_ce,palette='vlag' )
+for p in splot.patches:
+    splot.annotate(format(p.get_height(), '.4f'), (p.get_x() + p.get_width() / 2., p.get_height()/2), ha = 'center', va = 'center', xytext = (0, 10), textcoords = 'offset points')
+fig.savefig('Figures/box_real_a.png')
