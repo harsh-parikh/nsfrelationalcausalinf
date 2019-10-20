@@ -1293,6 +1293,33 @@ fig.savefig('Figures/Learn_MomSum/pdf_single_double_cate.png')
 print('Single-Blind \nATE, %f \nMedian, %f \nTrue TE, %f'%(ate_single,mediante_single,truth_single),file=fl)
 print('Double-Blind \nATE, %f \nMedian, %f \nTrue TE, %f'%(ate_double,mediante_double,truth_double),file=fl)
 
+
+
+
+#------------------------------------------------------------------------------
+#Moe's
+#------------------------------------------------------------------------------
+df_moe = pd.read_csv('synthetic_naive.csv')
+moe_s1 = df_moe.loc[df_moe['venue_single-blind']==1].loc[df_moe['prestige']>10]
+moe_s0 = df_moe.loc[df_moe['venue_single-blind']==1].loc[df_moe['prestige']<=10]
+moe_d1 = df_moe.loc[df_moe['venue_single-blind']==0].loc[df_moe['prestige']>10]
+moe_d0 = df_moe.loc[df_moe['venue_single-blind']==0].loc[df_moe['prestige']<=10]
+
+ms1 = RandomForestRegressor(n_estimators=1000)
+ms0 = RandomForestRegressor(n_estimators=1000)
+md1 = RandomForestRegressor(n_estimators=1000)
+md0 = RandomForestRegressor(n_estimators=1000)
+covar = list(set(list(df_moe.columns)) - set(['venue_single-blind','review','prestige']))
+ms1= ms1.fit(moe_s1[covar],moe_s1['review'])
+ms0= ms0.fit(moe_s0[covar],moe_s0['review'])
+md1= md1.fit(moe_d1[covar],moe_d1['review'])
+md0= md0.fit(moe_d0[covar],moe_d0['review'])
+
+tau_s = ms1.predict(df_moe[covar])-ms0.predict(df_moe[covar])
+tau_d = md1.predict(df_moe[covar])-md0.predict(df_moe[covar])
+df_tau['learn_comsum_rf_single'] = tau_s
+df_tau['learn_comsum_rf_double'] = tau_d
+
 fig = plt.figure(figsize=(10.5,7))
 plt.rcParams.update({'font.size': 22.5})
 plt.axhline(y=1,color='r',linestyle='--',alpha=0.8)
@@ -1311,7 +1338,7 @@ plt.title('Single-Blind')
 plt.tight_layout()
 fig.savefig('Figures/violin_universal_cate.png')
 
-fig = plt.figure(figsize=(10.5,7))
+fig = plt.figure(figsize=(13.5,9))
 plt.rcParams.update({'font.size': 22.5})
 plt.axhline(y=1,color='r',linestyle='--',alpha=0.8)
 #plt.boxplot(df_tau['join_single'],positions=[1],showmeans=True,showfliers=False)
@@ -1319,7 +1346,7 @@ plt.boxplot(df_tau['mean_single'],positions=[1],showmeans=True,showfliers=False)
 plt.boxplot(df_tau['median_single'],positions=[2],showmeans=True,showfliers=False)
 plt.boxplot(df_tau['complex_single'],positions=[3],showmeans=True,showfliers=False)
 #plt.boxplot(df_tau['learn_comsum_rf_single'],positions=[4],showmeans=True,showfliers=False)
-plt.boxplot(df_tau['learn_comsum_single'],positions=[4],showmeans=True,showfliers=False)
+plt.boxplot(df_tau['learn_comsum_single'],positions=[5],showmeans=True,showfliers=False)
 
 #plt.ylim((-0.5,2))
 plt.ylabel('Estimated CATE')
@@ -1329,7 +1356,7 @@ plt.title('Single-Blind')
 plt.tight_layout()
 fig.savefig('Figures/violin_single_cate.png')
 
-fig = plt.figure(figsize=(10.5,7))
+fig = plt.figure(figsize=(13.5,9))
 plt.rcParams.update({'font.size': 22.5})
 plt.axhline(y=0,color='r',linestyle='--',alpha=0.8)
 #plt.boxplot(df_tau['join_double'],positions=[1],showmeans=True,showfliers=False)
@@ -1337,7 +1364,7 @@ plt.boxplot(df_tau['mean_double'],positions=[1],showmeans=True,showfliers=False)
 plt.boxplot(df_tau['median_double'],positions=[2],showmeans=True,showfliers=False)
 plt.boxplot(df_tau['complex_double'],positions=[3],showmeans=True,showfliers=False)
 #plt.boxplot(df_tau['learn_comsum_rf_double'],positions=[4],showmeans=True,showfliers=False)
-plt.boxplot(df_tau['learn_comsum_double'],positions=[4],showmeans=True,showfliers=False)
+plt.boxplot(df_tau['learn_comsum_double'],positions=[5],showmeans=True,showfliers=False)
 
 #plt.ylim((-2,1))
 plt.ylabel('Estimated CATE')
@@ -1348,4 +1375,3 @@ plt.tight_layout()
 fig.savefig('Figures/violin_double_cate.png')
 
 fl.close()
-'''
