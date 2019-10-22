@@ -672,6 +672,7 @@ for i in range(n_paper):
     mean_rel_prestige = np.mean(ca_prestige_vec)
     mean_prestige = np.percentile(prestige_vec,75)
     mean_citation = np.mean(citation_vec)
+    
     d_paperi = {}
     d_paperi['quality'] = paper['quality']
     d_paperi['venue_area'] = df_conf.loc[paper['venue']]['area']
@@ -681,9 +682,11 @@ for i in range(n_paper):
     d_paperi['isolated prestige'] = prestige_vec
     d_paperi['isolated citation'] = citation_vec
     d_paperi['isolated experience'] = experience_vec
-    d_paperi['embedded_rel_prestige'] = mean_rel_prestige
+    d_paperi['relational prestige'] = ca_prestige_vec
+    d_paperi['relational citation'] = ca_citation_vec
     df_unit_table[i] = d_paperi
 
+df_unit_table = pd.DataFrame.from_dict(df_unit_table,orient='index')
 
 fl = open('Logs/Estimate.csv','w')
 df_unit_table = {}
@@ -783,8 +786,8 @@ df_tau_mean['total, double'] = tau_double_tot
 df_tau['mean'] = df_tau_mean
 
 
-fig = plt.figure(figsize=(11.5,10.5))
-plt.rcParams.update({'font.size': 20})
+fig = plt.figure(figsize=(12.5,11))
+plt.rcParams.update({'font.size': 22})
 sns.distplot(list(tau_single_iso_0) + list(tau_single_iso_1),hist=False,kde_kws={'shade': True})
 #sns.distplot(tau_single_iso_1,hist=False,kde_kws={'shade': True})
 plt.axvline(x = np.mean( list(tau_single_iso_0) + list(tau_single_iso_1) ), color='b',linestyle='--' ,linewidth=2)
@@ -798,15 +801,15 @@ plt.axvline(x=0.5,color='r',linewidth=2)
 plt.axvline(x=1.5,color='g',linewidth=2)
 #extraticks = [np.mean( list(tau_single_iso_0) + list(tau_single_iso_1)),np.mean( list(tau_single_rel_0) + list(tau_single_rel_1) ),np.mean(tau_single_tot),0.5,1,1.5]
 #plt.xticks(list(plt.xticks()[0]) + extraticks,rotation=90)
-plt.legend(['Estimated AIE = %0.3f'%(np.mean( list(tau_single_iso_0) + list(tau_single_iso_1) )),'Estimated ARE = %0.3f'%(np.mean( list(tau_single_rel_0) + list(tau_single_rel_1) )),'Estimated AOE = %0.3f'%(np.mean(tau_single_tot)),'True AIE = %0.3f'%(1), 'True ARE = %0.3f'%(0.5),'True AOE = %0.3f'%(1.5),'pdf IIE','pdf RE','pdf OE'],loc='upper center',bbox_to_anchor=(0.5, -0.1),ncol=3)
+plt.legend(['Estimated AIE = %0.3f'%(np.mean( list(tau_single_iso_0) + list(tau_single_iso_1) )),'Estimated ARE = %0.3f'%(np.mean( list(tau_single_rel_0) + list(tau_single_rel_1) )),'Estimated AOE = %0.3f'%(np.mean(tau_single_tot)),'True AIE = %0.3f'%(1), 'True ARE = %0.3f'%(0.5),'True AOE = %0.3f'%(1.5)],loc='upper center',bbox_to_anchor=(0.5, -0.1),ncol=2)
 plt.xlabel('Estimated Effect')
-plt.ylabel('Probability Density Estimate')
-plt.title('Single-Blind Submissions TEs')
-plt.subplots_adjust(bottom=0.235)
+plt.ylabel('Likelihood of Effects')
+plt.title('(SyntheticData) Single-Blind Submissions')
+plt.subplots_adjust(bottom=0.245)
 fig.savefig('Figures/pdf_rel_single_cate.png')
 
-fig = plt.figure(figsize=(11.5,10.5))
-plt.rcParams.update({'font.size': 20})
+fig = plt.figure(figsize=(12.5,11))
+plt.rcParams.update({'font.size': 22})
 sns.distplot(list(tau_double_iso_0) + list(tau_double_iso_1),hist=False,kde_kws={'shade': True})
 #sns.distplot(tau_single_iso_1,hist=False,kde_kws={'shade': True})
 plt.axvline(x = np.mean( list(tau_double_iso_0) + list(tau_double_iso_1) ), color='b',linestyle='--' ,linewidth=2)
@@ -817,14 +820,14 @@ sns.distplot(tau_double_tot,hist=False,kde_kws={'shade': True})
 plt.axvline(np.mean(tau_double_tot),color='g',linestyle='--',linewidth=2)
 plt.axvline(x=0,color='b',linewidth=2)
 plt.axvline(x=0.5,color='r',linewidth=2)
-plt.axvline(x=0.501,color='g',linewidth=2)
+plt.axvline(x=0.51,color='g',linewidth=2)
 #extraticks = [np.mean( list(tau_single_iso_0) + list(tau_single_iso_1)),np.mean( list(tau_single_rel_0) + list(tau_single_rel_1) ),np.mean(tau_single_tot),0.5,1,1.5]
 #plt.xticks(list(plt.xticks()[0]) + extraticks,rotation=90)
-plt.legend(['Estimated AIE = %0.3f'%(np.mean( list(tau_single_iso_0) + list(tau_single_iso_1) )),'Estimated ARE = %0.3f'%(np.mean( list(tau_single_rel_0) + list(tau_single_rel_1) )),'Estimated AOE = %0.3f'%(np.mean(tau_single_tot)),'True AIE = %0.3f'%(1), 'True ARE = %0.3f'%(0.5),'True AOE = %0.3f'%(1.5),'pdf IIE','pdf RE','pdf OE'],loc='upper center',bbox_to_anchor=(0.5, -0.1),ncol=3)
+plt.legend(['Estimated AIE = %0.3f'%(np.mean( list(tau_double_iso_0) + list(tau_double_iso_1) )),'Estimated ARE = %0.3f'%(np.mean( list(tau_double_rel_0) + list(tau_double_rel_1) )),'Estimated AOE = %0.3f'%(np.mean(tau_double_tot)),'True AIE = %0.3f'%(0), 'True ARE = %0.3f'%(0.5),'True AOE = %0.3f'%(0.5)],loc='upper center',bbox_to_anchor=(0.5, -0.1),ncol=2)
 plt.xlabel('Estimated Treatment Effect')
-plt.ylabel('Probability Density Estimate')
-plt.title('Double-Blind Submissions TEs')
-plt.subplots_adjust(bottom=0.235)
+plt.ylabel('Likelihood of Effects')
+plt.title('(SyntheticData) Double-Blind Submissions')
+plt.subplots_adjust(bottom=0.245)
 fig.savefig('Figures/pdf_rel_double_cate.png')
 
 '''
