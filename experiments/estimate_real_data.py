@@ -87,11 +87,11 @@ df_double_unit_table = pd.DataFrame.from_dict(df_double_emb,orient='index')
 # Average Treatment Effect
 #---------------------------------------------------------
 
-df_single_1 = df_single_unit_table.loc[df_single_unit_table['embedded_prestige'] >= 0.35]
-df_single_0 = df_single_unit_table.loc[df_single_unit_table['embedded_prestige'] < 0.35]
+df_single_1 = df_single_unit_table.loc[df_single_unit_table['embedded_prestige'] >= 0.4]
+df_single_0 = df_single_unit_table.loc[df_single_unit_table['embedded_prestige'] < 0.4]
 
-df_double_1 = df_double_unit_table.loc[df_double_unit_table['embedded_prestige'] >= 0.35]
-df_double_0 = df_double_unit_table.loc[df_double_unit_table['embedded_prestige'] < 0.35]
+df_double_1 = df_double_unit_table.loc[df_double_unit_table['embedded_prestige'] >= 0.4]
+df_double_0 = df_double_unit_table.loc[df_double_unit_table['embedded_prestige'] < 0.4]
 
 rf_single_1 = RFC(n_estimators = 100)
 rf_single_0 = RFC(n_estimators = 100)
@@ -117,8 +117,8 @@ df_ate = pd.DataFrame()
 cc_s = np.corrcoef(df_single_unit_table['embedded_prestige'],df_single_unit_table['decision'])[0,1]
 cc_d = np.corrcoef(df_double_unit_table['embedded_prestige'],df_double_unit_table['decision'])[0,1]
 
-fig = plt.figure(figsize=(10.5,7))
-plt.rcParams.update({'font.size': 20})
+fig = plt.figure(figsize=(15,15))
+plt.rcParams.update({'font.size': 35})
 
 df_ate = pd.DataFrame()
 df_ate['Quantity'] = ['ATE','ATE','Correlation','Correlation']
@@ -199,8 +199,8 @@ re0 = rfs01.predict(dsa[['citation','collab_citation']]) - rfs00.predict(dsa[['c
 
 oe = rfs11.predict(dsa[['citation','collab_citation']]) - rfs00.predict(dsa[['citation','collab_citation']])
 
-fig = plt.figure(figsize=(10.5,7))
-plt.rcParams.update({'font.size': 20})
+fig = plt.figure(figsize=(15,15))
+plt.rcParams.update({'font.size': 35})
 
 #plt.boxplot(df_tau['join_single'],positions=[1],showmeans=True,showfliers=False)
 #plt.boxplot(list(ie0)+list(ie1),positions=[1],showmeans=True,showfliers=False)
@@ -219,5 +219,5 @@ df_ce['Estimates'] = [np.corrcoef(dsa['prestige'],dsa['review'])[0,1],np.mean(li
 splot = sns.barplot(x='Quantity',y='Estimates',data=df_ce,palette='vlag' )
 for p in splot.patches:
     splot.annotate(format(p.get_height(), '.4f'), (p.get_x() + p.get_width() / 2., p.get_height()/2), ha = 'center', va = 'center', xytext = (0, 10), textcoords = 'offset points')
-plt.title(r'($\textsc{ReviewData}$) Single-Blind')
+plt.title(r'(ReviewData) Single-Blind')
 fig.savefig('Figures/box_real_a.png')
